@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
 
-const CoachLoginPage = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userType, setUserType] = useState("");
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -13,17 +13,22 @@ const CoachLoginPage = () => {
     setPassword(e.target.value);
   };
 
+  const handleUserType = (e) => {
+    setUserType(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email);
     console.log(password);
+    console.log(userType);
   };
 
   return (
-    <div data-theme="night" className="hero min-h-screen">
+    <div data-theme="cmyk" className="hero min-h-screen">
       <div className="card w-full max-w-sm">
         <div className="card-body">
-          <h1 className="text-3xl">Coach login</h1>
+          <h1 className="text-3xl">Login</h1>
           <form onSubmit={handleSubmit}>
             <div className="form-control">
               <label className="label">
@@ -49,6 +54,31 @@ const CoachLoginPage = () => {
                 onChange={handlePassword}
               />
             </div>
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <input
+                  type="radio"
+                  name="userTypeCoach"
+                  className="radio"
+                  value="coach"
+                  onChange={handleUserType}
+                  checked
+                />
+                <span className="label-text">Coach</span>
+              </label>
+            </div>
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <input
+                  type="radio"
+                  name="userTypeCoach"
+                  className="radio"
+                  value="client"
+                  onChange={handleUserType}
+                />
+                <span className="label-text">Client</span>
+              </label>
+            </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary" type="submit">
                 Login
@@ -61,4 +91,4 @@ const CoachLoginPage = () => {
   );
 };
 
-export default CoachLoginPage;
+export default Login;
