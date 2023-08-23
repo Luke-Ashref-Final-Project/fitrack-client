@@ -7,7 +7,7 @@ const Footer = () => {
         <img src={logo} alt="" />
         <p className="font-bold">
           FiTrack. <br />
-          Made by Luke and Aschref
+          Made by Luke and Ashref
         </p>
         <p>Copyright © 2023 - All right reserved</p>
       </div>
