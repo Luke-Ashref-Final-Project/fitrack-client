@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import CoachLoginPage from "./pages/CoachLoginPage";
-import ClientLoginPage from "./pages/ClientLoginPage";
+import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 
@@ -9,9 +8,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-      <Route path="/" element={<HomePage />} />
-        <Route path="/coach-login" element={<CoachLoginPage />} />
-        <Route path="/client-login" element={<ClientLoginPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </div>
