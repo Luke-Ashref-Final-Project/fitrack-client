@@ -8,7 +8,9 @@ const HomePage = () => {
   <div className="hero-content text-center">
     <div className="max-w-md">
       <div className="flex flex-row justify-center gap-x-4 items-center">
+      <Link to="/">
         <img src={Logo} alt="" className="h-max" />
+        </Link>
         <h1 className="text-6xl font-bold">FiTrack</h1>
       </div>
 

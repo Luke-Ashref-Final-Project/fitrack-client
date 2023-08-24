@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authMethods from "../services/auth.service";
+import Logo from '../logo.svg';
 
 const SignUp = () => {
   const [user, setUser] = useState({
@@ -41,6 +42,13 @@ const SignUp = () => {
   return (
     <div data-theme="cmyk" className="hero min-h-screen">
       <div className="card w-full max-w-sm">
+        {/* Up for a change */}
+          <Link to="/">
+          <div className="flex flex-row justify-center gap-x-4 items-center mb-10">
+              <img src={Logo} alt="" className="h-max" />
+              <h1 className="text-6xl font-bold">FiTrack</h1>
+          </div>
+          </Link>
         <div className="card-body">
           <h1 className="text-3xl">Sign up</h1>
           <form onSubmit={handleSubmit}>
