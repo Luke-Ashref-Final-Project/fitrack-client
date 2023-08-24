@@ -44,10 +44,10 @@ const SignUp = () => {
       <div className="card w-full max-w-sm">
         {/* Up for a change */}
           <Link to="/">
-          <div className="flex flex-row justify-center gap-x-4 items-center mb-10">
-              <img src={Logo} alt="" className="h-max" />
-              <h1 className="text-6xl font-bold">FiTrack</h1>
-          </div>
+            <div className="flex flex-row justify-center gap-x-4 items-center mb-10">
+                <img src={Logo} alt="" className="h-max" />
+                <h1 className="text-6xl font-bold">FiTrack</h1>
+            </div>
           </Link>
         <div className="card-body">
           <h1 className="text-3xl">Sign up</h1>
