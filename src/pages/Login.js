@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authMethods from "../services/auth.service";
 
@@ -74,17 +74,30 @@ const Login = () => {
             />
           </div>
           <div className="form-control">
-            <label className="label">
-              <span className="label-text">User Type</span>
-            </label>
-            <input
-              type="text"
-              placeholder="coach or client"
-              className="input input-bordered"
-              value={userType}
-              onChange={handleUserType}
-            />
-          </div>
+              <label className="label cursor-pointer">
+                <input
+                  type="radio"
+                  className="radio"
+                  name="userType"
+                  value="client"
+                  onChange={handleUserType}
+                  checked
+                />
+                <span className="label-text">Client</span>
+              </label>
+            </div>
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <input
+                  type="radio"
+                  name="userType"
+                  className="radio"
+                  value="coach"
+                  onChange={handleUserType}
+                />
+                <span className="label-text">Coach</span>
+              </label>
+            </div>
           <div className="form-control mt-6">
             <button className="btn btn-primary" type="submit">
               Login
