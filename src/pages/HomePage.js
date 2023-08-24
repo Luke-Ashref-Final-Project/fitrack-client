@@ -19,8 +19,13 @@ const HomePage = () => {
       <img src={cta1} alt="" />
 
 
-      <Link to="/signup"><button className="btn btn-outline">Sign up</button></Link>
-      <Link to="/login"><button className="btn btn-info">Login</button></Link>
+      <Link to="/signup">
+        <button className="btn btn-wide btn-outline mt-4">Sign up</button>
+      </Link>
+      <div className="mt-2"></div> {/* Small space between buttons */}
+      <Link to="/login">
+        <button className="btn btn-wide btn-info">Login</button>
+      </Link>
     </div>
   </div>
 </div>
