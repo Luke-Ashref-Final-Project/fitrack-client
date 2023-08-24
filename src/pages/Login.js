@@ -35,7 +35,7 @@ const Login = () => {
 
     authMethods.logIn(user)
     .then((tokenObject) =>{
-      console.log(tokenObject)
+      // console.log(tokenObject)
         // store the token in localStorage
         storeToken(tokenObject.authToken)
         authenticateUser()

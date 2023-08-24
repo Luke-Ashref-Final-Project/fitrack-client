@@ -45,7 +45,7 @@ const uploadPhoto = (uploadData) => {
 const getCurrentUser = () => {
   const storedToken = localStorage.getItem("authToken");
   return api
-    .get("/api/users", { headers: { Authorization: `Bearer ${storedToken}` } })
+    .get("/profile", { headers: { Authorization: `Bearer ${storedToken}` } })
     .then((response) => response.data)
     .catch((err) => console.error(err));
 };
