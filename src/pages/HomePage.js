@@ -11,7 +11,7 @@ const HomePage = () => {
       <Link to="/">
         <img src={Logo} alt="" className="h-max" />
         </Link>
-        <h1 className="text-6xl font-bold">FiTrack</h1>
+        <h1 className="text-6xl font-bold">Fi𝓣rack</h1> {/*testing*/}
       </div>
 
       <p className="py-6 text-lg">
