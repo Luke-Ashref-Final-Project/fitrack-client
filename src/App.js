@@ -1,9 +1,9 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
+import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer.js";
-import SignUp from "./pages/SignUp";
+import SignUpPage from "./pages/SignUpPage";
 
 import ProfilePage from "./pages/ProfilePage";
 
@@ -12,11 +12,9 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-//         <Route path="/profile" element={<Profile />} />
-
       </Routes>
       <Footer />
     </div>
