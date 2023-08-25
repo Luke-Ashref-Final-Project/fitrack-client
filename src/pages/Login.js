@@ -34,14 +34,15 @@ const Login = () => {
 
 
     authMethods.logIn(user)
-    .then((tokenObject) =>{
-      // console.log(tokenObject)
-        // store the token in localStorage
-        storeToken(tokenObject.authToken)
-        authenticateUser()
-        navigate("/")
-    } )
-    .catch(err => console.error(err))
+      .then((response) => {
+        const { authToken, user } = response; // Extract user payload
+        storeToken(authToken); // Store the token in localStorage
+        localStorage.setItem('user', JSON.stringify(user)); // Store user payload (We used stringify to transform the JSON data)
+        authenticateUser();
+        navigate('/profile');
+      })
+      .catch((err) => console.error(err));
+
   };
 
   return (
