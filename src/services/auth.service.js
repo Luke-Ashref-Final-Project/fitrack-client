@@ -22,10 +22,7 @@ const signupClient = ({ email, username, password }) => {
 
 const logIn = ({email, password, userType}) => {
     return api.post("/login", {email, password, userType})
-                .then((response) => {
-                    console.log("Login Response:", response);
-                    return response.data; // Return the data directly
-      })
+                .then(response => response.data)
                 .catch(err => console.error(err))
 }
 
@@ -45,9 +42,12 @@ const uploadPhoto = (uploadData) => {
 const getCurrentUser = () => {
   const storedToken = localStorage.getItem("authToken");
   return api
-    .get("/api/users", { headers: { Authorization: `Bearer ${storedToken}` } })
-    .then((response) => response.data)
-    .catch((err) => console.error(err));
+    .get("/profile", { headers: { Authorization: `Bearer ${storedToken}` } })
+    .then((response) => {
+      console.log("Login Response:", response);
+      return response.data; // Return the data directly
+})
+  .catch(err => console.error(err))
 };
 
 const editUser = ({ username, campus, course, image }) => {
