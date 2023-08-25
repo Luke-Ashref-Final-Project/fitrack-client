@@ -1,58 +1,72 @@
 import axios from "axios";
 
 const api = axios.create({
-  // make sure you use PORT = 5005 (the port where our server is running)
   baseURL: "http://localhost:5005",
-  // withCredentials: true // => you might need this option if using cookies and sessions
 });
 
-const signupCoach = ({ email, username, password }) => {
-  return api
-    .post("/signup/coach", { email, username, password })
-    .then((response) => response.data)
-    .catch((err) => console.error(err));
+const signupCoach = async ({ email, username, password }) => {
+  try {
+    const response = await api.post("/signup/coach", { email, username, password });
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const signupClient = ({ email, username, password }) => {
-  return api
-    .post("/signup/client", { email, username, password })
-    .then((response) => response.data)
-    .catch((err) => console.error(err));
+const signupClient = async ({ email, username, password }) => {
+  try {
+    const response = await api.post("/signup/client", { email, username, password });
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const logIn = ({email, password, userType}) => {
-    return api.post("/login", {email, password, userType})
-                .then(response => response.data)
-                .catch(err => console.error(err))
-}
-
-const verifyToken = (storedToken) => {
-    return api.get("/verify", { headers: { Authorization: `Bearer ${storedToken}`} })
-              .then(response => response.data)
-              .catch(err => console.error(err))
-}
-
-const uploadPhoto = (uploadData) => {
-  return api
-    .post("/api/upload", uploadData)
-    .then((response) => response.data)
-    .catch((err) => console.error(err));
+const logIn = async ({ email, password, userType }) => {
+  try {
+    const response = await api.post("/login", { email, password, userType });
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const getCurrentUser = () => {
+const verifyToken = async (storedToken) => {
+  try {
+    const response = await api.get("/verify", { headers: { Authorization: `Bearer ${storedToken}` } });
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const uploadPhoto = async (uploadData) => {
+  try {
+    const response = await api.post("/api/upload", uploadData);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const getCurrentUser = async () => {
   const storedToken = localStorage.getItem("authToken");
-  return api
-    .get("/profile", { headers: { Authorization: `Bearer ${storedToken}` } })
-    .then((response) => {
-      console.log("Login Response:", response);
-      return response.data; // Return the data directly
-})
-  .catch(err => console.error(err))
-
+  try {
+    const response = await api.get("/profile", { headers: { Authorization: `Bearer ${storedToken}` } });
+    console.log("Login Response:", response);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const editUser = ({ username, campus, course, image }) => {
-  return api.put("/api/users", { username, campus, course, image });
+const editUser = async ({ username, campus, course, image }) => {
+  try {
+    const response = await api.put("/api/users", { username, campus, course, image });
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const authMethods = {

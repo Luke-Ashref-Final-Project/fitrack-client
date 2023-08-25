@@ -1,44 +1,37 @@
-import { useState, useEffect } from "react";
-// import { Link, useNavigate } from "react-router-dom";
-// import { AuthContext } from "../context/auth.context";
-import authMethods from "../services/auth.service";
+import React, { useState, useEffect } from "react";
 import Nav from "../components/Nav";
-import axios from "axios";
 
 const ProfilePage = () => {
-  // const [email, setEmail] = useState("");
-  // const [username, setUsername] = useState("");
-  // const [userType, setUserType] = useState("");
   const [theme, setTheme] = useState("cmyk");
-  // const [isLoading, setLoading] = useState(true);
-
   const storedUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    if (storedUser.userType === "coach") {
+    if (storedUser && storedUser.userType === "coach") {
       setTheme("night");
     } else {
       setTheme("cmyk");
     }
-  }, []);
+  }, [storedUser]);
 
   return (
-    <div data-theme={theme}>
+    <div data-theme={theme} className="flex flex-col min-h-screen">
       <Nav />
-      {/*Checks if there's a stored used*/}
-      {storedUser ? (
-        <div className="w-full">
-          <h1 className="text-3xl">Profile page</h1>
-          <h4 className="text-2xl">Email</h4>
-          <h4>{storedUser.email}</h4>
-          <h4 className="text-2xl">Username</h4>
-          <h4>{storedUser.username}</h4>
-          <h4 className="text-2xl">User type</h4>
-          <h4>{storedUser.userType}</h4>
-        </div>
-      ) : (
-        <p>No user profile data available.</p>
-      )}
+      <div className="flex-grow">
+        {/* Checks if there's a stored user */}
+        {storedUser ? (
+          <div className="w-full">
+            <h1 className="text-3xl">Profile page</h1>
+            <h4 className="text-2xl">Email</h4>
+            <h4>{storedUser.email}</h4>
+            <h4 className="text-2xl">Username</h4>
+            <h4>{storedUser.username}</h4>
+            <h4 className="text-2xl">User type</h4>
+            <h4>{storedUser.userType}</h4>
+          </div>
+        ) : (
+          <p>No user profile data available.</p>
+        )}
+      </div>
     </div>
   );
 };
