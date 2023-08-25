@@ -42,6 +42,7 @@ const Login = () => {
         navigate('/profile');
       })
       .catch((err) => console.error(err));
+
   };
 
   return (

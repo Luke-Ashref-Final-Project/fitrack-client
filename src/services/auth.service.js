@@ -48,6 +48,7 @@ const getCurrentUser = () => {
       return response.data; // Return the data directly
 })
   .catch(err => console.error(err))
+
 };
 
 const editUser = ({ username, campus, course, image }) => {
