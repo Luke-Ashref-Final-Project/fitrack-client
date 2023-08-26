@@ -1,27 +1,27 @@
-import { useState, useEffect } from "react";
-import Nav from "../components/Nav";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
 const SubscribePage = () => {
+  
   const [theme, setTheme] = useState("cmyk");
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-  const [allCoaches, setAllCoaches] = useState(undefined);
-  const [allSubscribedClients, setAllSubscribedClients] = useState(undefined);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if (storedUser.userType === "coach") {
+    console.log(user);
+
+    if (user && user.userType === "coach") {
       setTheme("night");
     } else {
       setTheme("cmyk");
     }
-  }, []);
+  }, [user]);
 
   return (
     <div data-theme={theme}>
-      <Nav />
-      {storedUser.userType === "client" ? (
-        <h1 className="text-2xl">SUBSCRIBER</h1>
-      ) : (
+      { user.userType === "client" ? (
         <h1 className="text-2xl">SUBSCRIBE TO COACH</h1>
+      ) : (
+        <h1 className="text-2xl">SUBSCRIBERS</h1>
       )}
     </div>
   );

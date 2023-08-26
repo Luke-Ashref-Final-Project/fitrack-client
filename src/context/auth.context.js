@@ -3,7 +3,7 @@ import React, { useState, useEffect, createContext } from "react";
 import authMethods from "../services/auth.service";
  
 const AuthContext = createContext();
- 
+
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +14,6 @@ function AuthProviderWrapper(props) {
     localStorage.setItem('authToken', token);
   }
   
-
   const authenticateUser = () => {           //  <==  ADD  
     // Get the stored token from the localStorage
     const storedToken = localStorage.getItem('authToken');

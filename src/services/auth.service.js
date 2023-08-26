@@ -6,7 +6,11 @@ const api = axios.create({
 
 const signupCoach = async ({ email, username, password }) => {
   try {
-    const response = await api.post("/signup/coach", { email, username, password });
+    const response = await api.post("/signup/coach", {
+      email,
+      username,
+      password,
+    });
     return response.data;
   } catch (err) {
     console.error(err);
@@ -15,7 +19,11 @@ const signupCoach = async ({ email, username, password }) => {
 
 const signupClient = async ({ email, username, password }) => {
   try {
-    const response = await api.post("/signup/client", { email, username, password });
+    const response = await api.post("/signup/client", {
+      email,
+      username,
+      password,
+    });
     return response.data;
   } catch (err) {
     console.error(err);
@@ -33,7 +41,12 @@ const logIn = async ({ email, password, userType }) => {
 
 const verifyToken = async (storedToken) => {
   try {
-    const response = await api.get("/verify", { headers: { Authorization: `Bearer ${storedToken}` } });
+    const response = await api.get("/verify", {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    });
+    
+    console.log(response.data);
+
     return response.data;
   } catch (err) {
     console.error(err);
@@ -52,7 +65,9 @@ const uploadPhoto = async (uploadData) => {
 const getCurrentUser = async () => {
   const storedToken = localStorage.getItem("authToken");
   try {
-    const response = await api.get("/profile", { headers: { Authorization: `Bearer ${storedToken}` } });
+    const response = await api.get("/profile", {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    });
     console.log("Login Response:", response);
     return response.data;
   } catch (err) {
@@ -62,7 +77,12 @@ const getCurrentUser = async () => {
 
 const editUser = async ({ username, campus, course, image }) => {
   try {
-    const response = await api.put("/api/users", { username, campus, course, image });
+    const response = await api.put("/api/users", {
+      username,
+      campus,
+      course,
+      image,
+    });
     return response.data;
   } catch (err) {
     console.error(err);
@@ -77,12 +97,27 @@ const passwordUpdate = async ({ currentPassword, newPassword }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    
-    const response = await api.put("/profile/password", { currentPassword, newPassword }, config);
+
+    const response = await api.put(
+      "/profile/password",
+      { currentPassword, newPassword },
+      config
+    );
     return response.data;
   } catch (error) {
     console.log(error);
     throw error;
+  }
+};
+
+const getAllSubscribers = async () => {
+  try {
+    // const userInfo = localStorage.getItem("authToken");
+    const response = api.get("/profile/getallsubscribers");
+    return response.data
+
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -94,7 +129,8 @@ const authMethods = {
   uploadPhoto,
   getCurrentUser,
   editUser,
-  passwordUpdate
+  passwordUpdate,
+  getAllSubscribers,
 };
 
 export default authMethods;
