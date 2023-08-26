@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import { AuthContext } from "../context/auth.context";
-import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
-import axios from "axios";
+import authMethods from "../services/auth.service";
 
 const ProfilePage = () => {
   // const [email, setEmail] = useState("");
@@ -11,7 +10,6 @@ const ProfilePage = () => {
   // const [userType, setUserType] = useState("");
   const [theme, setTheme] = useState("cmyk");
   // const [isLoading, setLoading] = useState(true);
-
   const storedUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -39,6 +37,9 @@ const ProfilePage = () => {
       ) : (
         <p>No user profile data available.</p>
       )}
+      <div>
+        <button className="btn btn-secondary btn-outline">Log out</button>
+      </div>
     </div>
   );
 };

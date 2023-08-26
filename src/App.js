@@ -4,8 +4,10 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer.js";
 import SignUpPage from "./pages/SignUpPage";
-
 import ProfilePage from "./pages/ProfilePage";
+import ExercisesPage from "./pages/ExercisesPage";
+import OverviewPage from "./pages/OverviewPage";
+import SubscribePage from "./pages/SubscribePage";
 
 function App() {
   return (
@@ -15,6 +17,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/exercises" element={<ExercisesPage />} />
+        <Route path="/overview" element={<OverviewPage />} />
+        <Route path="/subscribe" element={<SubscribePage />} />
       </Routes>
       <Footer />
     </div>
