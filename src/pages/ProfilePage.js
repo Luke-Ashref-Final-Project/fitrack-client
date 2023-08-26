@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
+
 import Nav from "../components/Nav";
 import authMethods from "../services/auth.service";
 
@@ -26,6 +27,7 @@ const ProfilePage = () => {
       setError("Failed to change password."); 
     }
   };
+
 
   useEffect(() => {
     if (user && user.userType === "coach") {
@@ -106,6 +108,7 @@ const ProfilePage = () => {
         </div>
       </div>
     )
+
   );
 };
 
