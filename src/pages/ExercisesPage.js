@@ -15,6 +15,7 @@ const ExercisesPage = () => {
   };
 
   //filtering using UI
+  //
 
   useEffect(() => {
     if (storedUser.userType === "coach") {

@@ -20,17 +20,19 @@ const signupClient = ({ email, username, password }) => {
     .catch((err) => console.error(err));
 };
 
-const logIn = ({email, password, userType}) => {
-    return api.post("/login", {email, password, userType})
-                .then(response => response.data)
-                .catch(err => console.error(err))
-}
+const logIn = ({ email, password, userType }) => {
+  return api
+    .post("/login", { email, password, userType })
+    .then((response) => response.data)
+    .catch((err) => console.error(err));
+};
 
 const verifyToken = (storedToken) => {
-    return api.get("/verify", { headers: { Authorization: `Bearer ${storedToken}`} })
-              .then(response => response.data)
-              .catch(err => console.error(err))
-}
+  return api
+    .get("/verify", { headers: { Authorization: `Bearer ${storedToken}` } })
+    .then((response) => response.data)
+    .catch((err) => console.error(err));
+};
 
 const uploadPhoto = (uploadData) => {
   return api
@@ -46,9 +48,8 @@ const getCurrentUser = () => {
     .then((response) => {
       console.log("Login Response:", response);
       return response.data; // Return the data directly
-})
-  .catch(err => console.error(err))
-
+    })
+    .catch((err) => console.error(err));
 };
 
 const editUser = ({ username, campus, course, image }) => {
