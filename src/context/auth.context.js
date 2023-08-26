@@ -63,6 +63,7 @@ function AuthProviderWrapper(props) {
     removeToken();
     // and update the state variables    
     authenticateUser();
+
   }  
  
   
