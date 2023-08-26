@@ -69,6 +69,23 @@ const editUser = async ({ username, campus, course, image }) => {
   }
 };
 
+const passwordUpdate = async ({ currentPassword, newPassword }) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    
+    const response = await api.put("/profile/password", { currentPassword, newPassword }, config);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const authMethods = {
   signupCoach,
   signupClient,
@@ -77,6 +94,7 @@ const authMethods = {
   uploadPhoto,
   getCurrentUser,
   editUser,
+  passwordUpdate
 };
 
 export default authMethods;
