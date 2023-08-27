@@ -9,7 +9,7 @@ import Nav from "../components/Nav";
 const ExercisesPage = () => {
   //theme changing
   const [theme, setTheme] = useState("cmyk");
-  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user, isLoggedIn, isLoading } = useContext(AuthContext);
 
   const createNewExercise = () => {
 
@@ -18,6 +18,7 @@ const ExercisesPage = () => {
   //filtering using UI
   //
 
+
   useEffect(() => {
     if (user && user.userType === "coach") {
       setTheme("night");
@@ -25,6 +26,11 @@ const ExercisesPage = () => {
       setTheme("cmyk");
     }
   }, [user]);
+
+  // idk why it's not showing
+  if (isLoading) {
+    <span className="loading loading-spinner text-error"></span>
+  }
 
   return (
     isLoggedIn && (
