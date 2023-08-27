@@ -45,7 +45,7 @@ const verifyToken = async (storedToken) => {
       headers: { Authorization: `Bearer ${storedToken}` },
     });
     
-    console.log(response.data);
+    // console.log(response.data);
 
     return response.data;
   } catch (err) {
@@ -112,12 +112,13 @@ const passwordUpdate = async ({ currentPassword, newPassword }) => {
 
 const getAllSubscribers = async () => {
   try {
-    // const userInfo = localStorage.getItem("authToken");
-    const response = api.get("/profile/getallsubscribers");
+    const storedToken = localStorage.getItem("authToken");
+    const response = await api.get("/profile/getallsubscribers",{
+      headers: { Authorization: `Bearer ${storedToken}` },
+    });
     return response.data
-
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 

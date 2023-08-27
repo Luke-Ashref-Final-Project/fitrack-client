@@ -18,16 +18,13 @@ const ProfilePage = () => {
     e.preventDefault();
 
     try {
-      const response = await authMethods.passwordUpdate({
-        currentPassword,
-        newPassword,
-      });
-      console.log(response);
+      const response = await authMethods.passwordUpdate({ currentPassword, newPassword });
+      console.log(response); 
       setCurrentPassword("");
       setNewPassword("");
       window.my_modal_1.close();
     } catch (error) {
-      setError("Failed to change password.");
+      setError("Failed to change password."); 
     }
   };
 
@@ -47,9 +44,7 @@ const ProfilePage = () => {
         <div className="flex-grow">
           <div className="w-full">
             <Link to={"/"}>
-              <button className="btn btn-wide btn-outline mt-4">
-                Home Page
-              </button>
+              <button className="btn btn-wide btn-outline mt-4">Home Page</button>
             </Link>
             <button
               onClick={() => {
@@ -61,20 +56,14 @@ const ProfilePage = () => {
               Log out
             </button>
 
-            <button
-              className="btn"
-              onClick={() => window.my_modal_1.showModal()}
-            >
+            <button className="btn" onClick={() => window.my_modal_1.showModal()}>
               Change Password
             </button>
             <dialog id="my_modal_1" className="modal">
               <form method="dialog" className="modal-box">
                 <h3 className="font-bold text-lg">Change Password</h3>
                 <div className="py-4">
-                  <label
-                    htmlFor="currentPassword"
-                    className="block font-medium"
-                  >
+                  <label htmlFor="currentPassword" className="block font-medium">
                     Current Password:
                   </label>
                   <input
@@ -101,10 +90,7 @@ const ProfilePage = () => {
                   <button className="btn" onClick={handleChangePassword}>
                     Change Password
                   </button>
-                  <button
-                    className="btn"
-                    onClick={() => window.my_modal_1.close()}
-                  >
+                  <button className="btn" onClick={() => window.my_modal_1.close()}>
                     Close
                   </button>
                 </div>
@@ -122,6 +108,7 @@ const ProfilePage = () => {
         </div>
       </div>
     )
+
   );
 };
 
