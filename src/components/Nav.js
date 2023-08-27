@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 // import { useNavigate, Link } from "react-router-dom";
 // import authMethods from "../services/auth.service";
 import { AuthContext } from "../context/auth.context";
@@ -20,11 +21,12 @@ const Nav = () => {
   return (
     isLoggedIn && (
     <div data-theme={theme} className="flex flex-col items-center">
-    
+      <Link to={"/"}>
         <div className="flex flex-row items-center">
           <img className="w-8" src={logo} alt="" />
           <span className="text-4xl">Fi𝓣rack</span>
         </div>
+      </Link>
    
     </div>
     )
