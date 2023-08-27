@@ -27,12 +27,14 @@ const ProfilePage = () => {
       setError("Failed to change password."); 
     }
   };
+
   if (!isLoggedIn) {
     navigate("/")
   }
 
   useEffect(() => {
     if (user && user.userType === "coach") {
+      console.log(user._id);
       setTheme("night");
     } else {
       setTheme("cmyk");
