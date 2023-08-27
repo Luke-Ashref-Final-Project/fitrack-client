@@ -28,6 +28,10 @@ const ProfilePage = () => {
     }
   };
 
+  if (!isLoggedIn) {
+    navigate("/")
+  }
+
   useEffect(() => {
     if (user && user.userType === "coach") {
       console.log(user._id);

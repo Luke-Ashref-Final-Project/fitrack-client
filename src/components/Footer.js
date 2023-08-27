@@ -1,5 +1,5 @@
 import logo from "../logo.svg";
-
+//something wrong with the footer on mobile view
 const Footer = () => {
   return (
     <footer className="footer footer-center p-10 text-primary-content border-t-2">

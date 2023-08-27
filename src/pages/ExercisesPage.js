@@ -1,14 +1,15 @@
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 import exercise from "../data/exercise.json";
-import bodyPart from "../data/bodyPart.json";
-import target from "../data/target.json";
-import { useState, useEffect } from "react";
-import authMethods from "../services/auth.service";
+// import bodyPart from "../data/bodyPart.json";
+// import target from "../data/target.json";
+// import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
 
 const ExercisesPage = () => {
   //theme changing
   const [theme, setTheme] = useState("cmyk");
-  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const { user, isLoggedIn, isLoading } = useContext(AuthContext);
 
   const createNewExercise = () => {
 
@@ -17,15 +18,22 @@ const ExercisesPage = () => {
   //filtering using UI
   //
 
+
   useEffect(() => {
-    if (storedUser.userType === "coach") {
+    if (user && user.userType === "coach") {
       setTheme("night");
     } else {
       setTheme("cmyk");
     }
-  }, []);
+  }, [user]);
+
+  // idk why it's not showing
+  if (isLoading) {
+    <span className="loading loading-spinner text-error"></span>
+  }
 
   return (
+    isLoggedIn && (
     <div data-theme={theme} className="">
       <Nav />
       <h1 className="text-3xl mb-8">Exercises</h1>
@@ -54,6 +62,7 @@ const ExercisesPage = () => {
         );
       })}
     </div>
+    )
   );
 };
 

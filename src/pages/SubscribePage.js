@@ -4,13 +4,9 @@ import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
 
 const SubscribePage = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isLoggedIn } = useContext(AuthContext);
   const [fetchedUsers, setFetchedUsers] = useState(null);
   const [theme, setTheme] = useState("cmyk");
-
-
-
-
 
   useEffect(() => {
     if (user) {
@@ -27,12 +23,12 @@ const SubscribePage = () => {
           });
       } else {
         setTheme("cmyk");
-
       }
-    }
+
   }, [user]);
 
   return (
+    isLoggedIn && (
     <div data-theme={theme}>
       <Nav />
       It works!
@@ -45,6 +41,7 @@ const SubscribePage = () => {
           );
         })}
     </div>
+    )
   );
 };
 
