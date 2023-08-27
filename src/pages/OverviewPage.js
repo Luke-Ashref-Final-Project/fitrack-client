@@ -20,7 +20,7 @@ const OverviewPage = () => {
         setTheme("cmyk");
       }
     }
-  }, []);
+  }, [user]);
 
   return (
     <div data-theme={theme} className="pb-8">
