@@ -27,7 +27,9 @@ const ProfilePage = () => {
       setError("Failed to change password."); 
     }
   };
-
+  if (!isLoggedIn) {
+    navigate("/")
+  }
 
   useEffect(() => {
     if (user && user.userType === "coach") {
