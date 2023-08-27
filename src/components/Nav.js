@@ -13,21 +13,21 @@ const Nav = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if (user.userType === "coach") {
-      setTheme("night");
-    } else {
-      setTheme("cmyk");
+    if (user) {
+      if (user.userType === "coach") {
+        setTheme("night");
+      } else {
+        setTheme("cmyk");
+      }
     }
   }, [user]);
 
   return (
     <div data-theme={theme} className="flex flex-col items-center">
-    
-        <div className="flex flex-row items-center">
-          <img className="w-8" src={logo} alt="" />
-          <span className="text-4xl">Fi𝓣rack</span>
-        </div>
-   
+      <div className="flex flex-row items-center">
+        <img className="w-8" src={logo} alt="" />
+        <span className="text-4xl">Fi𝓣rack</span>
+      </div>
     </div>
   );
 };
