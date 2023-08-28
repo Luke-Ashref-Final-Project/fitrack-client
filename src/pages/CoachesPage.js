@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
@@ -8,12 +9,19 @@ const CoachesPage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [coachesList, setCoachesList] = useState([]);
   const { user, isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const getCoaches = async () => {
     try {
-        const response = await authMethods.getCoaches();
-        console.log(response);
-        setCoachesList(response);
+        if (user && user.userType === "client") {
+            const response = await authMethods.getCoaches();
+            console.log(response);
+            setCoachesList(response);
+        } else {
+            console.log("you're not a client")
+            navigate("/")
+        }
+
     } catch (error) {
       console.log(error);
     }
