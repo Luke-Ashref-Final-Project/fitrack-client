@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ExercisesPage from "./pages/ExercisesPage";
 import OverviewPage from "./pages/OverviewPage";
 import SubscribePage from "./pages/SubscribePage";
+import CoachesPage from "./pages/CoachesPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/exercises" element={<ExercisesPage />} />
         <Route path="/overview" element={<OverviewPage />} />
         <Route path="/subscribe" element={<SubscribePage />} />
+        <Route path="/coaches" element={<CoachesPage />} />
       </Routes>
       <Footer />
     </div>

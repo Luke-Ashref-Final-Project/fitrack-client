@@ -34,7 +34,6 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (user && user.userType === "coach") {
-      console.log(user._id);
       setTheme("night");
     } else {
       setTheme("cmyk");

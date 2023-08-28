@@ -75,14 +75,9 @@ const getCurrentUser = async () => {
   }
 };
 
-const editUser = async ({ username, campus, course, image }) => {
+const getCoaches = async () => {
   try {
-    const response = await api.put("/api/users", {
-      username,
-      campus,
-      course,
-      image,
-    });
+    const response = await api.get("/getcoach");
     return response.data;
   } catch (err) {
     console.error(err);
@@ -129,7 +124,7 @@ const authMethods = {
   verifyToken,
   uploadPhoto,
   getCurrentUser,
-  editUser,
+  getCoaches,
   passwordUpdate,
   getAllSubscribers,
 };

@@ -89,7 +89,7 @@ const Login = () => {
                   name="userType"
                   value="client"
                   onChange={handleUserType}
-                  checked
+                  
                 />
                 <span className="label-text">Client</span>
               </label>

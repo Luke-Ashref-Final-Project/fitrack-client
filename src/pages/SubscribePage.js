@@ -25,7 +25,8 @@ const SubscribePage = () => {
         setTheme("cmyk");
       }
 
-  }, [user]);
+  }
+}, [user]);
 
   return (
     isLoggedIn && (
