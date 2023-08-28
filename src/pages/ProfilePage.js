@@ -42,82 +42,85 @@ const ProfilePage = () => {
 
   return (
     isLoggedIn && (
-      <div data-theme={theme} className="flex flex-col min-h-screen">
+      <div data-theme={theme} >
         <Nav />
-        <div className="flex-grow">
-          <div className="w-full">
+        <div className="flex-grow p-6 flex flex-col items-center justify-center">
+          <div className={`w-full max-w-md p-6 ${user?.userType === 'client' ? 'bg-white' : 'bg-slate-900'} rounded-lg shadow-lg`}>
             <Link to={"/"}>
-              <button className="btn btn-wide btn-outline mt-4">Home Page</button>
+              <button className="btn btn-wide btn-outline mb-4">Home Page</button>
             </Link>
+
+            <h1 className="text-3xl mb-2">Profile page</h1>
+            <div className="mb-4">
+              {user?.image ? (
+                <img src={user.image} alt="Profile" width="200"  className="mx-auto block rounded-full"/>
+              ) : (
+                <p>No image available</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <h4 className="font-bold text-lg">Username:</h4>
+              <p>{user?.username}</p>
+            </div>
+            <div className="mb-4">
+              <h4 className="font-bold text-lg">You are a:</h4>
+              <p>{user?.userType}</p>
+            </div>
+
+            <button className="btn mb-4" onClick={() => window.my_modal_1.showModal()}>
+              Change Password
+            </button>
+            <dialog id="my_modal_1" className="modal">
+            <form method="dialog" className="modal-box">
+              <h3 className="font-bold text-lg">Change Password</h3>
+              <div className="py-4">
+                <label htmlFor="currentPassword" className="block font-medium">
+                  Current Password:
+                </label>
+                <input
+                  type="password"
+                  id="currentPassword"
+                  className="input input-bordered w-full"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                />
+              </div>
+              <div className="py-2">
+                <label htmlFor="newPassword" className="block font-medium">
+                  New Password:
+                </label>
+                <input
+                  type="password"
+                  id="newPassword"
+                  className="input input-bordered w-full"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+              </div>
+              <div className="modal-action">
+                <button className="btn" onClick={handleChangePassword}>
+                  Change Password
+                </button>
+                <button className="btn" onClick={() => window.my_modal_1.close()}>
+                  Close
+                </button>
+              </div>
+            </form>
+            </dialog>
+
             <button
               onClick={() => {
                 logOutUser();
                 navigate("/");
               }}
-              className="btn btn-wide btn-outline mt-4"
+              className="btn btn-wide btn-error mb-4"
             >
               Log out
             </button>
-
-            <button className="btn" onClick={() => window.my_modal_1.showModal()}>
-              Change Password
-            </button>
-            <dialog id="my_modal_1" className="modal">
-              <form method="dialog" className="modal-box">
-                <h3 className="font-bold text-lg">Change Password</h3>
-                <div className="py-4">
-                  <label htmlFor="currentPassword" className="block font-medium">
-                    Current Password:
-                  </label>
-                  <input
-                    type="password"
-                    id="currentPassword"
-                    className="input input-bordered w-full"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                  />
-                </div>
-                <div className="py-2">
-                  <label htmlFor="newPassword" className="block font-medium">
-                    New Password:
-                  </label>
-                  <input
-                    type="password"
-                    id="newPassword"
-                    className="input input-bordered w-full"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                  />
-                </div>
-                <div className="modal-action">
-                  <button className="btn" onClick={handleChangePassword}>
-                    Change Password
-                  </button>
-                  <button className="btn" onClick={() => window.my_modal_1.close()}>
-                    Close
-                  </button>
-                </div>
-              </form>
-            </dialog>
-
-            <h1 className="text-3xl">Profile page</h1>
-            <h4 className="text-2xl">Email</h4>
-            <h4>{user?.email}</h4>
-            <h4 className="text-2xl">Username</h4>
-            <h4>{user?.username}</h4>
-            <h4 className="text-2xl">User type</h4>
-            <h4>{user?.userType}</h4>
-            <h4 className="text-2xl">Image</h4>
-            {user?.image ? (
-              <img src={user.image} alt="Profile" width="200" />
-            ) : (
-              <p>No image available</p>
-            )}
           </div>
         </div>
       </div>
     )
-
   );
 };
 
