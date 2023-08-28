@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,6 +9,7 @@ const ProfilePage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [image, setImage] = useState("/images/default.png");
   const [error, setError] = useState("");
 
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -27,6 +28,21 @@ const ProfilePage = () => {
       setError("Failed to change password."); 
     }
   };
+
+  const handleFileUpload = async (e) => {
+    try {
+      const uploadData = new FormData();
+      uploadData.append("image", e.target.files[0]);
+  
+      const response = await authMethods.uploadPhoto(uploadData);
+      console.log(response)
+      setImage(response.fileUrl);
+    } catch (error) {
+      console.log("Error while uploading the file: ", error);
+      setError(error)
+    }
+  };
+  
 
   if (!isLoggedIn) {
     navigate("/")
@@ -53,11 +69,14 @@ const ProfilePage = () => {
             <h1 className="text-3xl mb-2">Profile page</h1>
             <div className="mb-4">
               {user?.image ? (
-                <img src={user.image} alt="Profile" width="200"  className="mx-auto block rounded-full"/>
+                <img src={image} alt="Profile" width="200"  className="mx-auto block rounded-full"/>
               ) : (
                 <p>No image available</p>
               )}
             </div>
+
+            <input type="file" className="file-input file-input-bordered file-input-info w-full max-w-xs mx-auto" onChange={(e) => handleFileUpload(e)} />
+
             <div className="mb-4">
               <h4 className="font-bold text-lg">Username:</h4>
               <p>{user?.username}</p>

@@ -55,7 +55,13 @@ const verifyToken = async (storedToken) => {
 
 const uploadPhoto = async (file) => {
   try {
-    const response = await api.post("/profile/upload", file);
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.post("/profile/upload", file, config);
     return response.data;
   } catch (err) {
     console.error(err);
