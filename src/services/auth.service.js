@@ -77,7 +77,13 @@ const getCurrentUser = async () => {
 
 const getCoaches = async () => {
   try {
-    const response = await api.get("/getcoach");
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.get("/getcoach", config);
     return response.data;
   } catch (err) {
     console.error(err);

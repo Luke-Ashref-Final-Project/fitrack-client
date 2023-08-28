@@ -133,6 +133,11 @@ const Nav = () => {
                       Account
                     </Link>
                   </li>
+                  <li>
+                    <Link className="text-xl" to="/coaches">
+                      coaches page
+                    </Link>
+                  </li>
                 </div>
               ) : null
             ) : null}
