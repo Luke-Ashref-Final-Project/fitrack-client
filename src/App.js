@@ -7,7 +7,7 @@ import SignUpPage from "./pages/SignUpPage";
 import ProfilePage from "./pages/ProfilePage";
 import ExercisesPage from "./pages/ExercisesPage";
 import OverviewPage from "./pages/OverviewPage";
-import SubscribePage from "./pages/SubscribePage";
+import SubscribersPage from "./pages/SubscribersPage";
 import CoachesPage from "./pages/CoachesPage";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/exercises" element={<ExercisesPage />} />
         <Route path="/overview" element={<OverviewPage />} />
-        <Route path="/subscribe" element={<SubscribePage />} />
+        <Route path="/subscribers" element={<SubscribersPage />} />
         <Route path="/coaches" element={<CoachesPage />} />
       </Routes>
       <Footer />
