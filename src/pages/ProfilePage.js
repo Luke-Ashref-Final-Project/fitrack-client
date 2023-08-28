@@ -107,6 +107,12 @@ const ProfilePage = () => {
             <h4>{user?.username}</h4>
             <h4 className="text-2xl">User type</h4>
             <h4>{user?.userType}</h4>
+            <h4 className="text-2xl">Image</h4>
+            {user?.image ? (
+              <img src={user.image} alt="Profile" width="200" />
+            ) : (
+              <p>No image available</p>
+            )}
           </div>
         </div>
       </div>

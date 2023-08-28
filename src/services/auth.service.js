@@ -53,9 +53,9 @@ const verifyToken = async (storedToken) => {
   }
 };
 
-const uploadPhoto = async (uploadData) => {
+const uploadPhoto = async (file) => {
   try {
-    const response = await api.post("/api/upload", uploadData);
+    const response = await api.post("/profile/upload", file);
     return response.data;
   } catch (err) {
     console.error(err);
