@@ -61,8 +61,10 @@ const uploadPhoto = async (file) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.post("/profile/upload", file, config);
+    const response = await api.put("/profile/upload", file, config);
+    console.log(response.data.user)
     return response.data;
+    
   } catch (err) {
     console.error(err);
   }
@@ -71,15 +73,20 @@ const uploadPhoto = async (file) => {
 const getCurrentUser = async () => {
   const storedToken = localStorage.getItem("authToken");
   try {
-    const response = await api.get("/profile", {
+    const response = await api.get("/user", {
       headers: { Authorization: `Bearer ${storedToken}` },
     });
-    console.log("Login Response:", response);
+    console.log("current user:", response.data);
     return response.data;
   } catch (err) {
     console.error(err);
   }
 };
+
+const editUser = ({email, userType, image }) => {
+  return api.put("/users", {email, userType, image})
+}
+
 
 const getCoaches = async () => {
   try {
@@ -139,6 +146,7 @@ const authMethods = {
   getCoaches,
   passwordUpdate,
   getAllSubscribers,
+  editUser,
 };
 
 export default authMethods;

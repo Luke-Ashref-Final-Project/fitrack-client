@@ -27,13 +27,7 @@ function AuthProviderWrapper(props) {
        // Update state variables        
         setIsLoggedIn(true);
         setIsLoading(false);
-        setUser(userPayload);
-        // need to find a way to make sure if coach or client is logged in, maybe we can do it somewhere else
-        /* if (userData.type === "coach") {
-            setTheme("dark");
-          } else {
-            setTheme("light");
-          } */     
+        setUser(userPayload);   
       })
       .catch((error) => {
         // If the server sends an error response (invalid token) 

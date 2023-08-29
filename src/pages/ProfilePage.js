@@ -9,10 +9,10 @@ const ProfilePage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [image, setImage] = useState("/images/default.png");
+  // const [image, setImage] = useState("");
   const [error, setError] = useState("");
 
-  const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
+  const { user, setUser, isLoggedIn, logOutUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChangePassword = async (e) => {
@@ -33,20 +33,32 @@ const ProfilePage = () => {
     try {
       const uploadData = new FormData();
       uploadData.append("image", e.target.files[0]);
-  
+
+
       const response = await authMethods.uploadPhoto(uploadData);
       console.log(response)
-      setImage(response.fileUrl);
+      //setUser gets reset if you refresh, need to find a way to update the token
+      setUser(response.user)
     } catch (error) {
       console.log("Error while uploading the file: ", error);
       setError(error)
     }
   };
-  
+
+  // const fetchUserImage = async () => {
+  //   try {
+  //     const image = await authMethods.getCurrentUserImage();
+  //     setImage(image);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   if (!isLoggedIn) {
     navigate("/")
   }
+
+  // fetchUserImage();
 
   useEffect(() => {
     if (user && user.userType === "coach") {
@@ -55,6 +67,7 @@ const ProfilePage = () => {
       setTheme("cmyk");
     }
   }, [user]);
+
 
   return (
     isLoggedIn && (
@@ -69,7 +82,7 @@ const ProfilePage = () => {
             <h1 className="text-3xl mb-2">Profile page</h1>
             <div className="mb-4">
               {user?.image ? (
-                <img src={image} alt="Profile" width="200"  className="mx-auto block rounded-full"/>
+                <img src={user?.image} alt="Profile" width="200"  className="mx-auto block rounded-full"/>
               ) : (
                 <p>No image available</p>
               )}
