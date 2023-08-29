@@ -44,8 +44,17 @@ const CoachesPage = () => {
       <div>
         <Nav />
         {coachesList?.length > 0 ? (
-          coachesList?.map((coach) => (
-            <h1 key={coach._id}>{coach?.username}</h1>
+          coachesList.map((coach) => (
+            <div className="card w-72 glass mx-auto mt-4">
+              <figure><img src={coach.image} alt="car!"/></figure>
+              <div className="card-body">
+                <h2 className="card-title">{coach.username}</h2>
+                <p>coache's description</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary">Subscribe!</button>
+                </div>
+              </div>
+            </div>
           ))
         ) : (
           <p>No coaches available.</p>
