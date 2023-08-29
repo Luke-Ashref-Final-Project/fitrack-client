@@ -53,9 +53,14 @@ const Nav = () => {
                 {user ? (
                   user.userType === "coach" ? (
                     <>
-                    <li>
+                      <li>
                         <Link className="text-xl" to="/overview">
                           Overview
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="text-xl" to="/exercises">
+                          All exercises
                         </Link>
                       </li>
                       <li>
@@ -71,7 +76,7 @@ const Nav = () => {
                     </>
                   ) : user.userType === "client" ? (
                     <>
-                    <li>
+                      <li>
                         <Link className="text-xl" to="/overview">
                           Overview
                         </Link>
@@ -93,7 +98,7 @@ const Nav = () => {
             </div>
           </div>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side z-50">
           <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 min-h-full bg-base-200">
             {/* Sidebar menu here */}
@@ -108,6 +113,11 @@ const Nav = () => {
                   <li>
                     <Link className="text-xl" to="/subscribers">
                       Subscribers
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="text-xl" to="/exercises">
+                      All exercises
                     </Link>
                   </li>
                   <li>

@@ -35,3 +35,25 @@
   </div>
 </form>
 </dialog>
+
+
+//pagination code
+
+// const [currentPage, setCurrentPage] = useState(1);
+// const resultsPerPage = 15;
+// const indexOfLastExercise = currentPage * resultsPerPage;
+// const indexOfFirstExercise = indexOfLastExercise - resultsPerPage;
+// const currentExercises = exercises.slice(
+//   indexOfFirstExercise,
+//   indexOfLastExercise
+// );
+
+// const shouldDisableButtons = exercises.length < 15;
+// const goToPreviousPage = () => {
+//   setCurrentPage(currentPage - 1);
+//   window.scrollTo(0, 0); // scroll to the top of the window
+// };
+// const goToNextPage = () => {
+//   setCurrentPage(currentPage + 1);
+//   window.scrollTo(0, 0); // scroll to the top of the window
+// };
