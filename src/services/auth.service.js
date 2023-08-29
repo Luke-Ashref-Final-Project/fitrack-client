@@ -131,6 +131,22 @@ const getAllSubscribers = async () => {
   }
 };
 
+// Work in progress
+const subscribe = async (coachId) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.post("/subscribe/${coachId}")
+    return response.data
+  } catch (error) {
+    throw error;
+  }
+}
+
 const authMethods = {
   signupCoach,
   signupClient,
@@ -141,6 +157,7 @@ const authMethods = {
   getCoaches,
   passwordUpdate,
   getAllSubscribers,
+  subscribe,
 };
 
 export default authMethods;

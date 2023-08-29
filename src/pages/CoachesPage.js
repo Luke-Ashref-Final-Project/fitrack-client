@@ -11,6 +11,15 @@ const CoachesPage = () => {
   const { user, isLoggedIn, isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
+
+  const handleSubscribe = async () => {
+    try {
+
+    } catch (error) {
+      throw error;
+    }
+  }
+  
   useEffect(() => {
     if (user && user.userType === "client") {
       const getCoaches = async () => {
@@ -51,7 +60,12 @@ const CoachesPage = () => {
                 <h2 className="card-title">{coach.username}</h2>
                 <p>coache's description</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Subscribe!</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleSubscribe(coach._id)}
+                  >
+                    Subscribe!
+                </button>
                 </div>
               </div>
             </div>
