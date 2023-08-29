@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 
-const NewExercisePage = (props) => {
-  return(
-  <div>New exercise page</div>);
+const NewExercisePage = ({ name, bodyPart, giturl }) => {
+  console.log(name);
+
+  return <div>New exercise page</div>;
 };
 
 export default NewExercisePage;

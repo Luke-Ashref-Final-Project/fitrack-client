@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://exercisedb.p.rapidapi.com/",
+  baseURL: process.env.REACT_APP_EXERCISES_API_URI,
 });
 
 const specifiedOptions = {

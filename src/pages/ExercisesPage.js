@@ -7,6 +7,7 @@ import { AuthContext } from "../context/auth.context";
 import Nav from "../components/Nav";
 import apiMethods from "../services/api.service";
 import { Link } from "react-router-dom";
+import NewExercisePage from "./NewExercisePage";
 
 const ExercisesPage = () => {
   //theme changing
@@ -36,7 +37,17 @@ const ExercisesPage = () => {
     }
   };
 
-  const goToCreateNewExercise = (props) => {};
+  const [name, setName] = useState("");
+  const [bodyPart, setBodyPart] = useState("");
+  const [giturl, getGigurl] = useState("");
+
+  //targeting the elements in each index
+  //getting the "value" from the targeted item
+  //pass onto a function and add values into the compoment upon click event
+
+  const goToCreateNewExercise = () => {
+    const getValue = document.getElementById("gifImage");
+  };
 
   useEffect(() => {
     if (user && user.userType === "coach") {
@@ -79,7 +90,7 @@ const ExercisesPage = () => {
           )}
         </div>
         <div className="pt-2 pb-4">
-        {resultsLoading && <p>Loading...</p>}
+          {resultsLoading && <p>Loading...</p>}
           {exercises && exercises.length !== 0 ? (
             exercises.map((eachExercise) => {
               return (
@@ -88,18 +99,30 @@ const ExercisesPage = () => {
                   className="card bg-base-100 shadow-xl card-bordered mx-6 mb-8"
                 >
                   <figure>
-                    <img src={eachExercise.gifUrl} alt="exercise" />
+                    <img
+                      src={eachExercise.gifUrl}
+                      alt="exercise"
+                      id="gifImage"
+                    />
                   </figure>
                   <div className="card-body">
-                    <h1 className="card-title text-1xl">{eachExercise.name}</h1>
+                    <h1 className="card-title text-1xl" id="exerciseName">
+                      {eachExercise.name}
+                    </h1>
                     <div className="card-actions justify-between items-center">
-                      <div className="badge badge-secondary">
+                      <div className="badge badge-secondary" id="bodyPart">
                         {eachExercise.bodyPart}
                       </div>
-                      <Link to="/new-exercise">
+                      <Link
+                        to="/new-exercise"
+                        state={{ name, bodyPart, giturl }}
+                      >
                         <button
-                          // onClick={}
                           //directly create new exercise here?
+                          onClick={()=>{
+                            // setBodyPart();
+                            // setName({eachExercise.name});
+                          }}
                           className="btn btn-primary btn-md"
                         >
                           Add to program
