@@ -62,7 +62,6 @@ const uploadPhoto = async (file) => {
       },
     };
     const response = await api.put("/profile/upload", file, config);
-    console.log(response.data.user)
     return response.data;
     
   } catch (err) {
@@ -82,10 +81,6 @@ const getCurrentUser = async () => {
     console.error(err);
   }
 };
-
-const editUser = ({email, userType, image }) => {
-  return api.put("/users", {email, userType, image})
-}
 
 
 const getCoaches = async () => {
@@ -146,7 +141,6 @@ const authMethods = {
   getCoaches,
   passwordUpdate,
   getAllSubscribers,
-  editUser,
 };
 
 export default authMethods;

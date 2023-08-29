@@ -9,7 +9,6 @@ const ProfilePage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  // const [image, setImage] = useState("");
   const [error, setError] = useState("");
 
   const { user, setUser, isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -36,29 +35,18 @@ const ProfilePage = () => {
 
 
       const response = await authMethods.uploadPhoto(uploadData);
-      console.log(response)
-      //setUser gets reset if you refresh, need to find a way to update the token
       setUser(response.user)
+      localStorage.setItem("authToken", response.token)
+      
     } catch (error) {
       console.log("Error while uploading the file: ", error);
       setError(error)
     }
   };
 
-  // const fetchUserImage = async () => {
-  //   try {
-  //     const image = await authMethods.getCurrentUserImage();
-  //     setImage(image);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   if (!isLoggedIn) {
     navigate("/")
   }
-
-  // fetchUserImage();
 
   useEffect(() => {
     if (user && user.userType === "coach") {
