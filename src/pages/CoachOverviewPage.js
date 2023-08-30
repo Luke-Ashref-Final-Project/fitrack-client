@@ -19,6 +19,7 @@ const CoachOverviewPage = () => {
         try {
           const response = await authMethods.coachOverview(coachId);
           // Need to find a way to make it something else
+          console.log(response.coach)
           setCoach(response.coach);
         } catch (error) {
           console.log(error);
