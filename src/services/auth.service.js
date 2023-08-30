@@ -131,18 +131,30 @@ const getAllSubscribers = async () => {
   }
 };
 
-// Work in progress
 const subscribe = async (coachId) => {
   try {
     const token = localStorage.getItem("authToken");
-    console.log("Token:", token);
-    console.log("Coach ID:", coachId); 
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
     const response = await api.post(`/subscribe/${coachId}`, {}, config);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// work in progress
+const Unsubscribe = async (coachId) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.delete(`/subscribe/${coachId}`, {}, config);
     return response.data;
   } catch (error) {
     throw error;
@@ -176,6 +188,7 @@ const authMethods = {
   getAllSubscribers,
   subscribe,
   coachOverview,
+  Unsubscribe,
 };
 
 export default authMethods;
