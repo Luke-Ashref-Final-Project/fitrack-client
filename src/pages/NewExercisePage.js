@@ -1,7 +1,8 @@
 import { AuthContext } from "../context/auth.context";
 import authMethods from "../services/auth.service";
+import apiMethods from "../services/api.service";
 import { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
 
 const NewExercisePage = () => {
@@ -16,8 +17,12 @@ const NewExercisePage = () => {
   const [id, setId] = useState("");
   const [subscribers, setSubscribers] = useState([]);
   const [description, setDescription] = useState("");
+  const [coachid, setCoachId] = useState("");
 
-  const handleCreateNewExercise = () => {};
+  const handleCreateNewExercise = () => {
+    apiMethods.createNewExercise({
+    });
+  };
 
   //UPON LOADING, RECEIVING THE DATA PASSED THROUGHT THE ROUTE
   useEffect(() => {
@@ -64,15 +69,23 @@ const NewExercisePage = () => {
             <h1 className="card-title text-1xl" id="exerciseName">
               {name}
             </h1>
-            <div className="flex">
-              <label htmlFor="selectClient">Select a client</label>
-              <select name="selectClient">
+            <div className="flex flex-col space-y-4">
+              <label htmlFor="selectClient" className="text-start text-1xl">Select a client</label>
+              <select name="selectClient" className="select select-bordered w-full max-w-xs">
+              <option disabled selected>Pick one client</option>
+
                 {subscribers.map((client) => {
-                  return <option value={client._id}>{client.username}</option>;
+                  return (
+                    <option key={client._id} value={client._id}>
+                      {client.username}
+                    </option>
+                  );
                 })}
               </select>
+              <label htmlFor="description" className="text-start text-1xl">Description</label>
+              <textarea className="textarea textarea-bordered" placeholder="description"></textarea>
             </div>
-            <div className="card-actions justify-between items-center">
+            <div className="card-actions justify-between items-center pt-4">
               <div className="badge badge-secondary" id="bodyPart">
                 {bodyPart}
               </div>
