@@ -15,7 +15,7 @@ const SubscribePage = () => {
         .getAllSubscribers()
         .then((data) => {
           setFetchedUsers(data);
-          console.log("This is te whole data", data);
+          console.log("This is the whole data", data);
         })
         .catch((err) => {
           console.error("Error fetching subscribers:", err);

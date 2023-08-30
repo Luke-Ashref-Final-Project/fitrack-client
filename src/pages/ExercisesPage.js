@@ -39,15 +39,11 @@ const ExercisesPage = () => {
 
   const [name, setName] = useState("");
   const [bodyPart, setBodyPart] = useState("");
-  const [giturl, getGigurl] = useState("");
+  const [gifUrl, setGifUrl] = useState("");
 
   //targeting the elements in each index
   //getting the "value" from the targeted item
   //pass onto a function and add values into the compoment upon click event
-
-  const goToCreateNewExercise = () => {
-    const getValue = document.getElementById("gifImage");
-  };
 
   useEffect(() => {
     if (user && user.userType === "coach") {
@@ -115,18 +111,20 @@ const ExercisesPage = () => {
                       </div>
                       <Link
                         to="/new-exercise"
-                        state={{ name, bodyPart, giturl }}
-                      >
-                        <button
-                          //directly create new exercise here?
-                          onClick={()=>{
-                            // setBodyPart();
-                            // setName({eachExercise.name});
-                          }}
+                        state={{
+                            name: eachExercise.name,
+                            bodyPart: eachExercise.bodyPart,
+                            gifUrl: eachExercise.gifUrl,
+                            id: user._id,
+                          }} 
                           className="btn btn-primary btn-md"
-                        >
-                          Add to program
-                        </button>
+                      >
+                      {/* <button>
+                      Add to program
+
+                      </button> */}
+                      Add to program
+
                       </Link>
                     </div>
                   </div>
