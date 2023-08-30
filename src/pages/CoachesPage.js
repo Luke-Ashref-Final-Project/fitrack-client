@@ -60,7 +60,7 @@ const CoachesPage = () => {
                 <figure><img src={coach.image} alt="coach image"/></figure>
                 <div className="card-body">
                   <h2 className="card-title">{coach.username}</h2>
-                  <p>coache's description</p>
+                  <p>coach's description</p>
                   <div className="card-actions justify-end">
                     <button
                       className="btn btn-primary"

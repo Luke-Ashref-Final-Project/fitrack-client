@@ -140,10 +140,25 @@ const subscribe = async (coachId) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.post("/subscribe/${coachId}", config)
+    const response = await api.post(`/subscribe/${coachId}`, config)
     return response.data
   } catch (error) {
     throw error;
+  }
+}
+
+const coachOverview = async (coachId) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.get(`/coaches/${coachId}`, config)
+    return response.data
+  } catch (error) {
+    throw error
   }
 }
 
@@ -158,6 +173,7 @@ const authMethods = {
   passwordUpdate,
   getAllSubscribers,
   subscribe,
+  coachOverview,
 };
 
 export default authMethods;
