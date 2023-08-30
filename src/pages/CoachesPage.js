@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
@@ -12,13 +12,14 @@ const CoachesPage = () => {
   const navigate = useNavigate();
 
 
-  const handleSubscribe = async () => {
-    try {
-
-    } catch (error) {
-      throw error;
-    }
-  }
+  // const handleSubscribe = async () => {
+  //   try {
+  //     const response = await authMethods.subscribeToCoach(coachId);
+  //     console.log('Subscribed successfully!', response);
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
   
   useEffect(() => {
     if (user && user.userType === "client") {
@@ -54,21 +55,23 @@ const CoachesPage = () => {
         <Nav />
         {coachesList?.length > 0 ? (
           coachesList.map((coach) => (
-            <div className="card w-72 glass mx-auto mt-4">
-              <figure><img src={coach.image} alt="car!"/></figure>
-              <div className="card-body">
-                <h2 className="card-title">{coach.username}</h2>
-                <p>coache's description</p>
-                <div className="card-actions justify-end">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleSubscribe(coach._id)}
-                  >
-                    Subscribe!
-                </button>
+            <Link to={`/coaches/${coach._id}`} key={coach._id}>
+              <div id={coach.id} className="card w-72 glass mx-auto mt-4">
+                <figure><img src={coach.image} alt="coach image"/></figure>
+                <div className="card-body">
+                  <h2 className="card-title">{coach.username}</h2>
+                  <p>coache's description</p>
+                  <div className="card-actions justify-end">
+                    <button
+                      className="btn btn-primary"
+                      // onClick={() => handleSubscribe(coach._id)}
+                    >
+                      Subscribe!
+                  </button>
+                  </div>
                 </div>
-              </div>
             </div>
+            </Link>
           ))
         ) : (
           <p>No coaches available.</p>
