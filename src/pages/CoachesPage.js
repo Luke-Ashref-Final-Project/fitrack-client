@@ -10,16 +10,6 @@ const CoachesPage = () => {
   const [coachesList, setCoachesList] = useState([]);
   const { user, isLoggedIn, isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
-
-
-  // const handleSubscribe = async () => {
-  //   try {
-  //     const response = await authMethods.subscribeToCoach(coachId);
-  //     console.log('Subscribed successfully!', response);
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
   
   useEffect(() => {
     if (user && user.userType === "client") {
@@ -56,19 +46,12 @@ const CoachesPage = () => {
         {coachesList?.length > 0 ? (
           coachesList.map((coach) => (
             <Link to={`/coaches/${coach._id}`} key={coach._id}>
-              <div id={coach.id} className="card w-72 glass mx-auto mt-4">
-                <figure><img src={coach.image} alt="coach image"/></figure>
+              <div id={coach.id} className="card w-72 glass mx-auto mt-4 mb-4">
+                <figure><img src={coach.image} alt="coach"/></figure>
                 <div className="card-body">
                   <h2 className="card-title">{coach.username}</h2>
                   <p>coach's description</p>
-                  <div className="card-actions justify-end">
-                    <button
-                      className="btn btn-primary"
-                      // onClick={() => handleSubscribe(coach._id)}
-                    >
-                      Subscribe!
-                  </button>
-                  </div>
+
                 </div>
             </div>
             </Link>

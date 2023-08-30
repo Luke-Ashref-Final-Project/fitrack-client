@@ -10,6 +10,15 @@ const CoachOverviewPage = () => {
     const { user, isLoggedIn } = useContext(AuthContext);
     const { coachId } = useParams();
 
+    // const handleSubscribe = async () => {
+    //   try {
+    //     const response = await authMethods.subscribeToCoach(coachId);
+    //     console.log('Subscribed successfully!', response);
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
+
     useEffect(() => {
       if (user && user.userType === "client") {
         setTheme("cmyk");
@@ -35,7 +44,7 @@ const CoachOverviewPage = () => {
       <div>
         <Nav />
         {coach ? (
-          <div id={coach.id} className="card w-72 glass mx-auto mt-4">
+          <div id={coach.id} className="card w-72 glass mx-auto mt-4 mb-4">
             <figure><img src={coach.image} alt="coach"/></figure>
             <div className="card-body">
               <h2 className="card-title">{coach.username}</h2>
