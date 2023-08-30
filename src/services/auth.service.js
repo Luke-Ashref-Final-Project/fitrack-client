@@ -135,17 +135,19 @@ const getAllSubscribers = async () => {
 const subscribe = async (coachId) => {
   try {
     const token = localStorage.getItem("authToken");
+    console.log("Token:", token);
+    console.log("Coach ID:", coachId); 
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.post(`/subscribe/${coachId}`, config)
-    return response.data
+    const response = await api.post(`/subscribe/${coachId}`, {}, config);
+    return response.data;
   } catch (error) {
     throw error;
   }
-}
+};
 
 const coachOverview = async (coachId) => {
   try {

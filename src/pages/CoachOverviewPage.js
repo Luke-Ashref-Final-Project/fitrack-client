@@ -10,14 +10,15 @@ const CoachOverviewPage = () => {
     const { user, isLoggedIn } = useContext(AuthContext);
     const { coachId } = useParams();
 
-    // const handleSubscribe = async () => {
-    //   try {
-    //     const response = await authMethods.subscribeToCoach(coachId);
-    //     console.log('Subscribed successfully!', response);
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    // }
+    const handleSubscribe = async () => {
+      try {
+        const response = await authMethods.subscribe(coachId);
+        console.log('Subscribed successfully!', response);
+        return response
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
     useEffect(() => {
       if (user && user.userType === "client") {
@@ -52,7 +53,7 @@ const CoachOverviewPage = () => {
               <div className="card-actions justify-end">
                 <button
                   className="btn btn-primary"
-                  // onClick={() => handleSubscribe(coach._id)}
+                  onClick={() => handleSubscribe(coach._id)}
                 >
                   Subscribe!
                 </button>
