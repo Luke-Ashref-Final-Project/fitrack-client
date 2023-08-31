@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react"; // Removed unnecessary import of useEffect
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
 import Logo from "../logo.svg";
@@ -8,23 +8,30 @@ const HomePage = () => {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <>
-        <div className="hero min-h-screen">
-          <div className="hero-content text-center">
-            <div className="max-w-md">
-              <div className="flex flex-row justify-center gap-x-4 items-center">
-                <Link to="/">
-                  <img src={Logo} alt="" className="h-max" />
-                </Link>
-                <h1 className="text-6xl font-bold">Fi𝓣rack</h1>
-              </div>
+    <div className="hero min-h-screen">
+      <div className="hero-content text-center">
+        <div className="max-w-md">
+          <div className="flex flex-row justify-center gap-x-4 items-center">
+            <Link to="/">
+              <img src={Logo} alt="" className="h-max" />
+            </Link>
+            <h1 className="text-6xl font-bold">Fi𝓣rack</h1>
+          </div>
 
-              <p className="py-6 text-lg">
-                The best way to track your fitness progress! For the coach and
-                for clients!
-              </p>
-              <img src={cta1} alt="" />
+          <p className="py-6 text-lg">
+            The best way to track your fitness progress! For the coach and
+            for clients!
+          </p>
+          <img src={cta1} alt="" />
 
+          {isLoggedIn ? (
+            <Link to="/profile">
+              <button className="btn btn-wide btn-outline mt-4">
+                Profile Page
+              </button>
+            </Link>
+          ) : (
+            <>
               <Link to="/signup">
                 <button className="btn btn-wide btn-outline mt-4">
                   Sign up
@@ -34,39 +41,12 @@ const HomePage = () => {
               <Link to="/login">
                 <button className="btn btn-wide btn-info">Login</button>
               </Link>
-            </div>
-          </div>
+            </>
+          )}
         </div>
-
-      {isLoggedIn && (
-        <div className="hero min-h-screen">
-          <div className="hero-content text-center">
-            <div className="max-w-md">
-              <div className="flex flex-row justify-center gap-x-4 items-center">
-                <Link to="/">
-                  <img src={Logo} alt="" className="h-max" />
-                </Link>
-                <h1 className="text-6xl font-bold">Fi𝓣rack</h1>
-              </div>
-
-              <p className="py-6 text-lg">
-                The best way to track your fitness progress! For the coach and
-                for clients!
-              </p>
-              <img src={cta1} alt="" />
-
-              <Link to="/profile">
-                <button className="btn btn-wide btn-outline mt-4">
-                  Profile Page
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
 export default HomePage;
-

@@ -94,7 +94,7 @@ const ProfilePage = () => {
               Change Password
             </button>
             <dialog id="my_modal_1" className="modal">
-            <form method="dialog" className="modal-box">
+            <form id={user._id} method="dialog" className="modal-box">
               <h3 className="font-bold text-lg">Change Password</h3>
               <div className="py-4">
                 <label htmlFor="currentPassword" className="block font-medium">
