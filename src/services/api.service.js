@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const api = axios.create({
+const apiExternal = axios.create({
   baseURL: process.env.REACT_APP_EXERCISES_API_URI,
+});
+
+const api = axios.create({
+  baseURL: "http://localhost:5005",
 });
 
 const specifiedOptions = {
@@ -13,9 +17,36 @@ const specifiedOptions = {
 
 const fetchExercises = async (options) => {
   try {
-    const response = await api.get("/exercises", options);
+    const response = await apiExternal.get("/exercises", options);
     const returnedData = response.data;
     return returnedData;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const createNewExercise = async ({
+  clientId,
+  coachId,
+  bodyPart,
+  image,
+  description,
+  name,
+}) => {
+  try {
+    const response = await api.post("/exercise/new", {
+      clientId,
+      coachId,
+      bodyPart,
+      image,
+      description,
+      name,
+    });
+
+    if (response) {
+      const newExercise = response.data;
+      return newExercise;
+    }
   } catch (error) {
     console.error(error);
   }
@@ -24,6 +55,7 @@ const fetchExercises = async (options) => {
 const apiMethods = {
   specifiedOptions,
   fetchExercises,
+  createNewExercise,
 };
 
 export default apiMethods;
