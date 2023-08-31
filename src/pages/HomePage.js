@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
 import Logo from "../logo.svg";
@@ -9,7 +9,6 @@ const HomePage = () => {
 
   return (
     <>
-      {!isLoggedIn && (
         <div className="hero min-h-screen">
           <div className="hero-content text-center">
             <div className="max-w-md">
@@ -38,7 +37,6 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      )}
 
       {isLoggedIn && (
         <div className="hero min-h-screen">

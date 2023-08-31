@@ -44,10 +44,6 @@ const ProfilePage = () => {
     }
   };
 
-  if (!isLoggedIn) {
-    navigate("/")
-  }
-
   useEffect(() => {
     if (user && user.userType === "coach") {
       setTheme("night");
@@ -55,6 +51,13 @@ const ProfilePage = () => {
       setTheme("cmyk");
     }
   }, [user]);
+
+  useEffect(() => {
+  if (!isLoggedIn) {
+    navigate("/")
+  }
+
+  }, [user])
 
 
   return (

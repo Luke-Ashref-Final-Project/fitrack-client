@@ -139,7 +139,7 @@ const subscribe = async (coachId) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.post(`/subscribe/${coachId}`, {}, config);
+    const response = await api.put(`/subscribe/${coachId}`, {}, config);
     return response.data;
   } catch (error) {
     throw error;
