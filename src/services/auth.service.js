@@ -146,7 +146,7 @@ const subscribe = async (coachId) => {
   }
 };
 // work in progress
-const Unsubscribe = async (coachId) => {
+const unSubscribe = async (coachId) => {
   try {
     const token = localStorage.getItem("authToken");
     const config = {
@@ -154,7 +154,7 @@ const Unsubscribe = async (coachId) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.delete(`/subscribe/${coachId}`, {}, config);
+    const response = await api.put(`/unsubscribe/${coachId}`, {}, config);
     return response.data;
   } catch (error) {
     throw error;
@@ -188,7 +188,7 @@ const authMethods = {
   getAllSubscribers,
   subscribe,
   coachOverview,
-  Unsubscribe,
+  unSubscribe,
 };
 
 export default authMethods;

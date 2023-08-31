@@ -22,6 +22,17 @@ const CoachOverviewPage = () => {
       }
     }
 
+    const handleUnsubscribe = async () => {
+      try {
+        const response = await authMethods.unSubscribe(coachId);
+        console.log('Unsubscribed successfully', response);
+        setSubscribed(false)
+        return response
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     useEffect(() => {
       if (user && user.userType === "client") {
         setTheme("cmyk");
@@ -62,7 +73,7 @@ const CoachOverviewPage = () => {
                   <div className="card-actions justify-end">
                     <button
                       className="btn btn-error"
-                      // onClick={() => handleSubscribe(coach._id)}
+                      onClick={() => handleUnsubscribe(coach._id)}
                     >
                       Unsubscribe
                     </button>
