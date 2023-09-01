@@ -3,6 +3,7 @@ import { AuthContext } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
 
 import Nav from "../components/Nav";
+import CoachDashboard from "../components/CoachDashboard";
 import authMethods from "../services/auth.service";
 
 const ProfilePage = () => {
@@ -44,6 +45,10 @@ const ProfilePage = () => {
     }
   };
 
+  if (!isLoggedIn) {
+    navigate("/")
+  }
+
   useEffect(() => {
     if (user && user.userType === "coach") {
       setTheme("night");
@@ -52,18 +57,14 @@ const ProfilePage = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-  if (!isLoggedIn) {
-    navigate("/")
-  }
-
-  }, [user])
-
 
   return (
     isLoggedIn && (
       <div data-theme={theme} >
         <Nav />
+                 {/* coach notifications, will change later*/}
+                 {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
+
         <div className="flex-grow p-6 flex flex-col items-center justify-center">
           <div className={`w-full max-w-md p-6 ${user?.userType === 'client' ? 'bg-white' : 'bg-slate-900'} rounded-lg shadow-lg`}>
             <Link to={"/"}>
@@ -94,7 +95,7 @@ const ProfilePage = () => {
               Change Password
             </button>
             <dialog id="my_modal_1" className="modal">
-            <form id={user._id} method="dialog" className="modal-box">
+            <form method="dialog" className="modal-box">
               <h3 className="font-bold text-lg">Change Password</h3>
               <div className="py-4">
                 <label htmlFor="currentPassword" className="block font-medium">

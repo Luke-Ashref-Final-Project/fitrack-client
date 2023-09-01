@@ -74,3 +74,7 @@
     </div>
   </div>
 </div> */}
+
+
+         {/* Render CoachDashboard for coaches */}
+         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
