@@ -1,9 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-// import exercise from "../data/exercise.json";
-// import bodyPart from "../data/bodyPart.json";
-// import target from "../data/target.json";
-// import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
 import apiMethods from "../services/api.service";
 import { Link } from "react-router-dom";
@@ -36,6 +32,7 @@ const SearchExercisesPage = () => {
       setExercises(results);
     }
   };
+
 
   useEffect(() => {
     if (user && user.userType === "coach") {
