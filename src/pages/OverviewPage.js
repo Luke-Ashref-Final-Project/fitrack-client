@@ -1,8 +1,4 @@
-import exercise from "../data/exercise.json";
-import bodyPart from "../data/bodyPart.json";
-import target from "../data/target.json";
 import { useState, useEffect, useContext } from "react";
-import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
 import CoachDashboard from "../components/CoachDashboard";
 import { AuthContext } from "../context/auth.context";
