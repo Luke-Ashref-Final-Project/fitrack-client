@@ -19,20 +19,21 @@ const SearchExercisesPage = () => {
     if (searchTerm) {
       setResultsLoading(true);
       const exercises = await fetchExercises(specifiedOptions);
-      const searchedResults = exercises.filter(
-        (exercise) =>
-          exercise.name.toLowerCase().includes(searchTerm) ||
-          exercise.bodyPart.toLowerCase().includes(searchTerm) ||
-          exercise.target.toLowerCase().includes(searchTerm)
-      );
-      const results = searchedResults.slice(0, 30);
-      setSearchTerm("");
-      setResultsLoading(false);
-      console.log(searchedResults);
-      setExercises(results);
+      if (exercises) {
+        const searchedResults = exercises.filter(
+          (exercise) =>
+            exercise.name.toLowerCase().includes(searchTerm) ||
+            exercise.bodyPart.toLowerCase().includes(searchTerm) ||
+            exercise.target.toLowerCase().includes(searchTerm)
+        );
+        const results = searchedResults.slice(0, 30);
+        setSearchTerm("");
+        setResultsLoading(false);
+        console.log(searchedResults);
+        setExercises(results);
+      }
     }
   };
-
 
   useEffect(() => {
     if (user && user.userType === "coach") {
@@ -102,19 +103,18 @@ const SearchExercisesPage = () => {
                       <Link
                         to="/new-exercise"
                         state={{
-                            name: eachExercise.name,
-                            bodyPart: eachExercise.bodyPart,
-                            gifUrl: eachExercise.gifUrl,
-                            id: user._id,
-                          }} 
-                          className="btn btn-primary btn-md"
+                          name: eachExercise.name,
+                          bodyPart: eachExercise.bodyPart,
+                          gifUrl: eachExercise.gifUrl,
+                          id: user._id,
+                        }}
+                        className="btn btn-primary btn-md"
                       >
-                      {/* <button>
+                        {/* <button>
                       Add to program
 
                       </button> */}
-                      Add to program
-
+                        Add to program
                       </Link>
                     </div>
                   </div>
