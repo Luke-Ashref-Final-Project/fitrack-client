@@ -4,6 +4,7 @@ import target from "../data/target.json";
 import { useState, useEffect, useContext } from "react";
 import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
+import CoachDashboard from "../components/CoachDashboard";
 import { AuthContext } from "../context/auth.context";
 
 const OverviewPage = () => {
@@ -25,6 +26,7 @@ const OverviewPage = () => {
   return (
     <div data-theme={theme} className="pb-8">
       <Nav />
+      {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
       <h1 className="text-3xl">Overview</h1>
     </div>
   );

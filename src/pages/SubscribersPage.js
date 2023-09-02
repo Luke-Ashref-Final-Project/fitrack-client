@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
+import CoachDashboard from "../components/CoachDashboard";
 
 const SubscribePage = () => {
   const { user, isLoggedIn } = useContext(AuthContext);
@@ -29,6 +30,7 @@ const SubscribePage = () => {
     isLoggedIn && (
       <div data-theme={theme}>
         <Nav />
+        {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
         <h1 className="text-3xl py-4">My subscribers</h1>
         <>
           {fetchedUsers &&

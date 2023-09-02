@@ -8,6 +8,7 @@ import Nav from "../components/Nav";
 import apiMethods from "../services/api.service";
 import { Link } from "react-router-dom";
 import NewExercisePage from "./NewExercisePage";
+import CoachDashboard from "../components/CoachDashboard";
 
 const ExercisesPage = () => {
   //theme changing
@@ -62,6 +63,7 @@ const ExercisesPage = () => {
     isLoggedIn && (
       <div data-theme={theme} className="min-h-screen">
         <Nav />
+        {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
         <h1 className="text-3xl mb-2 mt-4">Exercises</h1>
         <div className="flex flex-col align-items-stretch py-4 px-6 space-y-4">
           <input

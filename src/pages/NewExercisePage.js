@@ -4,6 +4,7 @@ import apiMethods from "../services/api.service";
 import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
+import CoachDashboard from "../components/CoachDashboard";
 
 const NewExercisePage = () => {
   const { user, isLoggedIn, isLoading } = useContext(AuthContext);
@@ -71,6 +72,7 @@ const NewExercisePage = () => {
   return (
     <div data-theme={theme}>
       <Nav />
+      {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
       {isLoggedIn ? (
         <div>
           <h1 className="text-3xl mb-2 mt-4">Create new exercise</h1>

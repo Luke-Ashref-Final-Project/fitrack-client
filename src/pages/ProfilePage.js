@@ -62,9 +62,7 @@ const ProfilePage = () => {
     isLoggedIn && (
       <div data-theme={theme} >
         <Nav />
-                 {/* coach notifications, will change later*/}
                  {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
-
         <div className="flex-grow p-6 flex flex-col items-center justify-center">
           <div className={`w-full max-w-md p-6 ${user?.userType === 'client' ? 'bg-white' : 'bg-slate-900'} rounded-lg shadow-lg`}>
             <Link to={"/"}>
