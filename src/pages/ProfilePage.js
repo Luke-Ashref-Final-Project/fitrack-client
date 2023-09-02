@@ -48,10 +48,6 @@ const ProfilePage = () => {
     }
   };
 
-  if (!isLoggedIn) {
-    navigate("/");
-  }
-
   useEffect(() => {
     if (user && user.userType === "coach") {
       setTheme("night");
@@ -60,8 +56,8 @@ const ProfilePage = () => {
     }
   }, [user]);
 
+  if (isLoggedIn) {
   return (
-    isLoggedIn && (
       <div data-theme={theme}>
         <Nav />
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
@@ -168,8 +164,11 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-    )
   );
+}
+return (
+  navigate("/")
+);
 };
 
 export default ProfilePage;
