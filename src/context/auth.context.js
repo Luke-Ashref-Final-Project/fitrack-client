@@ -3,18 +3,16 @@ import React, { useState, useEffect, createContext } from "react";
 import authMethods from "../services/auth.service";
  
 const AuthContext = createContext();
- 
+
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const [theme, setTheme] = useState("light");
   
   const storeToken = (token) => {       //  <==  ADD
     localStorage.setItem('authToken', token);
   }
   
-
   const authenticateUser = () => {           //  <==  ADD  
     // Get the stored token from the localStorage
     const storedToken = localStorage.getItem('authToken');
@@ -28,13 +26,7 @@ function AuthProviderWrapper(props) {
        // Update state variables        
         setIsLoggedIn(true);
         setIsLoading(false);
-        setUser(userPayload);
-        // need to find a way to make sure if coach or client is logged in, maybe we can do it somewhere else
-        /* if (userData.type === "coach") {
-            setTheme("dark");
-          } else {
-            setTheme("light");
-          } */     
+        setUser(userPayload);   
       })
       .catch((error) => {
         // If the server sends an error response (invalid token) 
@@ -63,6 +55,7 @@ function AuthProviderWrapper(props) {
     removeToken();
     // and update the state variables    
     authenticateUser();
+
   }  
  
   
@@ -71,7 +64,7 @@ function AuthProviderWrapper(props) {
    }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, setTheme, setUser, storeToken, authenticateUser, logOutUser }}>
+    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, setUser, storeToken, authenticateUser, logOutUser }}>
       {props.children}
     </AuthContext.Provider>
   )

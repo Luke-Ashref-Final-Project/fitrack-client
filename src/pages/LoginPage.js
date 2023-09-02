@@ -8,6 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { storeToken, authenticateUser } = useContext(AuthContext)
 
@@ -32,16 +33,14 @@ const Login = () => {
       userType: userType,
     };
 
-
     authMethods.logIn(user)
-      .then((response) => {
-        const { authToken, user } = response; // Extract user payload
-        storeToken(authToken); // Store the token in localStorage
-        localStorage.setItem('user', JSON.stringify(user)); // Store user payload (We used stringify to transform the JSON data)
-        authenticateUser();
-        navigate('/profile');
-      })
-      .catch((err) => console.error(err));
+    .then((tokenObject) =>{
+        // store the token in localStorage
+        storeToken(tokenObject.authToken)
+        authenticateUser()
+        navigate("/")
+    } )
+    .catch(err => console.error(err))
 
   };
 
@@ -91,7 +90,7 @@ const Login = () => {
                   name="userType"
                   value="client"
                   onChange={handleUserType}
-                  checked
+                  
                 />
                 <span className="label-text">Client</span>
               </label>
