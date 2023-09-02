@@ -5,7 +5,7 @@ const apiExternal = axios.create({
 });
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5005" 
+  baseURL: "http://localhost:5005" || process.env.REACT_APP_API_URL
 });
 
 const specifiedOptions = {
@@ -24,6 +24,7 @@ const fetchExercises = async (options) => {
     console.log(Array.isArray(returnedData));
     console.log(typeof returnedData);
     console.log(returnedData);
+    
     return returnedData;
   } catch (error) {
     console.error(error);
