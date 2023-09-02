@@ -7,9 +7,8 @@ import { AuthContext } from "../context/auth.context";
 import Nav from "../components/Nav";
 import apiMethods from "../services/api.service";
 import { Link } from "react-router-dom";
-import NewExercisePage from "./NewExercisePage";
 
-const ExercisesPage = () => {
+const SearchExercisesPage = () => {
   //theme changing
   const [theme, setTheme] = useState("cmyk");
   const { user, isLoggedIn, isLoading } = useContext(AuthContext);
@@ -36,10 +35,6 @@ const ExercisesPage = () => {
       setExercises(results);
     }
   };
-
-  const [name, setName] = useState("");
-  const [bodyPart, setBodyPart] = useState("");
-  const [gifUrl, setGifUrl] = useState("");
 
   //targeting the elements in each index
   //getting the "value" from the targeted item
@@ -140,4 +135,4 @@ const ExercisesPage = () => {
   );
 };
 
-export default ExercisesPage;
+export default SearchExercisesPage;
