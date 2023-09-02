@@ -59,8 +59,8 @@ const Nav = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link className="text-xl" to="/exercises">
-                          All exercises
+                        <Link className="text-xl" to="/searchexercises">
+                          Search exercises
                         </Link>
                       </li>
                       <li>
@@ -116,8 +116,8 @@ const Nav = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link className="text-xl" to="/exercises">
-                      All exercises
+                    <Link className="text-xl" to="/searchexercises">
+                      Search exercises
                     </Link>
                   </li>
                   <li>
@@ -145,7 +145,7 @@ const Nav = () => {
                   </li>
                   <li>
                     <Link className="text-xl" to="/coaches">
-                      coaches page
+                      Coaches page
                     </Link>
                   </li>
                 </div>

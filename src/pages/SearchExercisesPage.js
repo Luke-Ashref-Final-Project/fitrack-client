@@ -1,16 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-// import exercise from "../data/exercise.json";
-// import bodyPart from "../data/bodyPart.json";
-// import target from "../data/target.json";
-// import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
 import apiMethods from "../services/api.service";
 import { Link } from "react-router-dom";
-// import NewExercisePage from "./NewExercisePage";
 import CoachDashboard from "../components/CoachDashboard";
 
-const ExercisesPage = () => {
+const SearchExercisesPage = () => {
   //theme changing
   const [theme, setTheme] = useState("cmyk");
   const { user, isLoggedIn, isLoading } = useContext(AuthContext);
@@ -24,27 +19,21 @@ const ExercisesPage = () => {
     if (searchTerm) {
       setResultsLoading(true);
       const exercises = await fetchExercises(specifiedOptions);
-      const searchedResults = exercises.filter(
-        (exercise) =>
-          exercise.name.toLowerCase().includes(searchTerm) ||
-          exercise.bodyPart.toLowerCase().includes(searchTerm) ||
-          exercise.target.toLowerCase().includes(searchTerm)
-      );
-      const results = searchedResults.slice(0, 30);
-      setSearchTerm("");
-      setResultsLoading(false);
-      console.log(searchedResults);
-      setExercises(results);
+      if (exercises) {
+        const searchedResults = exercises.filter(
+          (exercise) =>
+            exercise.name.toLowerCase().includes(searchTerm) ||
+            exercise.bodyPart.toLowerCase().includes(searchTerm) ||
+            exercise.target.toLowerCase().includes(searchTerm)
+        );
+        const results = searchedResults.slice(0, 30);
+        setSearchTerm("");
+        setResultsLoading(false);
+        console.log(searchedResults);
+        setExercises(results);
+      }
     }
   };
-
-  // const [name, setName] = useState("");
-  // const [bodyPart, setBodyPart] = useState("");
-  // const [gifUrl, setGifUrl] = useState("");
-
-  //targeting the elements in each index
-  //getting the "value" from the targeted item
-  //pass onto a function and add values into the compoment upon click event
 
   useEffect(() => {
     if (user && user.userType === "coach") {
@@ -114,19 +103,18 @@ const ExercisesPage = () => {
                       <Link
                         to="/new-exercise"
                         state={{
-                            name: eachExercise.name,
-                            bodyPart: eachExercise.bodyPart,
-                            gifUrl: eachExercise.gifUrl,
-                            id: user._id,
-                          }} 
-                          className="btn btn-primary btn-md"
+                          name: eachExercise.name,
+                          bodyPart: eachExercise.bodyPart,
+                          gifUrl: eachExercise.gifUrl,
+                          id: user._id,
+                        }}
+                        className="btn btn-primary btn-md"
                       >
-                      {/* <button>
+                        {/* <button>
                       Add to program
 
                       </button> */}
-                      Add to program
-
+                        Add to program
                       </Link>
                     </div>
                   </div>
@@ -142,4 +130,4 @@ const ExercisesPage = () => {
   );
 };
 
-export default ExercisesPage;
+export default SearchExercisesPage;
