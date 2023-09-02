@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import authMethods from "../services/auth.service";
-import apiMethods from "../services/api.service";
 import Nav from "../components/Nav";
+import CoachDashboard from "../components/CoachDashboard";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
 
@@ -46,6 +45,7 @@ const OverviewPage = () => {
   return (
     <div data-theme={theme} className="pb-8">
       <Nav />
+      {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
       <h1 className="text-3xl">Overview</h1>
       {allExercises &&
         allExercises.map((eachExercise) => {

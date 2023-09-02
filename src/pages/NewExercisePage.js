@@ -4,9 +4,10 @@ import apiMethods from "../services/api.service";
 import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
+import CoachDashboard from "../components/CoachDashboard";
 
 const NewExercisePage = () => {
-  const { user, isLoggedIn, isLoading } = useContext(AuthContext);
+  const { user, isLoggedIn } = useContext(AuthContext);
   const [theme, setTheme] = useState("cmyk");
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,11 +67,12 @@ const NewExercisePage = () => {
     // console.log(bodyPart);
     // console.log(gifUrl);
     // console.log(id);
-  }, [name, bodyPart, gifUrl, coachId]);
+  }, [name, bodyPart, gifUrl, coachId, user, location.state]);
 
   return (
     <div data-theme={theme}>
       <Nav />
+      {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
       {isLoggedIn ? (
         <div>
           <h1 className="text-3xl mb-2 mt-4">Create new exercise</h1>
