@@ -19,6 +19,10 @@ const fetchExercises = async (options) => {
   try {
     const response = await apiExternal.get("/exercises", options);
     const returnedData = response.data;
+    // console.log(typeof returnedData);
+    // console.log(returnedData);
+    console.log(Array.isArray(returnedData));
+
     return returnedData;
   } catch (error) {
     console.error(error);
