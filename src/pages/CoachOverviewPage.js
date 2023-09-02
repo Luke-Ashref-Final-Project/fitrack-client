@@ -60,7 +60,7 @@ const CoachOverviewPage = () => {
   
   return (
     isLoggedIn && (
-      <div>
+      <div data-theme={theme}>
         <Nav />
         {coach ? (
           <div id={coach.id} className="card w-72 glass mx-auto mt-4 mb-4">

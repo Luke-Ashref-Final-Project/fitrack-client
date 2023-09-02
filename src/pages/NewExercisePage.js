@@ -7,7 +7,7 @@ import Nav from "../components/Nav";
 import CoachDashboard from "../components/CoachDashboard";
 
 const NewExercisePage = () => {
-  const { user, isLoggedIn, isLoading } = useContext(AuthContext);
+  const { user, isLoggedIn } = useContext(AuthContext);
   const [theme, setTheme] = useState("cmyk");
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,7 +67,7 @@ const NewExercisePage = () => {
     // console.log(bodyPart);
     // console.log(gifUrl);
     // console.log(id);
-  }, [name, bodyPart, gifUrl, coachId]);
+  }, [name, bodyPart, gifUrl, coachId, user, location.state]);
 
   return (
     <div data-theme={theme}>

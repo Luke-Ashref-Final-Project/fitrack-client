@@ -41,7 +41,7 @@ const CoachesPage = () => {
 
   return (
     isLoggedIn && (
-      <div>
+      <div data-theme={theme}>
         <Nav />
         {coachesList?.length > 0 ? (
           coachesList.map((coach) => (

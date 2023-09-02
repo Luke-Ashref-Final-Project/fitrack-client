@@ -7,7 +7,7 @@ import { AuthContext } from "../context/auth.context";
 import Nav from "../components/Nav";
 import apiMethods from "../services/api.service";
 import { Link } from "react-router-dom";
-import NewExercisePage from "./NewExercisePage";
+// import NewExercisePage from "./NewExercisePage";
 import CoachDashboard from "../components/CoachDashboard";
 
 const ExercisesPage = () => {
@@ -38,9 +38,9 @@ const ExercisesPage = () => {
     }
   };
 
-  const [name, setName] = useState("");
-  const [bodyPart, setBodyPart] = useState("");
-  const [gifUrl, setGifUrl] = useState("");
+  // const [name, setName] = useState("");
+  // const [bodyPart, setBodyPart] = useState("");
+  // const [gifUrl, setGifUrl] = useState("");
 
   //targeting the elements in each index
   //getting the "value" from the targeted item
