@@ -1,16 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-// import exercise from "../data/exercise.json";
-// import bodyPart from "../data/bodyPart.json";
-// import target from "../data/target.json";
-// import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
 import apiMethods from "../services/api.service";
 import { Link } from "react-router-dom";
-// import NewExercisePage from "./NewExercisePage";
 import CoachDashboard from "../components/CoachDashboard";
 
-const ExercisesPage = () => {
+const SearchExercisesPage = () => {
   //theme changing
   const [theme, setTheme] = useState("cmyk");
   const { user, isLoggedIn, isLoading } = useContext(AuthContext);
@@ -38,13 +33,6 @@ const ExercisesPage = () => {
     }
   };
 
-  // const [name, setName] = useState("");
-  // const [bodyPart, setBodyPart] = useState("");
-  // const [gifUrl, setGifUrl] = useState("");
-
-  //targeting the elements in each index
-  //getting the "value" from the targeted item
-  //pass onto a function and add values into the compoment upon click event
 
   useEffect(() => {
     if (user && user.userType === "coach") {
@@ -142,4 +130,4 @@ const ExercisesPage = () => {
   );
 };
 
-export default ExercisesPage;
+export default SearchExercisesPage;
