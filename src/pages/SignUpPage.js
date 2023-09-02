@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authMethods from "../services/auth.service";
+import { AuthContext } from "../context/auth.context";
 import Logo from '../logo.svg';
 
 const SignUp = () => {
@@ -9,10 +10,10 @@ const SignUp = () => {
     username: "",
     password: "",
   });
-
+  const { isLoggedIn } = useContext(AuthContext);
   const [userType, setUserType] = useState("");
-
   const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -39,6 +40,8 @@ const SignUp = () => {
     }
   };
 
+
+if (!isLoggedIn) {
   return (
     <div data-theme="cmyk" className="hero min-h-screen">
       <div className="card w-full max-w-sm">
@@ -126,4 +129,9 @@ const SignUp = () => {
     </div>
   );
 };
+
+return (
+  navigate("/")
+);
+}
 export default SignUp;

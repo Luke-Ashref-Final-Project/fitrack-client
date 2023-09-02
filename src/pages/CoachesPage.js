@@ -35,9 +35,9 @@ const CoachesPage = () => {
     }
   }, [user]);
 
-  if (isLoading) {
-    return <span className="loading loading-spinner text-error"></span>;
-  }
+  // if (isLoading) {
+  //   return <span className="loading loading-spinner text-error"></span>;
+  // }
 
   return (
     isLoggedIn && (
@@ -57,7 +57,7 @@ const CoachesPage = () => {
             </Link>
           ))
         ) : (
-          <p>No coaches available.</p>
+          <span className="loading loading-spinner text-error">Loading coaches</span>
         )}
       </div>
     )
