@@ -56,7 +56,7 @@ const ProfilePage = () => {
     }
   }, [user]);
 
-  if (isLoggedIn) {
+  if (user) {
   return (
       <div data-theme={theme}>
         <Nav />

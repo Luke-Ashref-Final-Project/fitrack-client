@@ -27,7 +27,7 @@ const SubscribePage = () => {
   }, [user]);
 
   return (
-    isLoggedIn && (
+    user && (
       <div data-theme={theme}>
         <Nav />
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}

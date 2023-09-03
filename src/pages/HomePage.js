@@ -5,7 +5,7 @@ import Logo from "../logo.svg";
 import cta1 from "../images/cta-1.png";
 
 const HomePage = () => {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, user } = useContext(AuthContext);
 
   return (
     <div className="hero min-h-screen">
@@ -24,7 +24,7 @@ const HomePage = () => {
           </p>
           <img src={cta1} alt="" />
 
-          {isLoggedIn ? (
+          {user ? (
             <Link to="/profile">
               <button className="btn btn-wide btn-outline mt-4">
                 Profile Page
