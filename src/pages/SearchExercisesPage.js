@@ -20,6 +20,11 @@ const SearchExercisesPage = () => {
       setResultsLoading(true);
       const exercises = await fetchExercises(specifiedOptions);
       if (exercises) {
+        console.log(Array.isArray(exercises));
+        const newnewData = Object.values(exercises);
+        console.log(typeof newnewData)
+        console.log(newnewData)
+
         const searchedResults = exercises.filter(
           (exercise) =>
             exercise.name.toLowerCase().includes(searchTerm) ||
