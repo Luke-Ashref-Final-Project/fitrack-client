@@ -40,7 +40,7 @@ const CoachesPage = () => {
   // }
 
   return (
-    isLoggedIn && (
+    user && (
       <div data-theme={theme}>
         <Nav />
         {coachesList?.length > 0 ? (
