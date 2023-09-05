@@ -5,7 +5,7 @@ const apiExternal = axios.create({
 });
 
 const api = axios.create({
-  baseURL:  process.env.REACT_APP_API_URL || "http://localhost:5005"
+  baseURL: "http://localhost:5005" || process.env.REACT_APP_API_URL,
 });
 
 const specifiedOptions = {
@@ -31,6 +31,7 @@ const fetchExercises = async (options) => {
   }
 };
 
+
 const getAllExercisesForClient = async (clientId) => {
   try {
     const response = await api.get(`/exercises/client/${clientId}`);
@@ -48,11 +49,23 @@ const getAllExercisesForCoach = async (coachId) => {
     const response = await api.get(`/exercises/coach/${coachId}`);
     if (response) {
       const newData = response.data;
-      console.log(newData)
       return newData;
     }
   } catch (err) {
     console.error(err);
+  }
+};
+
+const getOneExercise = async (exerciseId) => {
+  try {
+    const response = await api.get(`/exercise/${exerciseId}`);
+    if (response) {
+      const newData = response.data;
+      console.log(newData);
+      return newData;
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -89,6 +102,7 @@ const apiMethods = {
   createNewExercise,
   getAllExercisesForCoach,
   getAllExercisesForClient,
+  getOneExercise,
 };
 
 export default apiMethods;
