@@ -57,7 +57,7 @@ const ProfilePage = () => {
   }, [user]);
 
   useEffect(()=> {
-    if (!isLoggedIn) {
+    if (!isLoggedIn && !isLoading) {
       return navigate("/")
     }
   }, [])
