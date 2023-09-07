@@ -40,7 +40,7 @@ const CoachesPage = () => {
   // }
 
   return (
-    user && (
+    isLoggedIn && (
       <div data-theme={theme}>
         <Nav />
         {coachesList?.length > 0 ? (
@@ -57,7 +57,7 @@ const CoachesPage = () => {
             </Link>
           ))
         ) : (
-          <span className="loading loading-spinner text-error">Loading coaches</span>
+          <span className="loading loading-spinner text-error">Loading...</span>
         )}
       </div>
     )

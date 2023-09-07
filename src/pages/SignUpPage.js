@@ -10,8 +10,8 @@ const SignUp = () => {
     username: "",
     password: "",
   });
-  const { isLoggedIn } = useContext(AuthContext);
   const [userType, setUserType] = useState("");
+  const { isLoggedIn, isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
 
@@ -39,6 +39,10 @@ const SignUp = () => {
       console.log(err);
     }
   };
+
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
 
 
 if (!isLoggedIn) {
@@ -129,9 +133,5 @@ if (!isLoggedIn) {
     </div>
   );
 };
-
-return (
-  navigate("/")
-);
 }
 export default SignUp;

@@ -14,7 +14,7 @@ const ProfilePage = () => {
   
   console.log(error);
 
-  const { user, setUser, isLoggedIn, logOutUser } = useContext(AuthContext);
+  const { user, setUser, isLoggedIn, logOutUser, isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChangePassword = async (e) => {
@@ -56,8 +56,18 @@ const ProfilePage = () => {
     }
   }, [user]);
 
-  if (user) {
+  useEffect(()=> {
+    if (!isLoggedIn) {
+      return navigate("/")
+    }
+  }, [])
+
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
+
   return (
+    isLoggedIn && (
       <div data-theme={theme}>
         <Nav />
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
@@ -164,11 +174,8 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
+      )
   );
-}
-return (
-  navigate("/")
-);
 };
 
 export default ProfilePage;

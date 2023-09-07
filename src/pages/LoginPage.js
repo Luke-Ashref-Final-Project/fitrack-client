@@ -10,7 +10,7 @@ const Login = () => {
   const [userType, setUserType] = useState("");
   // const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const { storeToken, authenticateUser } = useContext(AuthContext)
+  const { storeToken, authenticateUser, isLoading, isLoggedIn } = useContext(AuthContext)
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -44,8 +44,18 @@ const Login = () => {
 
   };
 
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
+
+  //ask lloyd about this error in the console
+  // if (isLoggedIn) {
+  //   navigate("/")
+  //   return;
+  // }
+
   return (
-    
+    !isLoggedIn &&
     <div data-theme="cmyk" className="hero min-h-screen">
     <div className="card w-full max-w-sm">
       {/* Up for a change */}

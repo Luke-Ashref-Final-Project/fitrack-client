@@ -5,7 +5,7 @@ import Nav from "../components/Nav";
 import CoachDashboard from "../components/CoachDashboard";
 
 const SubscribePage = () => {
-  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user, isLoggedIn, isLoading } = useContext(AuthContext);
   const [fetchedUsers, setFetchedUsers] = useState(null);
   const [theme, setTheme] = useState("cmyk");
 
@@ -26,8 +26,13 @@ const SubscribePage = () => {
     }
   }, [user]);
 
+  
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
+
   return (
-    user && (
+    isLoggedIn && (
       <div data-theme={theme}>
         <Nav />
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
