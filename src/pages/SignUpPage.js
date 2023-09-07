@@ -9,6 +9,7 @@ const SignUp = () => {
     email: "",
     username: "",
     password: "",
+    description: "",
   });
   const [userType, setUserType] = useState("");
   const { isLoggedIn, isLoading } = useContext(AuthContext);
@@ -65,7 +66,7 @@ if (!isLoggedIn) {
               </label>
               <input
                 type="text"
-                placeholder="user name"
+                placeholder="username"
                 className="input input-bordered"
                 name="username"
                 value={user.username}
@@ -98,6 +99,21 @@ if (!isLoggedIn) {
                 onChange={handleChange}
               />
             </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Description</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Say something about yourself"
+                className="input input-bordered"
+                name="description"
+                value={user.description}
+                onChange={handleChange}
+              />
+            </div>
+
             <div className="form-control">
               <label className="label cursor-pointer">
                 <input

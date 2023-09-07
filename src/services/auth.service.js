@@ -4,12 +4,13 @@ const api = axios.create({
   baseURL: "http://localhost:5005"  || process.env.REACT_APP_API_URL
 });
 
-const signupCoach = async ({ email, username, password }) => {
+const signupCoach = async ({ email, username, password, description }) => {
   try {
     const response = await api.post("/signup/coach", {
       email,
       username,
       password,
+      description,
     });
     return response.data;
   } catch (err) {
@@ -17,12 +18,13 @@ const signupCoach = async ({ email, username, password }) => {
   }
 };
 
-const signupClient = async ({ email, username, password }) => {
+const signupClient = async ({ email, username, password, description }) => {
   try {
     const response = await api.post("/signup/client", {
       email,
       username,
       password,
+      description,
     });
     return response.data;
   } catch (err) {
