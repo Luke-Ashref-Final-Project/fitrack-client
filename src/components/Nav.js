@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // import authMethods from "../services/auth.service";
 import { AuthContext } from "../context/auth.context";
 import logo from "../logo.svg";
+import { FiHome, FiUser } from "react-icons/fi";
 
 const Nav = () => {
   const [theme, setTheme] = useState("cmyk");
@@ -70,7 +71,7 @@ const Nav = () => {
                       </li>
                       <li>
                         <Link className="text-xl" to="/profile">
-                          Account
+                        <FiUser />Account
                         </Link>
                       </li>
                     </>
@@ -88,7 +89,7 @@ const Nav = () => {
                       </li>
                       <li>
                         <Link className="text-xl" to="/profile">
-                          Account
+                        <FiUser /> Account
                         </Link>
                       </li>
                     </>
@@ -122,7 +123,7 @@ const Nav = () => {
                   </li>
                   <li>
                     <Link className="text-xl" to="/profile">
-                      Account
+                    <FiUser /> Account
                     </Link>
                   </li>
                 </div>
@@ -140,7 +141,7 @@ const Nav = () => {
                   </li>
                   <li>
                     <Link className="text-xl" to="/profile">
-                      Account
+                    <FiUser /> Account
                     </Link>
                   </li>
                   <li>
