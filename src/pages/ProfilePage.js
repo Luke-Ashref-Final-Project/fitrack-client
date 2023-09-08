@@ -12,7 +12,6 @@ const ProfilePage = () => {
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
   
-  console.log(error);
 
   const { user, setUser, isLoggedIn, logOutUser, isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -30,7 +29,7 @@ const ProfilePage = () => {
       setNewPassword("");
       window.my_modal_1.close();
     } catch (error) {
-      setError("Failed to change password.");
+      setError("Failed to change password.", error);
     }
   };
 
@@ -57,10 +56,10 @@ const ProfilePage = () => {
   }, [user]);
 
   useEffect(()=> {
-    if (!isLoggedIn && !isLoading) {
+    if (!isLoggedIn && !isLoading && !user) {
       return navigate("/")
     }
-  }, [isLoggedIn, isLoading])
+  }, [isLoggedIn, isLoading, user])
 
   if (isLoading) {
     return <span className="loading loading-spinner text-error">Loading...</span>
