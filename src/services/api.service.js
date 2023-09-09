@@ -102,30 +102,31 @@ const updateExercise = async (exerciseId, description, variationId) => {
       variationId,
     });
     const exercise = response.data;
-    return exercise
+    return exercise;
   } catch (error) {
     console.log(error);
   }
 };
 
 //getVariation
-const getVariation = async (variationId) => {
-  try {
-    const response = await api.get(`/variation/${variationId}`);
-    if (response) {
-      const variation = response.data;
-      return variation;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const getVariation = async (variationId) => {
+//   try {
+//     const response = await api.get(`/variation/${variationId}`);
+//     if (response) {
+//       const variation = response.data;
+//       return variation;
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 //createVariation
-const createVariation = async (variations, exerciseId) => {
+const createVariation = async (weights, reps, exerciseId) => {
   try {
     const response = await api.post("/variation/new", {
-      variations,
+      weights,
+      reps,
       exerciseId,
     });
     if (response) {
@@ -138,11 +139,23 @@ const createVariation = async (variations, exerciseId) => {
 };
 
 //updateVariation
-const updateVariation = async (variations, variationId) => {
+const updateVariation = async (weight, reps, variationId) => {
   try {
-    const response = await api.put(`/variation/${variationId}`, { variations });
+    const response = await api.put(`/variation/${variationId}`, {
+      weight,
+      reps,
+    });
     const variation = response.data;
     return variation;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//delete exercise
+const deleteExercise = async (exerciseId) => {
+  try {
+    const response = await api.delete(`/exercise/${exerciseId}`);
   } catch (error) {
     console.log(error);
   }
@@ -156,7 +169,7 @@ const apiMethods = {
   getAllExercisesForClient,
   getOneExercise,
   updateExercise,
-  getVariation,
+  // getVariation,
   createVariation,
   updateVariation,
 };
