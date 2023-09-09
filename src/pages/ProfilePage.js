@@ -10,7 +10,7 @@ const ProfilePage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   
 
   const { user, setUser, isLoggedIn, logOutUser, isLoading } = useContext(AuthContext);
@@ -27,6 +27,8 @@ const ProfilePage = () => {
       console.log(response);
       setCurrentPassword("");
       setNewPassword("");
+      setError(null);
+
       window.my_modal_1.close();
     } catch (error) {
       setError("Failed to change password.", error);
@@ -147,13 +149,20 @@ const ProfilePage = () => {
                     onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </div>
+                {error && <div className="text-red-500">{error}</div>}
+
                 <div className="modal-action">
                   <button className="btn" onClick={handleChangePassword}>
                     Change Password
                   </button>
                   <button
                     className="btn"
-                    onClick={() => window.my_modal_1.close()}
+                    onClick={() => {
+                      setError(null); // Reset the error state
+                      setCurrentPassword("")
+                      setNewPassword("")
+                      window.my_modal_1.close();
+                    }}
                   >
                     Close
                   </button>

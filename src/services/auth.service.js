@@ -35,9 +35,10 @@ const signupClient = async ({ email, username, password, description }) => {
 const logIn = async ({ email, password, userType }) => {
   try {
     const response = await api.post("/login", { email, password, userType });
-    return response.data;
+    return {responseData: response.data, responseStatus: response.status}
   } catch (err) {
     console.error(err);
+    return err
   }
 };
 
