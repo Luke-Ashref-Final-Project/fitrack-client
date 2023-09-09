@@ -122,24 +122,23 @@ const updateExercise = async (exerciseId, description, variationId) => {
 // };
 
 //createVariation
-const createVariation = async (weights, reps, exerciseId) => {
+const createVariation = async ({ weight, reps }) => {
   try {
     const response = await api.post("/variation/new", {
-      weights,
+      weight,
       reps,
-      exerciseId,
     });
-    if (response) {
-      const variation = response.data;
-      return variation;
-    }
+
+    return response.data;
+
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
 //updateVariation
-const updateVariation = async (weight, reps, variationId) => {
+const updateVariation = async ({ weight, reps, variationId }) => {
   try {
     const response = await api.put(`/variation/${variationId}`, {
       weight,
