@@ -31,7 +31,6 @@ const fetchExercises = async (options) => {
   }
 };
 
-
 const getAllExercisesForClient = async (clientId) => {
   try {
     const response = await api.get(`/exercises/client/${clientId}`);
@@ -96,6 +95,59 @@ const createNewExercise = async ({
   }
 };
 
+const updateExercise = async (exerciseId, description, variationId) => {
+  try {
+    const response = await api.put(`/exercise/${exerciseId}`, {
+      description,
+      variationId,
+    });
+    const exercise = response.data;
+    return exercise
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//getVariation
+const getVariation = async (variationId) => {
+  try {
+    const response = await api.get(`/variation/${variationId}`);
+    if (response) {
+      const variation = response.data;
+      return variation;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//createVariation
+const createVariation = async (variations, exerciseId) => {
+  try {
+    const response = await api.post("/variation/new", {
+      variations,
+      exerciseId,
+    });
+    if (response) {
+      const variation = response.data;
+      return variation;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//updateVariation
+const updateVariation = async (variations, variationId) => {
+  try {
+    const response = await api.put(`/variation/${variationId}`, { variations });
+    const variation = response.data;
+    return variation;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const apiMethods = {
   specifiedOptions,
   fetchExercises,
@@ -103,6 +155,10 @@ const apiMethods = {
   getAllExercisesForCoach,
   getAllExercisesForClient,
   getOneExercise,
+  updateExercise,
+  getVariation,
+  createVariation,
+  updateVariation,
 };
 
 export default apiMethods;

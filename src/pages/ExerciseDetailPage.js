@@ -14,8 +14,9 @@ const ExerciseDetailPage = () => {
   const [description, setDescription] = useState("");
   const id = useParams();
   const [exerciseSets, setExerciseSets] = useState([{ reps: 0, weight: 0 }]);
-  //this is the way to capture whole sets
-  //when create a new set, we push a new object into the set array.
+  //Add a new sets
+  // a: upon adding a new set, already send post request to create sets in the database
+  // b: do it in one go -> have a button to "handle" all the creation of the sets in database
 
   const addExerciseSet = () => {
     setExerciseSets([...exerciseSets, { reps: 0, weight: 0 }]);
@@ -28,7 +29,7 @@ const ExerciseDetailPage = () => {
     setExerciseSets(newSets);
   };
 
-  const handleReps = (value, index, type) => {
+  const handleRepsAndWeight = (value, index, type) => {
     //identify if the input is for weight or reps and update the object according to the index.
     const newCopy = [...exerciseSets];
     const updateSet = { ...exerciseSets[index] };
@@ -39,6 +40,22 @@ const ExerciseDetailPage = () => {
     }
     newCopy[index] = updateSet;
     setExerciseSets(newCopy);
+    console.log(exerciseSets);
+  };
+
+  const handleDescription = (value) => {
+    setDescription(value);
+  };
+
+  //communication to back-end:
+  const createVariation = (variations, exerciseId) => {
+    const variation = apiMethods.createVariation();
+  };
+
+  const updateVariaton = (variations) => {
+  };
+
+  const updateExercise = (exerciseId, description, variationId) => {
     console.log(exerciseSets);
   };
 
@@ -90,6 +107,9 @@ const ExerciseDetailPage = () => {
               className="textarea textarea-bordered w-full"
               type="text"
               value={description}
+              onChange={(e) => {
+                handleDescription(e.target.value);
+              }}
             />
           </div>
 
@@ -105,7 +125,7 @@ const ExerciseDetailPage = () => {
                       <h1 className="text-2xl">Set {index + 1}</h1>
                       <button
                         className="btn btn-circle btn-warning btn-outline btn-sm"
-                        onClick={(e) => handleDeletion(e, { index })}
+                        onClick={(e) => handleDeletion(e, index)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +152,7 @@ const ExerciseDetailPage = () => {
                           className="input input-bordered w-full"
                           value={eachSet.reps}
                           onChange={(e) =>
-                            handleReps(e.target.value, index, "reps")
+                            handleRepsAndWeight(e.target.value, index, "reps")
                           }
                         />
                       </div>
@@ -144,7 +164,7 @@ const ExerciseDetailPage = () => {
                           className="input input-bordered w-full"
                           value={eachSet.weight}
                           onChange={(e) =>
-                            handleReps(e.target.value, index, "weight")
+                            handleRepsAndWeight(e.target.value, index, "weight")
                           }
                         />
                       </div>
