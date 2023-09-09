@@ -68,9 +68,10 @@ const ExerciseDetailPage = () => {
   ////////////////////
 
   //Communication to back-end:
-  const createVariation = async (weight, reps) => {
+  const createVariation = async () => {
     try {
-      const createdVariation = await apiMethods.createVariation(weight, reps);
+
+      const createdVariation = await apiMethods.createVariation();
 
       if (createdVariation) {
         setExerciseSets([
@@ -236,9 +237,8 @@ const ExerciseDetailPage = () => {
             <div className="card-actions flex-col w-full mt-1 space-y-4">
               <button
                 className="btn btn-primary btn-outline w-full"
-                onClick={addExerciseSet}
+                onClick={()=>createVariation()}
               >
-                {" "}
                 <FiPlus />
                 Add new set
               </button>

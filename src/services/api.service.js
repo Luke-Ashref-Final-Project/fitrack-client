@@ -109,11 +109,10 @@ const updateExercise = async (exerciseId, description, variationId) => {
 };
 
 //createVariation
-const createVariation = async ({ weight, reps }) => {
+const createVariation = async () => {
   try {
     const response = await api.post("/variation/new", {
-      weight,
-      reps,
+
     });
 
     return response.data;
