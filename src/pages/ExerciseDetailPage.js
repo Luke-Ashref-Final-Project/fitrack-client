@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import apiMethods from "../services/api.service";
 import Nav from "../components/Nav";
+import { FiX, FiPlus, FiSave } from "react-icons/fi";
 
 const ExerciseDetailPage = () => {
   const [theme, setTheme] = useState("cmyk");
@@ -12,16 +13,14 @@ const ExerciseDetailPage = () => {
   const [name, setName] = useState("");
   const [bodyPart, setBodyPart] = useState("");
   const [description, setDescription] = useState("");
-  const id = useParams();
-  const [exerciseSets, setExerciseSets] = useState([{ reps: 0, weight: 0 }]);
-  //Add a new sets
-  // a: upon adding a new set, already send post request to create sets in the database
-  // b: do it in one go -> have a button to "handle" all the creation of the sets in database
-
-  const addExerciseSet = () => {
-    setExerciseSets([...exerciseSets, { reps: 0, weight: 0 }]);
+  const id = useParams(); //.exerciseId to extra the exerciseId
+  const handleDescription = (value) => {
+    setDescription(value);
   };
 
+  const [exerciseSets, setExerciseSets] = useState([]);
+
+  //need modification on the back-end to do the property deletion of the variation
   const handleDeletion = (e, index) => {
     e.preventDefault();
     const newSets = [...exerciseSets];
@@ -29,6 +28,25 @@ const ExerciseDetailPage = () => {
     setExerciseSets(newSets);
   };
 
+  //handle delete variation
+  const handleVariationDeletion = (e, index, variationId) => {
+    //front-end logic
+    e.preventDefault();
+    const newSets = [...exerciseSets];
+    newSets.splice(index, 1);
+    setExerciseSets(newSets);
+
+    //back-end
+    apiMethods.deleteVariation(variationId);
+  };
+
+  //handle exercise deletion
+  const handleExerciseDeletion = (e) => {
+    e.preventDefault();
+    apiMethods.deleteExercise(id.exerciseId);
+  };
+
+  //handle front-end interaction of reps and weight
   const handleRepsAndWeight = (value, index, type) => {
     //identify if the input is for weight or reps and update the object according to the index.
     const newCopy = [...exerciseSets];
@@ -43,20 +61,68 @@ const ExerciseDetailPage = () => {
     console.log(exerciseSets);
   };
 
-  const handleDescription = (value) => {
-    setDescription(value);
+  //until the back-end is ready, we can remove this blocl
+  const addExerciseSet = () => {
+    setExerciseSets([...exerciseSets, { reps: 0, weight: 0 }]);
+  };
+  ////////////////////
+
+  //Communication to back-end:
+  const createVariation = async (weight, reps) => {
+    try {
+      const createdVariation = await apiMethods.createVariation(weight, reps);
+
+      if (createdVariation) {
+        setExerciseSets([
+          ...exerciseSets,
+          {
+            weight: createdVariation.weight,
+            reps: createdVariation.reps,
+            variationId: createdVariation._id,
+          },
+        ]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  //communication to back-end:
-  const createVariation = (variations, exerciseId) => {
-    const variation = apiMethods.createVariation();
+  const saveAll = (e) => {
+    e.preventDefault();
+    //update all variations
+    for (let i = 0; i < exerciseSets.length; i++) {
+      updateVariation(
+        exerciseSets[i].weight,
+        exerciseSets[i].reps,
+        exerciseSets[i].variationId
+      );
+    }
+    //update the exercises
+    const variationId = exerciseSets.map((exercise) => exercise.variationId);
+    apiMethods.updateExercise(id.exerciseId, description, variationId);
   };
 
-  const updateVariaton = (variations) => {
-  };
-
-  const updateExercise = (exerciseId, description, variationId) => {
-    console.log(exerciseSets);
+  const updateVariation = async ({ weight, reps, variationId }) => {
+    try {
+      const updatedVariation = await apiMethods.updateVariation(
+        weight,
+        reps,
+        variationId
+      );
+      if (updatedVariation) {
+        const foundIndex = exerciseSets.findIndex(
+          (set) => set.variationId === updatedVariation.variationId
+        );
+        const newCopy = [...exerciseSets];
+        const updateSet = { ...exerciseSets[foundIndex] };
+        updateSet.reps = updatedVariation.reps;
+        updateSet.weight = updatedVariation.weight;
+        newCopy[foundIndex] = updateSet;
+        setExerciseSets(newCopy);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -64,13 +130,17 @@ const ExerciseDetailPage = () => {
       try {
         const oneExercise = await apiMethods.getOneExercise(id.exerciseId);
         if (oneExercise) {
-          setImage(oneExercise.image);
-          setName(oneExercise.name);
-          setBodyPart(oneExercise.bodypart);
-          setDescription(oneExercise.description);
+          setImage(oneExercise.image || "");
+          setName(oneExercise.name || "");
+          setBodyPart(oneExercise.bodypart || "");
+          setDescription(oneExercise.description || "");
+          //this should be modified based on the back-end route
+          if (oneExercise.variation.length !== 0) {
+            setExerciseSets(oneExercise.variation);
+          } 
         }
       } catch (err) {
-        console(err);
+        console.log(err);
       }
     };
     getdata();
@@ -125,22 +195,11 @@ const ExerciseDetailPage = () => {
                       <h1 className="text-2xl">Set {index + 1}</h1>
                       <button
                         className="btn btn-circle btn-warning btn-outline btn-sm"
-                        onClick={(e) => handleDeletion(e, index)}
+                        onClick={(e) =>
+                          handleDeletion(e, index, eachSet.variationId)
+                        }
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                          />
-                        </svg>
+                        <FiX />
                       </button>
                     </div>
                     <div className="flex flex-col">
@@ -179,10 +238,19 @@ const ExerciseDetailPage = () => {
                 className="btn btn-primary btn-outline w-full"
                 onClick={addExerciseSet}
               >
+                {" "}
+                <FiPlus />
                 Add new set
               </button>
               <div className="divider"></div>
-              <button className="btn btn-primary w-full">Save</button>
+              <button
+                className="btn btn-primary w-full"
+                onSubmit={(e) => {
+                  saveAll(e);
+                }}
+              >
+                Save
+              </button>
               <button className="btn btn-error w-full">Delete</button>
             </div>
           </div>

@@ -108,19 +108,6 @@ const updateExercise = async (exerciseId, description, variationId) => {
   }
 };
 
-//getVariation
-// const getVariation = async (variationId) => {
-//   try {
-//     const response = await api.get(`/variation/${variationId}`);
-//     if (response) {
-//       const variation = response.data;
-//       return variation;
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 //createVariation
 const createVariation = async ({ weight, reps }) => {
   try {
@@ -130,7 +117,6 @@ const createVariation = async ({ weight, reps }) => {
     });
 
     return response.data;
-
   } catch (error) {
     console.log(error);
     throw error;
@@ -155,8 +141,19 @@ const updateVariation = async ({ weight, reps, variationId }) => {
 const deleteExercise = async (exerciseId) => {
   try {
     const response = await api.delete(`/exercise/${exerciseId}`);
+    return response;
   } catch (error) {
     console.log(error);
+  }
+};
+
+//delete variation
+const deleteVariation = async (variationId) => {
+  try {
+    const response = await api.delete(`/variation/${variationId}`);
+    return response;
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -171,6 +168,8 @@ const apiMethods = {
   // getVariation,
   createVariation,
   updateVariation,
+  deleteExercise,
+  deleteVariation,
 };
 
 export default apiMethods;
