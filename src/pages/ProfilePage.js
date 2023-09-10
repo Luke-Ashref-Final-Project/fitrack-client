@@ -49,6 +49,19 @@ const ProfilePage = () => {
     }
   };
 
+  const handleDelete = async (e) => {
+    try {
+      const response = await authMethods.deleteUser()
+      console.log(response)
+      localStorage.removeItem("authToken");
+
+      navigate("/")
+      window.location.reload();
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     if (user && user.userType === "coach") {
       setTheme("night");
@@ -61,6 +74,7 @@ const ProfilePage = () => {
     if (!isLoggedIn && !isLoading && !user) {
       return navigate("/")
     }
+    console.log(user)
   }, [isLoggedIn, isLoading, user])
 
   if (isLoading) {
@@ -169,6 +183,12 @@ const ProfilePage = () => {
                 </div>
               </form>
             </dialog>
+
+            <button 
+              onClick={() => {
+                handleDelete();
+              }}
+              className="btn btn-outline btn-error mb-4">Delete Account</button>
 
             <button
               onClick={() => {

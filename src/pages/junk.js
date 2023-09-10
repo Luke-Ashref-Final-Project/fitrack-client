@@ -1,8 +1,9 @@
-<>
-         <button className="btn btn-primary" disabled="disabled">
-          <span className="loading loading-spinner"></span>
-          loading
-        </button>
+<textarea
+ placeholder="Bio" 
+ className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+ name="description"
+ value={user.description}
+ onChange={handleChange}
+>
 
-        <button className="btn" disabled="disabled">Disabled using attribute</button>
-        </>
+</textarea>

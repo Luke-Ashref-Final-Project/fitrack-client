@@ -108,9 +108,12 @@ const updateExercise = async (exerciseId, description, variationId) => {
 };
 
 //createVariation
-const createVariation = async ({ weight, reps }) => {
+
+const createVariation = async ({weight, reps}) => { // should have that
   try {
-    const response = await api.post("/variation/new", { weight, reps });
+    const response = await api.post("/variation/new", {
+      weight, reps
+    });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -129,6 +132,7 @@ const updateVariation = async ({ weight, reps, variationId }) => {
     const variation = response.data;
     console.log(variation);
     return variation;
+
   } catch (error) {
     console.log(error);
   }
@@ -151,6 +155,7 @@ const deleteVariation = async ({ _id }) => {
       data: { variationId: _id },
     });
     return response;
+
   } catch (err) {
     console.log(err);
   }
