@@ -5,7 +5,7 @@ import Nav from "../components/Nav";
 import CoachDashboard from "../components/CoachDashboard";
 
 const SubscribePage = () => {
-  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user, isLoggedIn, isLoading } = useContext(AuthContext);
   const [fetchedUsers, setFetchedUsers] = useState(null);
   const [theme, setTheme] = useState("cmyk");
 
@@ -25,6 +25,11 @@ const SubscribePage = () => {
       setTheme("cmyk");
     }
   }, [user]);
+
+  
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
 
   return (
     isLoggedIn && (

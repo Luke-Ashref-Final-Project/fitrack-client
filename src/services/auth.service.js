@@ -4,12 +4,13 @@ const api = axios.create({
   baseURL:process.env.REACT_APP_API_URL || "http://localhost:5005" 
 });
 
-const signupCoach = async ({ email, username, password }) => {
+const signupCoach = async ({ email, username, password, description }) => {
   try {
     const response = await api.post("/signup/coach", {
       email,
       username,
       password,
+      description,
     });
     return response.data;
   } catch (err) {
@@ -17,12 +18,13 @@ const signupCoach = async ({ email, username, password }) => {
   }
 };
 
-const signupClient = async ({ email, username, password }) => {
+const signupClient = async ({ email, username, password, description }) => {
   try {
     const response = await api.post("/signup/client", {
       email,
       username,
       password,
+      description,
     });
     return response.data;
   } catch (err) {
@@ -33,9 +35,10 @@ const signupClient = async ({ email, username, password }) => {
 const logIn = async ({ email, password, userType }) => {
   try {
     const response = await api.post("/login", { email, password, userType });
-    return response.data;
+    return {responseData: response.data, responseStatus: response.status}
   } catch (err) {
     console.error(err);
+    return err
   }
 };
 
@@ -145,7 +148,7 @@ const subscribe = async (coachId) => {
     throw error;
   }
 };
-// work in progress
+
 const unSubscribe = async (coachId) => {
   try {
     const token = localStorage.getItem("authToken");
@@ -176,6 +179,21 @@ const coachOverview = async (coachId) => {
   }
 }
 
+const deleteUser = async () => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.delete("/profile/delete", config)
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const authMethods = {
   signupCoach,
   signupClient,
@@ -189,6 +207,7 @@ const authMethods = {
   subscribe,
   coachOverview,
   unSubscribe,
+  deleteUser,
 };
 
 export default authMethods;

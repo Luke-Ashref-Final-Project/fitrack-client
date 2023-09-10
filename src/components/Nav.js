@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // import authMethods from "../services/auth.service";
 import { AuthContext } from "../context/auth.context";
 import logo from "../logo.svg";
+import { FiHome, FiUser, FiUsers, FiSearch, FiUserPlus } from "react-icons/fi";
 
 const Nav = () => {
   const [theme, setTheme] = useState("cmyk");
@@ -55,22 +56,22 @@ const Nav = () => {
                     <>
                       <li>
                         <Link className="text-xl" to="/overview">
-                          Overview
+                          <FiHome/> Overview
                         </Link>
                       </li>
                       <li>
                         <Link className="text-xl" to="/searchexercises">
-                          Search exercises
+                          <FiSearch/> Search exercises
                         </Link>
                       </li>
                       <li>
                         <Link className="text-xl" to="/subscribers">
-                          Subscribers
+                          <FiUsers/> Subscribers
                         </Link>
                       </li>
                       <li>
                         <Link className="text-xl" to="/profile">
-                          Account
+                        <FiUser />Account
                         </Link>
                       </li>
                     </>
@@ -78,7 +79,7 @@ const Nav = () => {
                     <>
                       <li>
                         <Link className="text-xl" to="/overview">
-                          Overview
+                        <FiHome/> Overview
                         </Link>
                       </li>
                       <li>
@@ -88,7 +89,7 @@ const Nav = () => {
                       </li>
                       <li>
                         <Link className="text-xl" to="/profile">
-                          Account
+                        <FiUser /> Account
                         </Link>
                       </li>
                     </>
@@ -107,22 +108,22 @@ const Nav = () => {
                 <div className="space-y-2 pt-10">
                   <li>
                     <Link className="text-xl" to="/overview">
-                      Overview
+                    <FiHome/> Overview
                     </Link>
                   </li>
                   <li>
                     <Link className="text-xl" to="/subscribers">
-                      Subscribers
+                      <FiUsers/> Subscribers
                     </Link>
                   </li>
                   <li>
                     <Link className="text-xl" to="/searchexercises">
-                      Search exercises
+                      <FiSearch/> Search exercises
                     </Link>
                   </li>
                   <li>
                     <Link className="text-xl" to="/profile">
-                      Account
+                    <FiUser /> Account
                     </Link>
                   </li>
                 </div>
@@ -130,7 +131,7 @@ const Nav = () => {
                 <div className="space-y-2 pt-8">
                   <li>
                     <Link className="text-xl" to="/overview">
-                      Overview
+                      <FiHome/> Overview
                     </Link>
                   </li>
                   <li>
@@ -140,12 +141,12 @@ const Nav = () => {
                   </li>
                   <li>
                     <Link className="text-xl" to="/profile">
-                      Account
+                    <FiUser /> Account
                     </Link>
                   </li>
                   <li>
                     <Link className="text-xl" to="/coaches">
-                      Coaches page
+                      <FiUserPlus/> Coaches page
                     </Link>
                   </li>
                 </div>

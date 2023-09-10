@@ -21,8 +21,7 @@ const SearchExercisesPage = () => {
       const exercises = await fetchExercises(specifiedOptions);
       if (exercises) {
         console.log(Array.isArray(exercises));
-        console.log(typeof exercises)
-        console.log(exercises)
+        const newnewData = Object.values(exercises);
 
         const searchedResults = exercises.filter(
           (exercise) =>

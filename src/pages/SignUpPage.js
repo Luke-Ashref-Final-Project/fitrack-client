@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authMethods from "../services/auth.service";
+import { AuthContext } from "../context/auth.context";
 import Logo from '../logo.svg';
 
 const SignUp = () => {
@@ -8,11 +9,12 @@ const SignUp = () => {
     email: "",
     username: "",
     password: "",
+    description: "",
   });
-
   const [userType, setUserType] = useState("");
-
+  const { isLoggedIn, isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -39,6 +41,12 @@ const SignUp = () => {
     }
   };
 
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
+
+
+if (!isLoggedIn) {
   return (
     <div data-theme="cmyk" className="hero min-h-screen">
       <div className="card w-full max-w-sm">
@@ -58,7 +66,7 @@ const SignUp = () => {
               </label>
               <input
                 type="text"
-                placeholder="user name"
+                placeholder="username"
                 className="input input-bordered"
                 name="username"
                 value={user.username}
@@ -91,6 +99,22 @@ const SignUp = () => {
                 onChange={handleChange}
               />
             </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Description</span>
+              </label>
+              <textarea
+                placeholder="Say something about yourself" 
+                className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+                name="description"
+                value={user.description}
+                onChange={handleChange}
+                >
+
+                </textarea>
+            </div>
+
             <div className="form-control">
               <label className="label cursor-pointer">
                 <input
@@ -126,4 +150,5 @@ const SignUp = () => {
     </div>
   );
 };
+}
 export default SignUp;

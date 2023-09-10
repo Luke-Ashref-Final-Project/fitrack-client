@@ -10,11 +10,10 @@ const ProfilePage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   
-  console.log(error);
 
-  const { user, setUser, isLoggedIn, logOutUser } = useContext(AuthContext);
+  const { user, setUser, isLoggedIn, logOutUser, isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChangePassword = async (e) => {
@@ -28,9 +27,11 @@ const ProfilePage = () => {
       console.log(response);
       setCurrentPassword("");
       setNewPassword("");
+      setError(null);
+
       window.my_modal_1.close();
     } catch (error) {
-      setError("Failed to change password.");
+      setError("Failed to change password.", error);
     }
   };
 
@@ -48,8 +49,17 @@ const ProfilePage = () => {
     }
   };
 
-  if (!isLoggedIn) {
-    navigate("/");
+  const handleDelete = async (e) => {
+    try {
+      const response = await authMethods.deleteUser()
+      console.log(response)
+      localStorage.removeItem("authToken");
+
+      navigate("/")
+      window.location.reload();
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -59,6 +69,17 @@ const ProfilePage = () => {
       setTheme("cmyk");
     }
   }, [user]);
+
+  useEffect(()=> {
+    if (!isLoggedIn && !isLoading && !user) {
+      return navigate("/")
+    }
+    console.log(user)
+  }, [isLoggedIn, isLoading, user])
+
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
 
   return (
     isLoggedIn && (
@@ -142,19 +163,32 @@ const ProfilePage = () => {
                     onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </div>
+                {error && <div className="text-red-500">{error}</div>}
+
                 <div className="modal-action">
                   <button className="btn" onClick={handleChangePassword}>
                     Change Password
                   </button>
                   <button
                     className="btn"
-                    onClick={() => window.my_modal_1.close()}
+                    onClick={() => {
+                      setError(null); // Reset the error state
+                      setCurrentPassword("")
+                      setNewPassword("")
+                      window.my_modal_1.close();
+                    }}
                   >
                     Close
                   </button>
                 </div>
               </form>
             </dialog>
+
+            <button 
+              onClick={() => {
+                handleDelete();
+              }}
+              className="btn btn-outline btn-error mb-4">Delete Account</button>
 
             <button
               onClick={() => {
@@ -168,7 +202,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-    )
+      )
   );
 };
 

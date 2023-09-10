@@ -91,7 +91,7 @@ const CoachOverviewPage = () => {
             </div>
           </div>
         ) : (
-          <p>Loading coach details...</p>
+          <span className="loading loading-spinner text-error">Loading...</span>
         )}
       </div>
     )
