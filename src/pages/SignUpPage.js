@@ -104,14 +104,15 @@ if (!isLoggedIn) {
               <label className="label">
                 <span className="label-text">Description</span>
               </label>
-              <input
-                type="text"
-                placeholder="Say something about yourself"
-                className="input input-bordered"
+              <textarea
+                placeholder="Say something about yourself" 
+                className="textarea textarea-bordered textarea-lg w-full max-w-xs"
                 name="description"
                 value={user.description}
                 onChange={handleChange}
-              />
+                >
+
+                </textarea>
             </div>
 
             <div className="form-control">
