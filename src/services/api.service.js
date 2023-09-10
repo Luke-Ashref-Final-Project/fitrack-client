@@ -5,7 +5,7 @@ const apiExternal = axios.create({
 });
 
 const api = axios.create({
-  baseURL: "http://localhost:5005" || process.env.REACT_APP_API_URL,
+  baseURL:  process.env.REACT_APP_API_URL || "http://localhost:5005"
 });
 
 const specifiedOptions = {
@@ -60,7 +60,6 @@ const getOneExercise = async (exerciseId) => {
     const response = await api.get(`/exercise/${exerciseId}`);
     if (response) {
       const newData = response.data;
-      console.log(newData);
       return newData;
     }
   } catch (err) {
@@ -109,12 +108,12 @@ const updateExercise = async (exerciseId, description, variationId) => {
 };
 
 //createVariation
+
 const createVariation = async ({weight, reps}) => { // should have that
   try {
     const response = await api.post("/variation/new", {
       weight, reps
     });
-
     return response.data;
   } catch (error) {
     console.log(error);
@@ -125,12 +124,15 @@ const createVariation = async ({weight, reps}) => { // should have that
 //updateVariation
 const updateVariation = async ({ weight, reps, variationId }) => {
   try {
-    const response = await api.put(`/variation/${variationId}/update`, {
-      weight,
-      reps,
+    const response = await api.put("/variation/update", {
+      weight: weight,
+      reps: reps,
+      variationId: variationId,
     });
-    
-    return response.data
+    const variation = response.data;
+    console.log(variation);
+    return variation;
+
   } catch (error) {
     console.log(error);
   }
@@ -139,7 +141,7 @@ const updateVariation = async ({ weight, reps, variationId }) => {
 //delete exercise
 const deleteExercise = async (exerciseId) => {
   try {
-    const response = await api.delete(`/exercise/${exerciseId}`);
+    const response = await api.delete(`/exercise/${exerciseId}/delete`);
     return response;
   } catch (error) {
     console.log(error);
@@ -147,11 +149,13 @@ const deleteExercise = async (exerciseId) => {
 };
 
 //delete variation
-const deleteVariation = async (variationId) => {
+const deleteVariation = async ({ _id }) => {
   try {
-    const response = await api.delete(`/variation/${variationId}/delete`);
-    
-    return response.data;
+    const response = await api.delete(`/variation/delete`, {
+      data: { variationId: _id },
+    });
+    return response;
+
   } catch (err) {
     console.log(err);
   }
@@ -165,7 +169,6 @@ const apiMethods = {
   getAllExercisesForClient,
   getOneExercise,
   updateExercise,
-  // getVariation,
   createVariation,
   updateVariation,
   deleteExercise,
