@@ -22,8 +22,6 @@ const SearchExercisesPage = () => {
       if (exercises) {
         console.log(Array.isArray(exercises));
         const newnewData = Object.values(exercises);
-        console.log(typeof newnewData)
-        console.log(newnewData)
 
         const searchedResults = exercises.filter(
           (exercise) =>
