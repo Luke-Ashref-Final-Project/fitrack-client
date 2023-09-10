@@ -60,7 +60,6 @@ const getOneExercise = async (exerciseId) => {
     const response = await api.get(`/exercise/${exerciseId}`);
     if (response) {
       const newData = response.data;
-      console.log(newData);
       return newData;
     }
   } catch (err) {
@@ -109,12 +108,9 @@ const updateExercise = async (exerciseId, description, variationId) => {
 };
 
 //createVariation
-const createVariation = async () => {
+const createVariation = async ({ weight, reps }) => {
   try {
-    const response = await api.post("/variation/new", {
-
-    });
-
+    const response = await api.post("/variation/new", { weight, reps });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -125,11 +121,13 @@ const createVariation = async () => {
 //updateVariation
 const updateVariation = async ({ weight, reps, variationId }) => {
   try {
-    const response = await api.put(`/variation/${variationId}`, {
-      weight,
-      reps,
+    const response = await api.put("/variation/update", {
+      weight: weight,
+      reps: reps,
+      variationId: variationId,
     });
     const variation = response.data;
+    console.log(variation);
     return variation;
   } catch (error) {
     console.log(error);
@@ -147,9 +145,11 @@ const deleteExercise = async (exerciseId) => {
 };
 
 //delete variation
-const deleteVariation = async (variationId) => {
+const deleteVariation = async ({ _id }) => {
   try {
-    const response = await api.delete(`/variation/${variationId}`);
+    const response = await api.delete(`/variation/delete`, {
+      data: { variationId: _id },
+    });
     return response;
   } catch (err) {
     console.log(err);
@@ -164,7 +164,6 @@ const apiMethods = {
   getAllExercisesForClient,
   getOneExercise,
   updateExercise,
-  // getVariation,
   createVariation,
   updateVariation,
   deleteExercise,

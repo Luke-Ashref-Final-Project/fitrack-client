@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import apiMethods from "../services/api.service";
 import Nav from "../components/Nav";
-import { FiX, FiPlus, FiSave } from "react-icons/fi";
+import { FiX, FiPlus } from "react-icons/fi";
 
 const ExerciseDetailPage = () => {
   const [theme, setTheme] = useState("cmyk");
@@ -19,17 +19,10 @@ const ExerciseDetailPage = () => {
   };
 
   const [exerciseSets, setExerciseSets] = useState([]);
-
-  //need modification on the back-end to do the property deletion of the variation
-  const handleDeletion = (e, index) => {
-    e.preventDefault();
-    const newSets = [...exerciseSets];
-    newSets.splice(index, 1);
-    setExerciseSets(newSets);
-  };
+  // console.log(exerciseSets);
 
   //handle delete variation
-  const handleVariationDeletion = (e, index, variationId) => {
+  const handleVariationDeletion = (e, index, _id) => {
     //front-end logic
     e.preventDefault();
     const newSets = [...exerciseSets];
@@ -37,7 +30,7 @@ const ExerciseDetailPage = () => {
     setExerciseSets(newSets);
 
     //back-end
-    apiMethods.deleteVariation(variationId);
+    apiMethods.deleteVariation({_id});
   };
 
   //handle exercise deletion
@@ -61,56 +54,67 @@ const ExerciseDetailPage = () => {
     console.log(exerciseSets);
   };
 
-  //until the back-end is ready, we can remove this blocl
-  const addExerciseSet = () => {
-    setExerciseSets([...exerciseSets, { reps: 0, weight: 0 }]);
-  };
-  ////////////////////
-
-  //Communication to back-end:
   const createVariation = async () => {
     try {
+      const createdVariation = await apiMethods.createVariation({
+        weight: 0,
+        reps: 0,
+      });
 
-      const createdVariation = await apiMethods.createVariation();
-
-      if (createdVariation) {
-        setExerciseSets([
-          ...exerciseSets,
-          {
-            weight: createdVariation.weight,
-            reps: createdVariation.reps,
-            variationId: createdVariation._id,
-          },
-        ]);
+      if (!createdVariation) {
+        console.log("cannot created a new exercise");
       }
+
+      await setExerciseSets([
+        ...exerciseSets,
+        {
+          weight: createdVariation.createdVariation.weight,
+          reps: createdVariation.createdVariation.reps,
+          _id: createdVariation.createdVariation._id,
+        },
+      ]);
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    console.log(exerciseSets);
+  });
+
   const saveAll = (e) => {
     e.preventDefault();
     //update all variations
     for (let i = 0; i < exerciseSets.length; i++) {
-      updateVariation(
-        exerciseSets[i].weight,
-        exerciseSets[i].reps,
-        exerciseSets[i].variationId
-      );
+      updateVariation({
+        weight: exerciseSets[i].weight,
+        reps: exerciseSets[i].reps,
+        variationId: exerciseSets[i]._id,
+      });
+      console.log(exerciseSets[i]);
     }
+    // updateVariation({
+    //   weight: exerciseSets[0].weight,
+    //   reps: exerciseSets[0].reps,
+    //   variationId: exerciseSets[0]._id,
+    // });
+
     //update the exercises
-    const variationId = exerciseSets.map((exercise) => exercise.variationId);
+    const variationId = exerciseSets.map((exercise) => exercise._id);
     apiMethods.updateExercise(id.exerciseId, description, variationId);
+    // window.location.reload();
   };
 
   const updateVariation = async ({ weight, reps, variationId }) => {
     try {
-      const updatedVariation = await apiMethods.updateVariation(
-        weight,
-        reps,
-        variationId
-      );
+      const updatedVariation = await apiMethods.updateVariation({
+        variationId: variationId,
+        weight: weight,
+        reps: reps,
+      });
+
       if (updatedVariation) {
+        console.log(updatedVariation);
         const foundIndex = exerciseSets.findIndex(
           (set) => set.variationId === updatedVariation.variationId
         );
@@ -120,6 +124,8 @@ const ExerciseDetailPage = () => {
         updateSet.weight = updatedVariation.weight;
         newCopy[foundIndex] = updateSet;
         setExerciseSets(newCopy);
+      } else {
+        console.log("not created");
       }
     } catch (err) {
       console.log(err);
@@ -138,7 +144,7 @@ const ExerciseDetailPage = () => {
           //this should be modified based on the back-end route
           if (oneExercise.variation.length !== 0) {
             setExerciseSets(oneExercise.variation);
-          } 
+          }
         }
       } catch (err) {
         console.log(err);
@@ -197,7 +203,7 @@ const ExerciseDetailPage = () => {
                       <button
                         className="btn btn-circle btn-warning btn-outline btn-sm"
                         onClick={(e) =>
-                          handleDeletion(e, index, eachSet.variationId)
+                          handleVariationDeletion(e, index, eachSet._id)
                         }
                       >
                         <FiX />
@@ -237,7 +243,7 @@ const ExerciseDetailPage = () => {
             <div className="card-actions flex-col w-full mt-1 space-y-4">
               <button
                 className="btn btn-primary btn-outline w-full"
-                onClick={()=>createVariation()}
+                onClick={() => createVariation()}
               >
                 <FiPlus />
                 Add new set
@@ -245,7 +251,7 @@ const ExerciseDetailPage = () => {
               <div className="divider"></div>
               <button
                 className="btn btn-primary w-full"
-                onSubmit={(e) => {
+                onClick={(e) => {
                   saveAll(e);
                 }}
               >
