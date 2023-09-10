@@ -137,7 +137,7 @@ const updateVariation = async ({ weight, reps, variationId }) => {
 //delete exercise
 const deleteExercise = async (exerciseId) => {
   try {
-    const response = await api.delete(`/exercise/${exerciseId}`);
+    const response = await api.delete(`/exercise/${exerciseId}/delete`);
     return response;
   } catch (error) {
     console.log(error);

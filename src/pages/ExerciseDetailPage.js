@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import apiMethods from "../services/api.service";
 import Nav from "../components/Nav";
@@ -13,6 +13,7 @@ const ExerciseDetailPage = () => {
   const [name, setName] = useState("");
   const [bodyPart, setBodyPart] = useState("");
   const [description, setDescription] = useState("");
+  const navigate = useNavigate();
   const id = useParams(); //.exerciseId to extra the exerciseId
   const handleDescription = (value) => {
     setDescription(value);
@@ -30,13 +31,18 @@ const ExerciseDetailPage = () => {
     setExerciseSets(newSets);
 
     //back-end
-    apiMethods.deleteVariation({_id});
+    apiMethods.deleteVariation({ _id });
   };
 
   //handle exercise deletion
-  const handleExerciseDeletion = (e) => {
-    e.preventDefault();
+  const handleExerciseDeletion = () => {
+    //handle delete exercise
     apiMethods.deleteExercise(id.exerciseId);
+    //handle delete variation
+    for (let i = 0; i < exerciseSets.length; i++) {
+      apiMethods.deleteVariation({ _id: exerciseSets[i]._id });
+    }
+    navigate("/overview");
   };
 
   //handle front-end interaction of reps and weight
@@ -93,12 +99,6 @@ const ExerciseDetailPage = () => {
       });
       console.log(exerciseSets[i]);
     }
-    // updateVariation({
-    //   weight: exerciseSets[0].weight,
-    //   reps: exerciseSets[0].reps,
-    //   variationId: exerciseSets[0]._id,
-    // });
-
     //update the exercises
     const variationId = exerciseSets.map((exercise) => exercise._id);
     apiMethods.updateExercise(id.exerciseId, description, variationId);
@@ -257,7 +257,14 @@ const ExerciseDetailPage = () => {
               >
                 Save
               </button>
-              <button className="btn btn-error w-full">Delete</button>
+              <button
+                className="btn btn-error w-full"
+                onClick={() => {
+                  handleExerciseDeletion();
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
