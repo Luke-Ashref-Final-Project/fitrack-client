@@ -109,10 +109,10 @@ const updateExercise = async (exerciseId, description, variationId) => {
 };
 
 //createVariation
-const createVariation = async () => {
+const createVariation = async ({weight, reps}) => { // should have that
   try {
     const response = await api.post("/variation/new", {
-
+      weight, reps
     });
 
     return response.data;
@@ -125,12 +125,12 @@ const createVariation = async () => {
 //updateVariation
 const updateVariation = async ({ weight, reps, variationId }) => {
   try {
-    const response = await api.put(`/variation/${variationId}`, {
+    const response = await api.put(`/variation/${variationId}/update`, {
       weight,
       reps,
     });
-    const variation = response.data;
-    return variation;
+    
+    return response.data
   } catch (error) {
     console.log(error);
   }
@@ -149,8 +149,9 @@ const deleteExercise = async (exerciseId) => {
 //delete variation
 const deleteVariation = async (variationId) => {
   try {
-    const response = await api.delete(`/variation/${variationId}`);
-    return response;
+    const response = await api.delete(`/variation/${variationId}/delete`);
+    
+    return response.data;
   } catch (err) {
     console.log(err);
   }

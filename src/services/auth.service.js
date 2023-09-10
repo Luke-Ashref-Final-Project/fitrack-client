@@ -148,7 +148,7 @@ const subscribe = async (coachId) => {
     throw error;
   }
 };
-// work in progress
+
 const unSubscribe = async (coachId) => {
   try {
     const token = localStorage.getItem("authToken");
@@ -179,6 +179,21 @@ const coachOverview = async (coachId) => {
   }
 }
 
+const deleteUser = async () => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.delete("/profile/delete", config)
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const authMethods = {
   signupCoach,
   signupClient,
@@ -192,6 +207,7 @@ const authMethods = {
   subscribe,
   coachOverview,
   unSubscribe,
+  deleteUser,
 };
 
 export default authMethods;
