@@ -13,7 +13,7 @@ const ProfilePage = () => {
   const [error, setError] = useState(null);
   
 
-  const { user, setUser, isLoggedIn, logOutUser, isLoading } = useContext(AuthContext);
+  const { user, setUser, isLoggedIn, logOutUser, isLoading, authenticateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChangePassword = async (e) => {
@@ -71,6 +71,7 @@ const ProfilePage = () => {
   }, [user]);
 
   useEffect(()=> {
+    // authenticateUser()
     if (!isLoggedIn && !isLoading && !user) {
       return navigate("/")
     }
