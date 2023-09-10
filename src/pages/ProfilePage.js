@@ -75,7 +75,7 @@ const ProfilePage = () => {
       return navigate("/")
     }
     console.log(user)
-  }, [isLoggedIn, isLoading, user])
+  }, [isLoggedIn, isLoading, user, navigate])
 
   if (isLoading) {
     return <span className="loading loading-spinner text-error">Loading...</span>

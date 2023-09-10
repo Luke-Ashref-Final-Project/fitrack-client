@@ -8,7 +8,7 @@ import Nav from "../components/Nav";
 const CoachesPage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [coachesList, setCoachesList] = useState([]);
-  const { user, isLoggedIn, isLoading } = useContext(AuthContext);
+  const { user, isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   
   useEffect(() => {
