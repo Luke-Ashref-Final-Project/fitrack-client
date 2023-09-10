@@ -56,6 +56,7 @@ const ProfilePage = () => {
       localStorage.removeItem("authToken");
 
       navigate("/")
+      window.location.reload();
     } catch (error) {
       console.log(error)
     }
