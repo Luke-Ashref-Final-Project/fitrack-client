@@ -7,15 +7,6 @@ import CoachDashboard from "../components/CoachDashboard";
 import authMethods from "../services/auth.service";
 
 const ProfilePage = () => {
-  const { user, setUser, isLoggedIn, logOutUser, isLoading, /*authenticateUser*/ } = useContext(AuthContext);
-
-  const [theme, setTheme] = useState("cmyk");
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [description, setDescription] = useState(user?.description);
-  const [error, setError] = useState(null);
-
-
   const {
     user,
     setUser,
@@ -23,6 +14,12 @@ const ProfilePage = () => {
     logOutUser,
     isLoading /*authenticateUser*/,
   } = useContext(AuthContext);
+
+  const [theme, setTheme] = useState("cmyk");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [description, setDescription] = useState(user?.description);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -74,13 +71,11 @@ const ProfilePage = () => {
 
   const handleDescription = async (e) => {
     try {
-
-      const response = await authMethods.updateDescription({ description })
-      console.log(response)
+      const response = await authMethods.updateDescription({ description });
+      console.log(response);
       setDescription(response.user.description);
       localStorage.setItem("authToken", response.token);
       // window.location.reload();
-
     } catch (error) {
       console.log(error);
     }
@@ -157,27 +152,25 @@ const ProfilePage = () => {
               open modal
             </button>
 
-              <dialog id="my_modal_4" className="modal">
-                <div className="modal-box w-11/12 max-w-5xl">
-                  <h3 className="font-bold text-lg">{user?.description}</h3>
-                  <textarea 
-                    placeholder="Bio" 
-                    className="textarea textarea-bordered textarea-md w-full max-w-xs"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  >
-                    {/* {description} */}
-                  </textarea>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button className="btn">Close</button>
-                      <button className="btn" onClick={handleDescription}>
-                        Update
-                      </button>
-                    </form>
-                  </div>
-
+            <dialog id="my_modal_4" className="modal">
+              <div className="modal-box w-11/12 max-w-5xl">
+                <h3 className="font-bold text-lg">{user?.description}</h3>
+                <textarea
+                  placeholder="Bio"
+                  className="textarea textarea-bordered textarea-md w-full max-w-xs"
+                  name="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                >
+                  {/* {description} */}
+                </textarea>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="btn">Close</button>
+                    <button className="btn" onClick={handleDescription}>
+                      Update
+                    </button>
+                  </form>
                 </div>
               </div>
             </dialog>
