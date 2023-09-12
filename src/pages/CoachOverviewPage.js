@@ -67,7 +67,7 @@ const CoachOverviewPage = () => {
             <figure><img src={coach.image} alt="coach"/></figure>
             <div className="card-body">
               <h2 className="card-title">{coach.username}</h2>
-              <p>coach's description</p>
+              <p>{coach.description}</p>
               {
                 subscribed ? (
                   <div className="card-actions justify-end">

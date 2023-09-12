@@ -50,8 +50,7 @@ const CoachesPage = () => {
                 <figure><img src={coach.image} alt="coach"/></figure>
                 <div className="card-body">
                   <h2 className="card-title">{coach.username}</h2>
-                  <p>coach's description</p>
-
+                  {/* <p>Click to find out more about this coach</p> */}
                 </div>
             </div>
             </Link>
