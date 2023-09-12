@@ -29,9 +29,9 @@ const HomePage = () => {
           <img src={cta1} alt="" />
 
           {isLoggedIn ? (
-            <Link to="/profile">
-              <button className="btn btn-wide btn-outline mt-4">
-                Profile Page
+            <Link to="/overview">
+              <button className="btn btn-wide btn-primary btn-outline mt-4">
+                Overview page
               </button>
             </Link>
           ) : (

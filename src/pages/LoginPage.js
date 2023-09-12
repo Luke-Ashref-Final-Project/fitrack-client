@@ -47,7 +47,7 @@ const Login = () => {
         console.log(response.responseData)
         storeToken(response.responseData.authToken);
         authenticateUser();
-        navigate("/");
+        navigate("/overview");
       }
 
 
