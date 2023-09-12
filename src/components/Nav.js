@@ -56,22 +56,23 @@ const Nav = () => {
                     <>
                       <li>
                         <Link className="text-xl" to="/overview">
-                          <FiHome/> Overview
+                          <FiHome /> Overview
                         </Link>
                       </li>
                       <li>
                         <Link className="text-xl" to="/searchexercises">
-                          <FiSearch/> Search exercises
+                          <FiSearch /> Search exercises
                         </Link>
                       </li>
                       <li>
                         <Link className="text-xl" to="/subscribers">
-                          <FiUsers/> Subscribers
+                          <FiUsers /> Subscribers
                         </Link>
                       </li>
                       <li>
                         <Link className="text-xl" to="/profile">
-                        <FiUser />Account
+                          <FiUser />
+                          Account
                         </Link>
                       </li>
                     </>
@@ -79,17 +80,17 @@ const Nav = () => {
                     <>
                       <li>
                         <Link className="text-xl" to="/overview">
-                        <FiHome/> Overview
+                          <FiHome /> Overview
                         </Link>
                       </li>
                       <li>
-                        <Link className="text-xl" to="/">
-                          Testing page
+                        <Link className="text-xl" to="/coaches">
+                          <FiUsers /> Coaches
                         </Link>
                       </li>
                       <li>
                         <Link className="text-xl" to="/profile">
-                        <FiUser /> Account
+                          <FiUser /> Account
                         </Link>
                       </li>
                     </>
@@ -108,22 +109,22 @@ const Nav = () => {
                 <div className="space-y-2 pt-10">
                   <li>
                     <Link className="text-xl" to="/overview">
-                    <FiHome/> Overview
+                      <FiHome /> Overview
                     </Link>
                   </li>
                   <li>
                     <Link className="text-xl" to="/subscribers">
-                      <FiUsers/> Subscribers
+                      <FiUsers /> Subscribers
                     </Link>
                   </li>
                   <li>
                     <Link className="text-xl" to="/searchexercises">
-                      <FiSearch/> Search exercises
+                      <FiSearch /> Search exercises
                     </Link>
                   </li>
                   <li>
                     <Link className="text-xl" to="/profile">
-                    <FiUser /> Account
+                      <FiUser /> Account
                     </Link>
                   </li>
                 </div>
@@ -131,7 +132,7 @@ const Nav = () => {
                 <div className="space-y-2 pt-8">
                   <li>
                     <Link className="text-xl" to="/overview">
-                      <FiHome/> Overview
+                      <FiHome /> Overview
                     </Link>
                   </li>
                   <li>
@@ -141,12 +142,12 @@ const Nav = () => {
                   </li>
                   <li>
                     <Link className="text-xl" to="/profile">
-                    <FiUser /> Account
+                      <FiUser /> Account
                     </Link>
                   </li>
                   <li>
                     <Link className="text-xl" to="/coaches">
-                      <FiUserPlus/> Coaches page
+                      <FiUserPlus /> Coaches page
                     </Link>
                   </li>
                 </div>
