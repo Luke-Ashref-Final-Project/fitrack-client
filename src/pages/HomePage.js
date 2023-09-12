@@ -30,22 +30,21 @@ const HomePage = () => {
 
           {isLoggedIn ? (
             <Link to="/overview">
-              <button className="btn btn-wide btn-primary btn-outline mt-4">
+              <button className="btn btn-wide btn-primarybtn-outline mt-4">
                 Overview page
               </button>
             </Link>
           ) : (
-            <>
+            <div className="flex flex-row space-x-4 mt-4 justify-center">
               <Link to="/signup">
-                <button className="btn btn-wide btn-outline mt-4">
+                <button className="btn btn-outline">
                   Sign up
                 </button>
               </Link>
-              <div className="mt-2"></div>
               <Link to="/login">
-                <button className="btn btn-wide btn-info">Login</button>
+                <button className="btn btn-info">Login</button>
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>
