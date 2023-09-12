@@ -7,14 +7,15 @@ import CoachDashboard from "../components/CoachDashboard";
 import authMethods from "../services/auth.service";
 
 const ProfilePage = () => {
+  const { user, setUser, isLoggedIn, logOutUser, isLoading, /*authenticateUser*/ } = useContext(AuthContext);
+
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(user?.description);
   const [error, setError] = useState(null);
   
 
-  const { user, setUser, isLoggedIn, logOutUser, isLoading, /*authenticateUser*/ } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChangePassword = async (e) => {
@@ -67,6 +68,9 @@ const ProfilePage = () => {
     try {
       const response = await authMethods.updateDescription({ description })
       console.log(response)
+      setDescription(response.user.description);
+      localStorage.setItem("authToken", response.token);
+      // window.location.reload();
 
     } catch (error) {
       console.log(error)
@@ -149,10 +153,11 @@ const ProfilePage = () => {
                   <textarea 
                     placeholder="Bio" 
                     className="textarea textarea-bordered textarea-md w-full max-w-xs"
+                    name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   >
-                    {user?.description}
+                    {/* {description} */}
                   </textarea>
                   <div className="modal-action">
                     <form method="dialog">
