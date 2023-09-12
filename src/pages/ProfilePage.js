@@ -12,9 +12,14 @@ const ProfilePage = () => {
   const [newPassword, setNewPassword] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
-  
 
-  const { user, setUser, isLoggedIn, logOutUser, isLoading, /*authenticateUser*/ } = useContext(AuthContext);
+  const {
+    user,
+    setUser,
+    isLoggedIn,
+    logOutUser,
+    isLoading /*authenticateUser*/,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChangePassword = async (e) => {
@@ -52,24 +57,23 @@ const ProfilePage = () => {
 
   const handleDelete = async (e) => {
     try {
-      const response = await authMethods.deleteUser()
-      console.log(response)
+      const response = await authMethods.deleteUser();
+      console.log(response);
       localStorage.removeItem("authToken");
 
-      navigate("/")
+      navigate("/");
       window.location.reload();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleDescription = async (e) => {
     try {
-      const response = await authMethods.updateDescription({ description })
-      console.log(response)
-
+      const response = await authMethods.updateDescription({ description });
+      console.log(response);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -81,16 +85,18 @@ const ProfilePage = () => {
     }
   }, [user]);
 
-  useEffect(()=> {
+  useEffect(() => {
     // authenticateUser()
     if (!isLoggedIn && !isLoading && !user) {
-      return navigate("/")
+      return navigate("/");
     }
-    console.log(user)
-  }, [isLoggedIn, isLoading, user, navigate])
+    console.log(user);
+  }, [isLoggedIn, isLoading, user, navigate]);
 
   if (isLoading) {
-    return <span className="loading loading-spinner text-error">Loading...</span>
+    return (
+      <span className="loading loading-spinner text-error">Loading...</span>
+    );
   }
 
   return (
@@ -105,18 +111,16 @@ const ProfilePage = () => {
               user?.userType === "client" ? "bg-white" : "bg-slate-900"
             } rounded-lg shadow-lg`}
           >
-
             <h1 className="text-3xl mb-2">Profile page</h1>
-            <div className="mb-4">
+            <div className="mb-4 w-48 h-48 mx-auto overflow-hidden rounded-full">
               {user?.image ? (
                 <img
                   src={user?.image}
                   alt="Profile"
-                  width="200"
-                  className="mx-auto block rounded-full"
+                  className="w-full h-full object-cover"
                 />
               ) : (
-                <p>No image available</p>
+                <p className="text-center mt-20">No image available</p>
               )}
             </div>
 
@@ -137,33 +141,33 @@ const ProfilePage = () => {
 
             {/*description modal*/}
 
-            <button 
-              className="btn" 
-              onClick={()=>document.getElementById('my_modal_4').showModal()}
-              >
-                open modal
+            <button
+              className="btn"
+              onClick={() => document.getElementById("my_modal_4").showModal()}
+            >
+              open modal
             </button>
-              <dialog id="my_modal_4" className="modal">
-                <div className="modal-box w-11/12 max-w-5xl">
-                  <h3 className="font-bold text-lg">{user?.description}</h3>
-                  <textarea 
-                    placeholder="Bio" 
-                    className="textarea textarea-bordered textarea-md w-full max-w-xs"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  >
-                    {user?.description}
-                  </textarea>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button className="btn">Close</button>
-                      <button className="btn" onClick={handleDescription}>
-                        Update
-                      </button>
-                    </form>
-                  </div>
+            <dialog id="my_modal_4" className="modal">
+              <div className="modal-box w-11/12 max-w-5xl">
+                <h3 className="font-bold text-lg">{user?.description}</h3>
+                <textarea
+                  placeholder="Bio"
+                  className="textarea textarea-bordered textarea-md w-full max-w-xs"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                >
+                  {user?.description}
+                </textarea>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="btn">Close</button>
+                    <button className="btn" onClick={handleDescription}>
+                      Update
+                    </button>
+                  </form>
                 </div>
-              </dialog>
+              </div>
+            </dialog>
 
             {/*password modal*/}
 
@@ -213,8 +217,8 @@ const ProfilePage = () => {
                     className="btn"
                     onClick={() => {
                       setError(null); // Reset the error state
-                      setCurrentPassword("")
-                      setNewPassword("")
+                      setCurrentPassword("");
+                      setNewPassword("");
                       window.my_modal_1.close();
                     }}
                   >
@@ -224,11 +228,14 @@ const ProfilePage = () => {
               </form>
             </dialog>
 
-            <button 
+            <button
               onClick={() => {
                 handleDelete();
               }}
-              className="btn btn-outline btn-error mb-4">Delete Account</button>
+              className="btn btn-outline btn-error mb-4"
+            >
+              Delete Account
+            </button>
 
             <button
               onClick={() => {
@@ -242,7 +249,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      )
+    )
   );
 };
 
