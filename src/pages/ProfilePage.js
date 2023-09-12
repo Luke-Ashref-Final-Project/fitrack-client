@@ -10,10 +10,11 @@ const ProfilePage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [description, setDescription] = useState("");
   const [error, setError] = useState(null);
   
 
-  const { user, setUser, isLoggedIn, logOutUser, isLoading, authenticateUser } = useContext(AuthContext);
+  const { user, setUser, isLoggedIn, logOutUser, isLoading, /*authenticateUser*/ } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChangePassword = async (e) => {
@@ -61,6 +62,16 @@ const ProfilePage = () => {
       console.log(error)
     }
   }
+
+  const handleDescription = async (e) => {
+    try {
+      const response = await authMethods.updateDescription({ description })
+      console.log(response)
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   useEffect(() => {
     if (user && user.userType === "coach") {
@@ -127,6 +138,38 @@ const ProfilePage = () => {
               <h4 className="font-bold text-lg">You are a:</h4>
               <p>{user?.userType}</p>
             </div>
+
+            {/*description modal*/}
+
+            <button 
+              className="btn" 
+              onClick={()=>document.getElementById('my_modal_4').showModal()}
+              >
+                open modal
+            </button>
+              <dialog id="my_modal_4" className="modal">
+                <div className="modal-box w-11/12 max-w-5xl">
+                  <h3 className="font-bold text-lg">{user?.description}</h3>
+                  <textarea 
+                    placeholder="Bio" 
+                    className="textarea textarea-bordered textarea-md w-full max-w-xs"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  >
+                    {user?.description}
+                  </textarea>
+                  <div className="modal-action">
+                    <form method="dialog">
+                      <button className="btn">Close</button>
+                      <button className="btn" onClick={handleDescription}>
+                        Update
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
+
+            {/*password modal*/}
 
             <button
               className="btn mb-4"

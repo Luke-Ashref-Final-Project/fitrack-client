@@ -194,6 +194,22 @@ const deleteUser = async () => {
   }
 }
 
+const updateDescription = async ({ description }) => {
+  try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.put("/profile/description", { description }, config)
+    return response.data
+
+  } catch (error) {
+    console.log(error)
+  }
+};
+
 const authMethods = {
   signupCoach,
   signupClient,
@@ -208,6 +224,7 @@ const authMethods = {
   coachOverview,
   unSubscribe,
   deleteUser,
+  updateDescription,
 };
 
 export default authMethods;
