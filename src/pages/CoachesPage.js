@@ -4,13 +4,12 @@ import { AuthContext } from "../context/auth.context";
 import authMethods from "../services/auth.service";
 import Nav from "../components/Nav";
 
-
 const CoachesPage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [coachesList, setCoachesList] = useState([]);
   const { user, isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (user && user.userType === "client") {
       const getCoaches = async () => {
@@ -41,27 +40,50 @@ const CoachesPage = () => {
 
   return (
     isLoggedIn && (
-      <div data-theme={theme}>
+      <div data-theme={theme} className="pb-8">
         <Nav />
-        {coachesList?.length > 0 ? (
-          coachesList.map((coach) => (
-            <Link to={`/coaches/${coach._id}`} key={coach._id}>
-              <div id={coach.id} className="card w-72 glass mx-auto mt-4 mb-4">
-                <figure><img src={coach.image} alt="coach"/></figure>
-                <div className="card-body">
-                  <h2 className="card-title">{coach.username}</h2>
-                  {/* <p>Click to find out more about this coach</p> */}
+        <div className="flex flex-col mt-4 space-y-4 items-center md:flex-row md:space-x-6 md:items-center md:px-24">
+          <h1 className="text-3xl self-center md:mt-3 md:ml-4">Coaches</h1>
+        </div>
+
+        <div className="flex flex-wrap px-6 md:px-24">
+          {coachesList?.length > 0 ? (
+            coachesList.map((coach) => (
+              <div
+                key={coach._id}
+                className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 h-full"
+              >
+                <div
+                  id={coach.id}
+                  className="bg-base-100 shadow-xl card-bordered h-full"
+                >
+                  <figure className="w-full overflow-hidden">
+                    <img
+                      src={coach.image}
+                      alt="coach"
+                      className="w-full object-cover"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title text-1xl">{coach.username}</h2>
+                    <div className="card-actions justify-between items-center">
+                      <Link to={`/coaches/${coach._id}`}>
+                        <button className="btn btn-primary">View coach</button>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-            </div>
-            </Link>
-          ))
-        ) : (
-          <span className="loading loading-spinner text-error">Loading...</span>
-        )}
+              </div>
+            ))
+          ) : (
+            <span className="loading loading-spinner text-error">
+              Loading...
+            </span>
+          )}
+        </div>
       </div>
     )
   );
 };
 
 export default CoachesPage;
-

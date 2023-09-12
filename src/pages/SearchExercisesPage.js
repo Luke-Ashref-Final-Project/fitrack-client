@@ -91,7 +91,7 @@ const SearchExercisesPage = () => {
               return (
                 <div
                   key={eachExercise.id}
-                  className="w-full md:w-1/2 lg:w-1/3 p-4 h-full"
+                  className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 h-full"
                 >
                   <div className="card bg-base-100 shadow-xl card-bordered h-full">
                     <figure className="w-full overflow-hidden">

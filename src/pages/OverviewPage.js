@@ -68,7 +68,7 @@ const OverviewPage = () => {
       {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
 
       <div className="flex flex-col mt-4 space-y-4 items-center md:flex-row md:space-x-6 md:items-center md:px-24">
-      <h1 className="text-3xl self-center md:mt-3 md:ml-4">Overview</h1>
+        <h1 className="text-3xl self-center md:mt-3 md:ml-4">Overview</h1>
 
         {user?.userType === "coach" && (
           <>
@@ -99,7 +99,7 @@ const OverviewPage = () => {
             return (
               <div
                 key={eachExercise._id}
-                className="w-full md:w-1/2 lg:w-1/3 p-4 h-full" // Adjusted width for tablet and desktop, and added padding
+                className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 h-full" // Adjusted width for tablet and desktop, and added padding
               >
                 <div
                   className="card bg-base-100 shadow-xl card-bordered h-full" // Added h-full to grow vertically
