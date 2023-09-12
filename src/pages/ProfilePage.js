@@ -11,8 +11,6 @@ const ProfilePage = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState(null);
-  
-
   const { user, setUser, isLoggedIn, logOutUser, isLoading, authenticateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -84,20 +82,16 @@ const ProfilePage = () => {
 
   return (
     isLoggedIn && (
-      <div data-theme={theme}>
+      <div data-theme={theme} className="pd-8">
         <Nav />
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
+
         <div className="flex-grow p-6 flex flex-col items-center justify-center">
           <div
             className={`w-full max-w-md p-6 ${
               user?.userType === "client" ? "bg-white" : "bg-slate-900"
             } rounded-lg shadow-lg`}
           >
-            <Link to={"/"}>
-              <button className="btn btn-wide btn-outline mb-4">
-                Home Page
-              </button>
-            </Link>
 
             <h1 className="text-3xl mb-2">Profile page</h1>
             <div className="mb-4">

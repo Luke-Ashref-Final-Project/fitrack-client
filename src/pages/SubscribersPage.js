@@ -26,40 +26,51 @@ const SubscribePage = () => {
     }
   }, [user]);
 
-  
   if (isLoading) {
-    return <span className="loading loading-spinner text-error">Loading...</span>
+    return (
+      <span className="loading loading-spinner text-error">Loading...</span>
+    );
   }
 
   return (
     isLoggedIn && (
-      <div data-theme={theme}>
+      <div data-theme={theme} className="pb-8">
         <Nav />
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
-        <h1 className="text-3xl py-4">My subscribers</h1>
-        <>
+
+        <div className="flex flex-col mt-4 space-y-4 items-center md:flex-row md:space-x-6 md:items-center md:px-24">
+          <h1 className="text-3xl self-center md:mt-3 md:ml-4">
+            My subscribers
+          </h1>
+        </div>
+        <div className="flex flex-wrap px-6 md:px-24">
           {fetchedUsers &&
             fetchedUsers.subscribersIds.map((item) => {
               return (
-                <div className="card w-96 bg-base-100 shadow-xl" key={item._id}>
-                  <figure className="px-10 pt-2">
-                    {item?.image ? (
-                      <img
-                        className="rounded-full w-24"
-                        src={item.image}
-                        alt="profile"
-                      />
-                    ) : (
-                      <p>No image available</p>
-                    )}
-                  </figure>
-                  <div className="card-body items-center text-center">
-                      <h1 className="card-title">{item.username}</h1>
+                <div
+                  key={item._id}
+                  className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 h-full"
+                >
+                  <div className="card bg-base-100 shadow-xl card-bordered h-full">
+                    <figure className="w-full overflow-hidden">
+                      {item?.image ? (
+                        <img
+                          className="w-full object-cover"
+                          src={item.image}
+                          alt="profile"
+                        />
+                      ) : (
+                        <p className="text-center">No image available</p>
+                      )}
+                    </figure>
+                    <div className="card-body">
+                      <h1 className="card-title text-1xl">{item.username}</h1>
+                    </div>
                   </div>
                 </div>
               );
             })}
-        </>
+        </div>
       </div>
     )
   );
