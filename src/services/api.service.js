@@ -5,7 +5,7 @@ const apiExternal = axios.create({
 });
 
 const api = axios.create({
-  baseURL:  process.env.REACT_APP_API_URL || "http://localhost:5005"
+  baseURL: "http://localhost:5005" || process.env.REACT_APP_API_URL,
 });
 
 const specifiedOptions = {
@@ -109,10 +109,12 @@ const updateExercise = async (exerciseId, description, variationId) => {
 
 //createVariation
 
-const createVariation = async ({weight, reps}) => { // should have that
+const createVariation = async ({ weight, reps }) => {
+  // should have that
   try {
     const response = await api.post("/variation/new", {
-      weight, reps
+      weight,
+      reps,
     });
     return response.data;
   } catch (error) {
@@ -132,7 +134,6 @@ const updateVariation = async ({ weight, reps, variationId }) => {
     const variation = response.data;
     console.log(variation);
     return variation;
-
   } catch (error) {
     console.log(error);
   }
@@ -155,7 +156,6 @@ const deleteVariation = async ({ _id }) => {
       data: { variationId: _id },
     });
     return response;
-
   } catch (err) {
     console.log(err);
   }

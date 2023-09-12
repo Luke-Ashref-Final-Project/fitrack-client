@@ -51,79 +51,89 @@ const SearchExercisesPage = () => {
 
   return (
     isLoggedIn && (
-      <div data-theme={theme} className="min-h-screen">
+      <div data-theme={theme} className="">
         <Nav />
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
-        <h1 className="text-3xl mb-2 mt-4">Exercises</h1>
-        <div className="flex flex-col align-items-stretch py-4 px-6 space-y-4">
-          <input
-            onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
-            value={searchTerm}
-            type="text"
-            className="input input-bordered w-full"
-            placeholder="Type to search"
-          />
-          {searchTerm ? (
-            <button className="btn btn-primary w-full" onClick={handleSearch}>
-              Search exercises
-            </button>
-          ) : (
-            <button
-              disabled
-              className="btn btn-primary w-full"
-              onClick={handleSearch}
-            >
-              Search exercises
-            </button>
-          )}
+
+        <div className="flex flex-col mt-4 space-y-4 items-center md:flex-row md:space-x-6 md:items-center md:px-24">
+          <h1 className="text-3xl whitespace-nowrap md:mt-3 md:ml-4 md:w-max">Search exercises</h1>
+          <div className="flex flex-col items-center space-y-4 w-full md:space-y-0 md:space-x-4 md:flex-row">
+            <input
+              onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+              value={searchTerm}
+              type="text"
+              className="input input-bordered w-full max-w-xs md:w-auto md:mr-2"
+              placeholder="Type to search"
+            />
+            {searchTerm ? (
+              <button
+                className="btn btn-primary w-full max-w-xs md:w-auto"
+                onClick={handleSearch}
+              >
+                Search
+              </button>
+            ) : (
+              <button
+                disabled
+                className="btn btn-primary w-full max-w-xs md:w-auto"
+                onClick={handleSearch}
+              >
+                Search
+              </button>
+            )}
+          </div>
         </div>
-        <div className="pt-2 pb-4">
-          {resultsLoading && <p>Loading...</p>}
+
+        <div className="flex flex-wrap px-6 md:px-24">
+          {resultsLoading && <p className="w-full text-center">Loading...</p>}
           {exercises && exercises.length !== 0 ? (
             exercises.map((eachExercise) => {
               return (
                 <div
                   key={eachExercise.id}
-                  className="card bg-base-100 shadow-xl card-bordered mx-6 mb-8"
+                  className="w-full md:w-1/2 lg:w-1/3 p-4 h-full"
                 >
-                  <figure>
-                    <img
-                      src={eachExercise.gifUrl}
-                      alt="exercise"
-                      id="gifImage"
-                    />
-                  </figure>
-                  <div className="card-body">
-                    <h1 className="card-title text-1xl" id="exerciseName">
-                      {eachExercise.name}
-                    </h1>
-                    <div className="card-actions justify-between items-center">
-                      <div className="badge badge-secondary" id="bodyPart">
-                        {eachExercise.bodyPart}
-                      </div>
-                      <Link
-                        to="/new-exercise"
-                        state={{
-                          name: eachExercise.name,
-                          bodyPart: eachExercise.bodyPart,
-                          gifUrl: eachExercise.gifUrl,
-                          id: user._id,
-                        }}
-                        className="btn btn-primary btn-md"
-                      >
-                        {/* <button>
+                  <div className="card bg-base-100 shadow-xl card-bordered h-full">
+                    <figure className="w-full overflow-hidden">
+                      <img
+                        src={eachExercise.gifUrl}
+                        alt="exercise"
+                        id="gifImage"
+                        className="w-full object-cover"
+                      />
+                    </figure>
+                    <div className="card-body">
+                      <h1 className="card-title text-1xl" id="exerciseName">
+                        {eachExercise.name}
+                      </h1>
+                      <div className="card-actions justify-between items-center">
+                        <div className="badge badge-secondary" id="bodyPart">
+                          {eachExercise.bodyPart}
+                        </div>
+                        <Link
+                          to="/new-exercise"
+                          state={{
+                            name: eachExercise.name,
+                            bodyPart: eachExercise.bodyPart,
+                            gifUrl: eachExercise.gifUrl,
+                            id: user._id,
+                          }}
+                          className="btn btn-primary btn-md"
+                        >
+                          {/* <button>
                       Add to program
 
                       </button> */}
-                        Add to program
-                      </Link>
+                          Add to program
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               );
             })
           ) : (
-            <p>No exercise found</p>
+            <p className="w-full text-center py-10">No exercise found</p>
           )}
         </div>
       </div>
