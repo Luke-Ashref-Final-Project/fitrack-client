@@ -1,10 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import apiMethods from "../services/api.service";
-import Nav from "../components/Nav";
-import CoachDashboard from "../components/CoachDashboard";
 import { AuthContext } from "../context/auth.context";
 import { Link, useLocation } from "react-router-dom";
 import authMethods from "../services/auth.service";
+
+import Nav from "../components/Nav";
+import CoachDashboard from "../components/CoachDashboard";
+import ClientDashboard from "../components/ClientDashboard";
 
 const OverviewPage = () => {
   //theme changing
@@ -68,6 +70,8 @@ const OverviewPage = () => {
     <div data-theme={theme} className="pb-8">
       <Nav />
       {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
+      {user?.userType === "client" && <ClientDashboard clientId={user._id} />}
+
 
       <div className="flex flex-col mt-4 space-y-4 items-center md:flex-row md:space-x-6 md:items-center md:px-24">
         <h1 className="text-3xl self-center md:mt-3 md:ml-4">Overview</h1>
