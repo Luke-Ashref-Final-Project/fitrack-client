@@ -242,14 +242,25 @@ const ProfilePage = () => {
               </form>
             </dialog>
 
-            {/* delete account button */}
+            {/* delete account modal */}
 
-            <button 
-              onClick={() => {
-                handleDelete();
-              }}
-              className="btn btn-outline btn-error mb-4">Delete Account
-            </button>
+            <button className="btn btn-outline btn-error mb-4" onClick={()=>document.getElementById('my_modal_5').showModal()}>Delete account</button>
+            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+              <div className="modal-box">
+                <h3 className="font-bold text-lg">Are you sure you want to delete your account?</h3>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button 
+                      onClick={() => {
+                        handleDelete();
+                      }}
+                      className="btn btn-outline btn-error mb-4 mr-4">Yes
+                    </button>
+                    <button className="btn">Close</button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
 
             {/* logout button */}
 
