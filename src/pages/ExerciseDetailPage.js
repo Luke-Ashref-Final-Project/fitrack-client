@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 import { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import apiMethods from "../services/api.service";
 import Nav from "../components/Nav";
@@ -162,18 +162,18 @@ const ExerciseDetailPage = () => {
   }, [user]);
 
   return (
-    <div data-theme={theme} className="pb-8">
+    <div data-theme={theme} className="mb-8">
       <Nav />
 
-      <div className="sm:visible md:hidden lg:visible">Only visible at mobile</div>
-      
       <div className="flex flex-col w-full mt-4 space-y-4 items-start px-6">
-        <button className="btn btn-ghost btn-sm flex flex-row items-start">
-          <FiChevronLeft />
-          Back
-        </button>
-        <div className="flex flex-col ml-4 space-y-2">
-          <h1 className="card-title text-3xl" id="exerciseName">
+        <Link to="/overview">
+          <button className="btn btn-outline flex flex-row items-center">
+            <FiChevronLeft />
+            Back
+          </button>
+        </Link>
+        <div className="flex flex-col space-y-2">
+          <h1 className="text-3xl text-left" id="exerciseName">
             {name}
           </h1>
           <div className="badge badge-secondary" id="bodyPart">
@@ -182,11 +182,11 @@ const ExerciseDetailPage = () => {
         </div>
       </div>
 
-      <div className=" bg-base-100 shadow-xl mt-8 px-6">
-        <figure>
-          <img src={image} alt="exercise" id="gifImage" />
+      <div className="bg-base-100 shadow-xl mt-8 px-6 md:w-1/3 mx-auto">
+        <figure className="w-full overflow-hidden">
+          <img src={image} alt="exercise" id="gifImage" className="w-full object-cover" />
         </figure>
-        <div className="">
+        <div className="mt-6">
           <div>
             <h1 className="text w-full text-2xl text-left mb-4">Description</h1>
             <input
@@ -199,8 +199,7 @@ const ExerciseDetailPage = () => {
             />
           </div>
 
-          <div id="setRep" className="card">
-            <div className="">
+          <div id="setRep" className="card mb-6">
               {exerciseSets.map((eachSet, index) => {
                 return (
                   <form
@@ -280,7 +279,6 @@ const ExerciseDetailPage = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

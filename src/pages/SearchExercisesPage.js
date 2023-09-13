@@ -51,8 +51,9 @@ const SearchExercisesPage = () => {
 
   return (
     isLoggedIn && (
-      <div data-theme={theme} className="">
+      <div data-theme={theme} className="pb-8">
         <Nav />
+        
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
 
         <div className="flex flex-col mt-4 space-y-4 items-center md:flex-row md:space-x-6 md:items-center md:px-24">
