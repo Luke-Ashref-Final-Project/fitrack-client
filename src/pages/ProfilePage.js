@@ -7,7 +7,12 @@ import CoachDashboard from "../components/CoachDashboard";
 import authMethods from "../services/auth.service";
 
 const ProfilePage = () => {
-  const { user, setUser, isLoggedIn, logOutUser, isLoading} = useContext(AuthContext);
+  const { user, 
+          setUser, 
+          isLoggedIn, 
+          logOutUser, 
+          isLoading
+        } = useContext(AuthContext);
 
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -21,11 +26,11 @@ const ProfilePage = () => {
     e.preventDefault();
 
     try {
-      const response = await authMethods.passwordUpdate({
+      await authMethods.passwordUpdate({
         currentPassword,
         newPassword,
       });
-      console.log(response);
+      
       setCurrentPassword("");
       setNewPassword("");
       setError(null);
@@ -42,6 +47,7 @@ const ProfilePage = () => {
       uploadData.append("image", e.target.files[0]);
 
       const response = await authMethods.uploadPhoto(uploadData);
+
       setUser(response.user);
       localStorage.setItem("authToken", response.token);
     } catch (error) {
@@ -112,6 +118,8 @@ const ProfilePage = () => {
             } rounded-lg shadow-lg`}
           >
 
+          {/* profile image */}  
+            
             <h1 className="text-3xl mb-2">Profile page</h1>
             <div className="mb-4">
               {user?.image ? (
@@ -126,11 +134,15 @@ const ProfilePage = () => {
               )}
             </div>
 
+          {/* upload photo */}
+
             <input
               type="file"
               className="file-input file-input-bordered file-input-info w-full max-w-xs mx-auto"
               onChange={(e) => handleFileUpload(e)}
             />
+
+          {/* user details */}
 
             <div className="mb-4">
               <h4 className="font-bold text-lg">Username:</h4>
@@ -230,11 +242,16 @@ const ProfilePage = () => {
               </form>
             </dialog>
 
+            {/* delete account button */}
+
             <button 
               onClick={() => {
                 handleDelete();
               }}
-              className="btn btn-outline btn-error mb-4">Delete Account</button>
+              className="btn btn-outline btn-error mb-4">Delete Account
+            </button>
+
+            {/* logout button */}
 
             <button
               onClick={() => {
