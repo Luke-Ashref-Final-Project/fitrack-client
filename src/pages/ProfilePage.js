@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Nav from "../components/Nav";
 import CoachDashboard from "../components/CoachDashboard";
@@ -12,18 +12,8 @@ const ProfilePage = () => {
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [description, setDescription] = useState(user?.description || "");
-  const [initialDescription, setInitialDescription] = useState(user?.description || "");
-
+  const [description, setDescription] = useState(user?.description);
   const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     setDescription(user.description || "");
-  //   }
-  // }, [user]);
-  
-  
 
   const navigate = useNavigate();
 
@@ -69,6 +59,7 @@ const ProfilePage = () => {
       navigate("/")
       window.location.reload();
     } catch (error) {
+      setError("Failed to upload your photo.", error)
       console.log(error)
     }
   }
@@ -76,20 +67,17 @@ const ProfilePage = () => {
   const handleDescription = async (e) => {
     try {
       const response = await authMethods.updateDescription({ description });
-      console.log(response);
-      // Update the initial description for display
       localStorage.setItem("authToken", response.token);
-      setInitialDescription(response.user.description);
+
       setUser(response.user)
-      // window.location.reload();
     } catch (error) {
       console.log(error);
+      setError("Failed to update the description.", error)
     }
   };
 
   useEffect(() => {
     if (user) {
-      console.log(user)
       setDescription(user.description || "");
       if (user && user.userType === "coach") {
         setTheme("night");
