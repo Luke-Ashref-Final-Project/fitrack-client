@@ -31,7 +31,7 @@ const NewExercisePage = () => {
       name: name,
     });
     if (createdNewExercise) {
-      navigate("/overview");
+      navigate("/overview", { state: { newExerciseAdded: true } });
     } else {
       return <h1>Cannot create new exercise</h1>;
     }
@@ -61,12 +61,7 @@ const NewExercisePage = () => {
       setGifUrl(location.state.gifUrl);
       setCoachId(location.state.id);
     }
-    // console.log(location);
-    // console.log(location.state);
-    // console.log(name);
-    // console.log(bodyPart);
-    // console.log(gifUrl);
-    // console.log(id);
+
   }, [name, bodyPart, gifUrl, coachId, user, location.state]);
 
   return (
@@ -102,9 +97,6 @@ const NewExercisePage = () => {
                         setClientId(e.target.value);
                       }}
                     >
-                      <option disabled selected>
-                        Pick one client
-                      </option>
                       {subscribers.map((client) => {
                         return (
                           <option key={client._id} value={client._id}>

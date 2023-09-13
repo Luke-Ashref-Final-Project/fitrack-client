@@ -3,7 +3,7 @@ import apiMethods from "../services/api.service";
 import Nav from "../components/Nav";
 import CoachDashboard from "../components/CoachDashboard";
 import { AuthContext } from "../context/auth.context";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import authMethods from "../services/auth.service";
 
 const OverviewPage = () => {
@@ -24,6 +24,8 @@ const OverviewPage = () => {
       setFilteredExercises(allExercises);
     }
   };
+
+  const location = useLocation();
 
   useEffect(() => {
     const getdata = async () => {
@@ -51,7 +53,7 @@ const OverviewPage = () => {
       }
     };
     getdata();
-  }, [user]);
+  }, [user, location.state?.newExerciseAdded]);
 
   useEffect(() => {
     //setting themes
@@ -129,6 +131,10 @@ const OverviewPage = () => {
               </div>
             );
           })}
+
+        {(!filteredExercises || filteredExercises.length === 0) && (
+          <p className="w-full text-center py-10">No exercise found</p>
+        )}
       </div>
     </div>
   );
