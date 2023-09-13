@@ -7,13 +7,22 @@ import CoachDashboard from "../components/CoachDashboard";
 import authMethods from "../services/auth.service";
 
 const ProfilePage = () => {
-  const { user, setUser, isLoggedIn, logOutUser, isLoading, /*authenticateUser*/ } = useContext(AuthContext);
+  const { user, setUser, isLoggedIn, logOutUser, isLoading} = useContext(AuthContext);
 
   const [theme, setTheme] = useState("cmyk");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [description, setDescription] = useState(user?.description);
+  const [description, setDescription] = useState(user?.description || "");
+  const [initialDescription, setInitialDescription] = useState(user?.description || "");
+
   const [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     setDescription(user.description || "");
+  //   }
+  // }, [user]);
+  
   
 
   const navigate = useNavigate();
@@ -66,36 +75,41 @@ const ProfilePage = () => {
 
   const handleDescription = async (e) => {
     try {
-      const response = await authMethods.updateDescription({ description })
-      console.log(response)
-      setDescription(response.user.description);
+      const response = await authMethods.updateDescription({ description });
+      console.log(response);
+      // Update the initial description for display
       localStorage.setItem("authToken", response.token);
+      setInitialDescription(response.user.description);
+      setUser(response.user)
       // window.location.reload();
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    if (user && user.userType === "coach") {
-      setTheme("night");
-    } else {
-      setTheme("cmyk");
+    if (user) {
+      console.log(user)
+      setDescription(user.description || "");
+      if (user && user.userType === "coach") {
+        setTheme("night");
+      } else {
+        setTheme("cmyk");
+      }
     }
   }, [user]);
 
   useEffect(()=> {
-    // authenticateUser()
     if (!isLoggedIn && !isLoading && !user) {
       return navigate("/")
     }
-    console.log(user)
+    
   }, [isLoggedIn, isLoading, user, navigate])
 
   if (isLoading) {
     return <span className="loading loading-spinner text-error">Loading...</span>
   }
+  
 
   return (
     isLoggedIn && (
@@ -139,36 +153,35 @@ const ProfilePage = () => {
               <p>{user?.userType}</p>
             </div>
 
-            {/*description modal*/}
+          {/*description modal*/}
 
-            <button 
-              className="btn" 
-              onClick={()=>document.getElementById('my_modal_4').showModal()}
-              >
-                open modal
+            <button
+              className="btn"
+              onClick={() => document.getElementById("my_modal_4").showModal()}
+            >
+              Update your description
             </button>
-              <dialog id="my_modal_4" className="modal">
-                <div className="modal-box w-11/12 max-w-5xl">
-                  <h3 className="font-bold text-lg">{user?.description}</h3>
-                  <textarea 
-                    placeholder="Bio" 
-                    className="textarea textarea-bordered textarea-md w-full max-w-xs"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  >
-                    {/* {description} */}
-                  </textarea>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button className="btn">Close</button>
-                      <button className="btn" onClick={handleDescription}>
-                        Update
-                      </button>
-                    </form>
-                  </div>
+            <dialog id="my_modal_4" className="modal">
+              <div className="modal-box w-11/12 max-w-5xl">
+                <h3 className="font-bold text-lg">Description:</h3>
+                <textarea
+                  placeholder="Bio"
+                  className="textarea textarea-bordered textarea-md w-full max-w-xs"
+                  name="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="btn mr-2" onClick={handleDescription}>
+                      Update
+                    </button>
+                    <button className="btn">Close</button>
+                  </form>
                 </div>
-              </dialog>
+              </div>
+            </dialog>
+
 
             {/*password modal*/}
 
