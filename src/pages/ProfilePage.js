@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import Nav from "../components/Nav";
 import CoachDashboard from "../components/CoachDashboard";
+import ClientDashboard from "../components/ClientDashboard";
 import authMethods from "../services/auth.service";
 
 const ProfilePage = () => {
@@ -110,6 +111,8 @@ const ProfilePage = () => {
       <div data-theme={theme} className="pd-8">
         <Nav />
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
+        {user?.userType === "client" && <ClientDashboard clientId={user._id} />}
+
 
         <div className="flex-grow p-6 flex flex-col items-center justify-center">
           <div
