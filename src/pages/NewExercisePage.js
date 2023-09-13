@@ -61,7 +61,6 @@ const NewExercisePage = () => {
       setGifUrl(location.state.gifUrl);
       setCoachId(location.state.id);
     }
-
   }, [name, bodyPart, gifUrl, coachId, user, location.state]);
 
   return (
@@ -97,13 +96,20 @@ const NewExercisePage = () => {
                         setClientId(e.target.value);
                       }}
                     >
-                      {subscribers.map((client) => {
-                        return (
-                          <option key={client._id} value={client._id}>
-                            {client.username}
-                          </option>
-                        );
-                      })}
+                      <option disabled selected>
+                        Pick one client
+                      </option>
+                      {subscribers.length !== 0 ? (
+                        subscribers.map((client) => {
+                          return (
+                            <option key={client._id} value={client._id}>
+                              {client.username}
+                            </option>
+                          );
+                        })
+                      ) : (
+                        <option disabled>No options available</option>
+                      )}
                     </select>
                     <label
                       htmlFor="description"
@@ -124,9 +130,15 @@ const NewExercisePage = () => {
                     <div className="badge badge-secondary" id="bodyPart">
                       {bodyPart}
                     </div>
-                    <button type="submit" className="btn btn-primary">
-                      Create new exercise
-                    </button>
+                    {clientId ? (
+                      <button type="submit" className="btn btn-primary">
+                        Create new exercise
+                      </button>
+                    ) : (
+                      <button type="submit" disabled="disabled" className="btn btn-primary disabled">
+                        Create new exercise
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
