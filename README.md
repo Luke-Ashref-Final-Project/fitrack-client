@@ -8,31 +8,57 @@ This is an app that helps the personal trainer arrange and monitor the fitness p
 
 ## User Stories
 
-# For coach persoan
+# Coach persona
 -  **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's not available for me.
 -  **Signup:** As a user I can sign up in the platform so that I can start monitoring my client's fitness progress.
 -  **Login:** As a user I can login to the platform so that I can start monitoring my client's fitness progress.
 -  **Logout:** As a user I can logout from the platform so no one else can tamper mine and my clients information.
--  **View exercises** As a user I can view exercises of my clients
--  **Filter exercises** As a user I can filter exercises of my clients.
--  **View exercise detail** As a user I can see the detail of an exercise so that I can decide to update decription and update sets.
--  **Update reps and weight** As a user I can update the detail of an exercise including description, reps and weight.
--  **Search for a new exercise** As a user I can search exercise based on name, body part or muscle group of the exercise.
--  **Create a new exercise** As a user, I can create a new exercise from the search results and select which client for this exercise.
--  **Add a new set** As a user, I can add a new set to a exercise.
--  **Delete a set** As a user, I can delete a set from a exercise.
--  **Save exercise** As a user, I can save the changes done to the exercise, including the sets.
--  **Delete exercise** As a user, I can delete an exercise.
+-  **Delete:** As a user I can delete my account if I am not happy with the platform.
+-  **Change password:** As a user I want to change my password.
+-  **View exercises:** As a user I can view exercises of my clients
+-  **Filter exercises:** As a user I can filter exercises of my clients.
+-  **View exercise detail:** As a user I can see the detail of an exercise so that I can decide to update decription and update sets.
+-  **Update exercise:** As a user I can update the detail of an exercise including description, reps and weight.
+-  **Search for a new exercise:** As a user I can search exercise based on name, body part or muscle group of the exercise.
+-  **Create a new exercise:** As a user, I can create a new exercise from the search results and select which client for this exercise.
+-  **Add a new set:** As a user, I can add a new set to a exercise.
+-  **Delete a set:** As a user, I can delete a set from a exercise.
+-  **Save exercise:** As a user, I can save the changes done to the exercise, including the sets.
+-  **Delete exercise:** As a user, I can delete an exercise.
+
+# Client persona
+-  **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's not available for me.
+-  **Signup:** As a user I can sign up in the platform so that I can start seeing my progress.
+-  **Login:** As a user I can login to the platform so that I can start monitoring my fitness progress.
+-  **Logout:** As a user I can logout from the platform so no one else can tamper my information.
+-  **Delete account** As a user I can delete my account if I am not happy with the platform.
+-  **Change password:** As a user I want to change my password.
+-  **View exercises:** As a user I can view my own exercises set up by my coach.
+-  **View exercise detail:** As a user I can view the detail of my exercises, including description, reps and weight.
+-  **Update exercise:** As a user I can update the detail of my exercise including description, reps and weight.
+-  **Save exercise:** As a user I can save the changes to my exercise including description, reps and weight.
+-  **Add new set:** As a user I can add a new set.
+-  **Delete a set:** As a user I can delete a set.
+-  **View coaches:** As a user I can view list of coaches availale at the platform.
+-  **View coach detail** As a user I can view the detail of a coach.
+-  **Subscribe to a coach:** As a user I can subscribe to a coach.
 
 ## Backlog
 
-
-- All exercises
+- View all exercises
 - View exercsie detail
+- Update exercise detail
+- Search exercise
+- Delete an exercise
+- Add a new set
+- Update set
+- Delete a set
 - View account detail
-- Search exercise view
-- Create new exercise view
-
+- Update account detail
+- Change password
+- Delete account
+- Update account detail
+- Create new exercise
 
 <br>
 
