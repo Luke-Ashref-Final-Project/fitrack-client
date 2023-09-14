@@ -23,6 +23,7 @@ const NewExercisePage = () => {
   const handleCreateNewExercise = (e) => {
     e.preventDefault();
     const createdNewExercise = apiMethods.createNewExercise({
+      user: user,
       clientId: clientId,
       coachId: coachId,
       bodyPart: bodyPart,
@@ -31,7 +32,7 @@ const NewExercisePage = () => {
       name: name,
     });
     if (createdNewExercise) {
-      navigate("/overview");
+      navigate("/overview", { state: { newExerciseAdded: true } });
     } else {
       return <h1>Cannot create new exercise</h1>;
     }
@@ -61,12 +62,6 @@ const NewExercisePage = () => {
       setGifUrl(location.state.gifUrl);
       setCoachId(location.state.id);
     }
-    // console.log(location);
-    // console.log(location.state);
-    // console.log(name);
-    // console.log(bodyPart);
-    // console.log(gifUrl);
-    // console.log(id);
   }, [name, bodyPart, gifUrl, coachId, user, location.state]);
 
   return (
@@ -105,13 +100,17 @@ const NewExercisePage = () => {
                       <option disabled selected>
                         Pick one client
                       </option>
-                      {subscribers.map((client) => {
-                        return (
-                          <option key={client._id} value={client._id}>
-                            {client.username}
-                          </option>
-                        );
-                      })}
+                      {subscribers.length !== 0 ? (
+                        subscribers.map((client) => {
+                          return (
+                            <option key={client._id} value={client._id}>
+                              {client.username}
+                            </option>
+                          );
+                        })
+                      ) : (
+                        <option disabled>No options available</option>
+                      )}
                     </select>
                     <label
                       htmlFor="description"
@@ -132,9 +131,15 @@ const NewExercisePage = () => {
                     <div className="badge badge-secondary" id="bodyPart">
                       {bodyPart}
                     </div>
-                    <button type="submit" className="btn btn-primary">
-                      Create new exercise
-                    </button>
+                    {clientId ? (
+                      <button type="submit" className="btn btn-primary">
+                        Create new exercise
+                      </button>
+                    ) : (
+                      <button type="submit" disabled="disabled" className="btn btn-primary disabled">
+                        Create new exercise
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

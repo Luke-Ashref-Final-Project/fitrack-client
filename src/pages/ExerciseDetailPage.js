@@ -1,14 +1,14 @@
 // import { useEffect, useState } from "react";
 import { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import apiMethods from "../services/api.service";
 import Nav from "../components/Nav";
-import { FiX, FiPlus } from "react-icons/fi";
+import { FiX, FiPlus, FiChevronLeft } from "react-icons/fi";
 
 const ExerciseDetailPage = () => {
   const [theme, setTheme] = useState("cmyk");
-  const { user } = useContext(AuthContext);
+  const { user, isLoading } = useContext(AuthContext);
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [bodyPart, setBodyPart] = useState("");
@@ -20,7 +20,6 @@ const ExerciseDetailPage = () => {
   };
 
   const [exerciseSets, setExerciseSets] = useState([]);
-  // console.log(exerciseSets);
 
   //handle delete variation
   const handleVariationDeletion = (e, index, _id) => {
@@ -35,12 +34,12 @@ const ExerciseDetailPage = () => {
   };
 
   //handle exercise deletion
-  const handleExerciseDeletion = () => {
+  const handleExerciseDeletion = async () => {
     //handle delete exercise
-    apiMethods.deleteExercise(id.exerciseId);
+    await apiMethods.deleteExercise(id.exerciseId);
     //handle delete variation
     for (let i = 0; i < exerciseSets.length; i++) {
-      apiMethods.deleteVariation({ _id: exerciseSets[i]._id });
+      await apiMethods.deleteVariation({ _id: exerciseSets[i]._id });
     }
     navigate("/overview");
   };
@@ -162,22 +161,36 @@ const ExerciseDetailPage = () => {
     }
   }, [user]);
 
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
+
   return (
-    <div data-theme={theme} className="pb-8">
+    <div data-theme={theme} className="mb-8">
       <Nav />
-      <div className="card bg-base-100 shadow-xl card-bordered mt-8 px-6 w-full">
-        <figure>
-          <img src={image} alt="exercise" id="gifImage" />
-        </figure>
-        <div className="card-body">
-          <h1 className="card-title text-3xl" id="exerciseName">
+
+      <div className="flex flex-col w-full mt-4 space-y-4 items-start px-6">
+        <Link to="/overview">
+          <button className="btn btn-outline flex flex-row items-center">
+            <FiChevronLeft />
+            Back
+          </button>
+        </Link>
+        <div className="flex flex-col space-y-2">
+          <h1 className="text-3xl text-left" id="exerciseName">
             {name}
           </h1>
-          <div className="card-actions justify-between items-center">
-            <div className="badge badge-secondary" id="bodyPart">
-              {bodyPart}
-            </div>
+          <div className="badge badge-secondary" id="bodyPart">
+            {bodyPart}
           </div>
+        </div>
+      </div>
+
+      <div className="bg-base-100 shadow-xl mt-8 px-6 md:w-1/3 mx-auto">
+        <figure className="w-full overflow-hidden">
+          <img src={image} alt="exercise" id="gifImage" className="w-full object-cover" />
+        </figure>
+        <div className="mt-6">
           <div>
             <h1 className="text w-full text-2xl text-left mb-4">Description</h1>
             <input
@@ -190,13 +203,12 @@ const ExerciseDetailPage = () => {
             />
           </div>
 
-          <div id="setRep" className="card">
-            <div className="">
+          <div id="setRep" className="card mb-6">
               {exerciseSets.map((eachSet, index) => {
                 return (
                   <form
                     key={index}
-                    className="flex flex-col mt-6 mb-6 bg-slate-800 px-4 py-4 rounded-xl"
+                    className="flex flex-col mt-6 mb-6 border border-primary px-4 py-4 rounded-xl"
                   >
                     <div className="flex flex-row justify-between items-center">
                       <h1 className="text-2xl">Set {index + 1}</h1>
@@ -257,19 +269,20 @@ const ExerciseDetailPage = () => {
               >
                 Save
               </button>
-              <button
-                className="btn btn-error w-full"
-                onClick={() => {
-                  handleExerciseDeletion();
-                }}
-              >
-                Delete
-              </button>
+              {user.userType === "coach" && (
+                <button
+                  className="btn btn-error w-full"
+                  onClick={() => {
+                    handleExerciseDeletion();
+                  }}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
