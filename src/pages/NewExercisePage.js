@@ -33,6 +33,7 @@ const NewExercisePage = () => {
     });
     if (createdNewExercise) {
       navigate("/overview", { state: { newExerciseAdded: true } });
+      window.location.reload();
     } else {
       return <h1>Cannot create new exercise</h1>;
     }
@@ -136,7 +137,11 @@ const NewExercisePage = () => {
                         Create new exercise
                       </button>
                     ) : (
-                      <button type="submit" disabled="disabled" className="btn btn-primary disabled">
+                      <button
+                        type="submit"
+                        disabled="disabled"
+                        className="btn btn-primary disabled"
+                      >
                         Create new exercise
                       </button>
                     )}
