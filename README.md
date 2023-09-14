@@ -1,70 +1,132 @@
-# Getting Started with Create React App
+# Fitrack
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+This is an app that helps the personal trainer arrange and monitor the fitness progress of the clients.
 
-### `npm start`
+## User Stories
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# For coach persoan
+-  **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's not available for me.
+-  **Signup:** As a user I can sign up in the platform so that I can start monitoring my client's fitness progress.
+-  **Login:** As a user I can login to the platform so that I can start monitoring my client's fitness progress.
+-  **Logout:** As a user I can logout from the platform so no one else can tamper mine and my clients information.
+-  **View exercises** As a user I can view exercises of my clients
+-  **Filter exercises** As a user I can filter exercises of my clients.
+-  **View exercise detail** As a user I can see the detail of an exercise so that I can decide to update decription and update sets.
+-  **Update reps and weight** As a user I can update the detail of an exercise including description, reps and weight.
+-  **Search for a new exercise** As a user I can search exercise based on name, body part or muscle group of the exercise.
+-  **Create a new exercise** As a user, I can create a new exercise from the search results and select which client for this exercise.
+-  **Add a new set** As a user, I can add a new set to a exercise.
+-  **Delete a set** As a user, I can delete a set from a exercise.
+-  **Save exercise** As a user, I can save the changes done to the exercise, including the sets.
+-  **Delete exercise** As a user, I can delete an exercise.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Backlog
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- All exercises
+- View exercsie detail
+- View account detail
+- Search exercise view
+- Create new exercise view
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Client / Frontend
 
-### `npm run eject`
+## React Router Routes (React App)
+| Path                      | Component                      | Permissions | Behavior                                                     |
+| ------------------------- | --------------------           | ----------- | ------------------------------------------------------------ |
+| `/`                       | HomePAge                       | public `<Route>`            | Home page                                        |
+| `/signup`                 | SignupPage                     | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup |
+| `/login`                  | LoginPage                      | anon only `<AnonRoute>`     | Login form, link to signup, navigate to homepage after login  |
+| `/logout`                 | n/a                            | user only `<PrivateRoute>`  | Navigate to homepage after logout, expire session             |
+| `/backlog/series`         | NavBar, ElementList, FooterBar | user only `<PrivateRoute>`  | Shows all tv series on backlog                                |
+| `/backlog/films`          | NavBar, ElementList, FooterBar | user only `<PrivateRoute>`  | Shows all films on backlog                                    |
+| `/backlog/games`          | NavBar, ElementList, FooterBar | user only `<PrivateRoute>`  | Shows all games on backlog                                    |
+| `/search/series`          | SearchForm, SearchResults      | user only  `<PrivateRoute>` | Search a tv series to be added                                |
+| `/search/films`           | SearchForm, SearchResults      | user only `<PrivateRoute>`  | Search a film to be added                                     |
+| `/search/games`           | SearchForm, SearchResults      | user only `<PrivateRoute>`  | Search a game to be added                                     |
+| `/add/:id`                | ElementInfo                    | user only `<PrivateRoute>`  | Add an element to the backlog                                 |
+| `/profile`                | Profile, Stats                 | user only  `<PrivateRoute>` | Check profile with stat information                           |
+| `/done/series`            | Done list for Series           | user only  `<PrivateRoute>` | Shows all tv series finished                                  |
+| `/done/films`             | Done list for films            | user only `<PrivateRoute>`  | Shows all films finished                                      |
+| `/done/games`             | Done list for games            | user only `<PrivateRoute>`  | Shows all videogames finished                                 |
+          
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Components
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- LoginPage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- SignupPage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- NavBar
 
-## Learn More
+- FooterBar
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- BackBar
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ElementList
 
-### Code Splitting
+- SearchForm
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- SearchResults
 
-### Analyzing the Bundle Size
+- ElementInfo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Stats
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+ 
 
-### Deployment
+## Services
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Auth Service
+  - auth.login(user)
+  - auth.signup(user)
+  - auth.logout()
 
-### `npm run build` fails to minify
+- Api Service
+  - backlog.filter(type, status) // for different types of media and if they are done or not
+  - backlog.detail(id)
+  - backlog.add(id)
+  - backlog.delete(id)
+  - backlog.update(id)
+  
+- External API
+  - API for exercises
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+<br>
+
+
+## Links
+
+### Trello/Kanban
+
+[Link to your trello board](https://trello.com/b/iloDccrZ/backlog-quest) 
+or picture of your physical board
+
+### Git
+
+The url to your repository and to your deployed project
+
+[Client repository Link](https://github.com/jorgeberrizbeitia/backlog-quest)
+
+[Server repository Link](https://github.com/jorgeberrizbeitia/backlog-quest-server)
+
+[Deployed App Link](https://backlog-quest.herokuapp.com/login)
+
+### Slides
+
+The url to your presentation slides
+
+[Slides Link](https://docs.google.com/presentation/d/1zndKZ8DC-_i391alptPKsAKanCSXTrLVL39L3xtEjz8/edit?usp=sharing)
