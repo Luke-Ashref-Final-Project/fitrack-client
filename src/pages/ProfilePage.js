@@ -159,7 +159,7 @@ const ProfilePage = () => {
           {/*description modal*/}
 
             <button
-              className="btn"
+              className="btn mb-2"
               onClick={() => document.getElementById("my_modal_4").showModal()}
             >
               Update your description
