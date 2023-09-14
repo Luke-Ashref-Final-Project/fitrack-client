@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL:"http://localhost:5005" || process.env.REACT_APP_API_URL 
+  baseURL: process.env.REACT_APP_API_URL 
+  // "http://localhost:5005" 
 });
 
 const signupCoach = async ({ email, username, password, description }) => {
