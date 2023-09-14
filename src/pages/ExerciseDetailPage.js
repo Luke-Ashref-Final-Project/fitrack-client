@@ -228,6 +228,7 @@ const ExerciseDetailPage = () => {
                           id="reps"
                           type="number"
                           className="input input-bordered w-full"
+                          defaultValue={0}
                           value={eachSet.reps}
                           onChange={(e) =>
                             handleRepsAndWeight(e.target.value, index, "reps")
