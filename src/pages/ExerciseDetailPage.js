@@ -8,7 +8,7 @@ import { FiX, FiPlus, FiChevronLeft } from "react-icons/fi";
 
 const ExerciseDetailPage = () => {
   const [theme, setTheme] = useState("cmyk");
-  const { user } = useContext(AuthContext);
+  const { user, isLoading } = useContext(AuthContext);
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [bodyPart, setBodyPart] = useState("");
@@ -34,12 +34,12 @@ const ExerciseDetailPage = () => {
   };
 
   //handle exercise deletion
-  const handleExerciseDeletion = () => {
+  const handleExerciseDeletion = async () => {
     //handle delete exercise
-    apiMethods.deleteExercise(id.exerciseId);
+    await apiMethods.deleteExercise(id.exerciseId);
     //handle delete variation
     for (let i = 0; i < exerciseSets.length; i++) {
-      apiMethods.deleteVariation({ _id: exerciseSets[i]._id });
+      await apiMethods.deleteVariation({ _id: exerciseSets[i]._id });
     }
     navigate("/overview");
   };
@@ -160,6 +160,10 @@ const ExerciseDetailPage = () => {
       setTheme("cmyk");
     }
   }, [user]);
+
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
 
   return (
     <div data-theme={theme} className="pb-8">
