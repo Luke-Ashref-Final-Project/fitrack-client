@@ -80,9 +80,11 @@ const CoachesPage = () => {
               </div>
             ))
           ) : (
-            <span className="loading loading-spinner text-error">
-              Loading...
-            </span>
+            <div className="h-screen flex flex-col justify-center">
+              <span className="text-error">
+              No coaches avaialble
+              </span>
+            </div>
           )}
         </div>
       </div>
