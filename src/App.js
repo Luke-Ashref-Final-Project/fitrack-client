@@ -12,6 +12,7 @@ import CoachesPage from "./pages/CoachesPage";
 import NewExercisePage from "./pages/NewExercisePage";
 import CoachOverviewPage from "./pages/CoachOverviewPage";
 import ExerciseDetailPage from "./pages/ExerciseDetailPage.js"
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/coaches" element={<CoachesPage />} />
         <Route path="/new-exercise" element={<NewExercisePage />} />
         <Route path="/coaches/:coachId" element={<CoachOverviewPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </div>

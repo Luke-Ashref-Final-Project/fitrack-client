@@ -2,7 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authMethods from "../services/auth.service";
+
 import Nav from "../components/Nav";
+import ClientDashboard from "../components/ClientDashboard";
 
 const CoachesPage = () => {
   const [theme, setTheme] = useState("cmyk");
@@ -42,6 +44,8 @@ const CoachesPage = () => {
     isLoggedIn && (
       <div data-theme={theme} className="pb-8">
         <Nav />
+        {user?.userType === "client" && <ClientDashboard clientId={user._id} />}
+
         <div className="flex flex-col mt-4 space-y-4 items-center md:flex-row md:space-x-6 md:items-center md:px-24">
           <h1 className="text-3xl self-center md:mt-3 md:ml-4">Coaches</h1>
         </div>

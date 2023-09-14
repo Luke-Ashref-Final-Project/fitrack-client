@@ -23,6 +23,7 @@ const NewExercisePage = () => {
   const handleCreateNewExercise = (e) => {
     e.preventDefault();
     const createdNewExercise = apiMethods.createNewExercise({
+      user: user,
       clientId: clientId,
       coachId: coachId,
       bodyPart: bodyPart,

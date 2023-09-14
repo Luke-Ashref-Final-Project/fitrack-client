@@ -68,6 +68,7 @@ const getOneExercise = async (exerciseId) => {
 };
 
 const createNewExercise = async ({
+  user,
   clientId,
   coachId,
   bodyPart,
@@ -77,6 +78,7 @@ const createNewExercise = async ({
 }) => {
   try {
     const response = await api.post("/exercise/new", {
+      user,
       clientId,
       coachId,
       bodyPart,
