@@ -63,96 +63,119 @@ This is an app that helps the personal trainer arrange and monitor the fitness p
 <br>
 
 
+
 # Client / Frontend
 
 ## React Router Routes (React App)
-| Path                      | Component                      | Permissions | Behavior                                                     |
-| ------------------------- | --------------------           | ----------- | ------------------------------------------------------------ |
-| `/`                       | HomePAge                       | public `<Route>`            | Home page                                        |
-| `/signup`                 | SignupPage                     | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup |
-| `/login`                  | LoginPage                      | anon only `<AnonRoute>`     | Login form, link to signup, navigate to homepage after login  |
-| `/logout`                 | n/a                            | user only `<PrivateRoute>`  | Navigate to homepage after logout, expire session             |
-| `/backlog/series`         | NavBar, ElementList, FooterBar | user only `<PrivateRoute>`  | Shows all tv series on backlog                                |
-| `/backlog/films`          | NavBar, ElementList, FooterBar | user only `<PrivateRoute>`  | Shows all films on backlog                                    |
-| `/backlog/games`          | NavBar, ElementList, FooterBar | user only `<PrivateRoute>`  | Shows all games on backlog                                    |
-| `/search/series`          | SearchForm, SearchResults      | user only  `<PrivateRoute>` | Search a tv series to be added                                |
-| `/search/films`           | SearchForm, SearchResults      | user only `<PrivateRoute>`  | Search a film to be added                                     |
-| `/search/games`           | SearchForm, SearchResults      | user only `<PrivateRoute>`  | Search a game to be added                                     |
-| `/add/:id`                | ElementInfo                    | user only `<PrivateRoute>`  | Add an element to the backlog                                 |
-| `/profile`                | Profile, Stats                 | user only  `<PrivateRoute>` | Check profile with stat information                           |
-| `/done/series`            | Done list for Series           | user only  `<PrivateRoute>` | Shows all tv series finished                                  |
-| `/done/films`             | Done list for films            | user only `<PrivateRoute>`  | Shows all films finished                                      |
-| `/done/games`             | Done list for games            | user only `<PrivateRoute>`  | Shows all videogames finished                                 |
-          
+| Path                      | Component                                                    | Permissions | Behavior                                                     |
+| ------------------------- | --------------------                                         | ----------- | ------------------------------------------------------------ |
+| `/`                       | HomePage                                                     | public `<Route>`            | Home page, link to sign up and login 
+| `/signup`                 | SignUpPage                                                   | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to loginPage after signup |
+| `/login`                  | LoginPage                                                    | anon only `<AnonRoute>`     | Login form, link to signup, navigate to OverviewPage after login  |
+| `/logout`                 | n/a                                                          | user only `<PrivateRoute>`  | Navigate to homepage after logout, expire session             |
+| `/overview`               | OverviewPage, Nav, Footer, Coach Dashboard/Client Dashboard  | user only `<PrivateRoute>`  | Shows all relevant exercises for client or coach 
+| `/overview/:exerciseId"`  | ExerciseDetailPage, Nav, Footer                              | user only `<PrivateRoute>`  | Shows individual exercise detail |
+| `/profile`                | ProfilePage, Nav, Footer                                     | user only `<PrivateRoute>`  | Shows all games on backlog                                    |
+| `/searchexercises`        | SearchExercisesPage, Nav, Footer                             | user only  `<PrivateRoute>` | Search inquery page, button to execute search, Show search results|
+| `/subscribers`            | SubscribersPage, Nav, Footer                                 | coach only `<PrivateRoute>` | View all subscribers                                  |
+| `/coaches`                | CoachesPage, Nav, Footer                                     | client only `<PrivateRoute>`| View all coaches                                    |
+| `/coaches/:coachId`       | CoachOverviewPage, Nav, Footer                               | client only `<PrivateRoute>`| View coach detail, subscribe to a coach          |
+| `/new-exercise`           | NewExercisePage, Nav, Footer                                 | client only `<PrivateRoute>`| View coach detail, subscribe to a coach          |
+| `/*`                      | NotFoundPage, Nav, Footer                                    | public only `<PrivateRoute>`| Show 404 page when the route does not exist          |
+
 
 ## Components
+
+- Nav
+
+- Footer
+
+- Coach Dashboard
+
+- Client Dashboard
+
+
+## Pages
 
 - LoginPage
 
 - SignupPage
 
-- NavBar
-
-- FooterBar
-
-- BackBar
-
-- ElementList
-
-- SearchForm
-
-- SearchResults
-
-- ElementInfo
-
-- Stats
-
-
-
+- CoachOverviewPage
   
+- CoachesPage
 
+- ExerciseDetailPage
+
+- HomePage
+  
+- NewExercisePage
+  
+- NotFoundPage
+  
+- OverviewPage
+  
+- ProfilePage
+  
+- SearchExercisesPage
+  
+- SubscribersPage
  
 
 ## Services
 
 - Auth Service
-  - auth.login(user)
-  - auth.signup(user)
-  - auth.logout()
+  - auth.signupCoach
+  - auth.signupClient
+  - auth.logIn
+  - auth.verifyToken
+  - auth.uploadPhoto
+  - auth.getCurrentUser
+  - auth.getCoaches
+  - auth.passwordUpdate
+  - auth.getAllSubscribers
+  - auth.subscribe
+  - auth.unSubscribe
+  - auth.coachOverview
+  - auth.deleteUser
+  - auth.updateDescription
 
 - Api Service
-  - backlog.filter(type, status) // for different types of media and if they are done or not
-  - backlog.detail(id)
-  - backlog.add(id)
-  - backlog.delete(id)
-  - backlog.update(id)
+  - api.fetchExercises,
+  - api.createNewExercise,
+  - api.getAllExercisesForCoach,
+  - api.getAllExercisesForClient,
+  - api.getOneExercise,
+  - api.updateExercise,
+  - api.createVariation,
+  - api.updateVariation,
+  - api.deleteExercise,
+  - api.deleteVariation,
   
 - External API
-  - API for exercises
-
+  - api.fetchExercises,
 
 <br>
 
 
 ## Links
 
-### Trello/Kanban
+### Backlog
+[Link to ClickUp](https://sharing.clickup.com/4561709/t/h/861n8374w/BHJFKAHZVXV8O3D)
 
-[Link to your trello board](https://trello.com/b/iloDccrZ/backlog-quest) 
-or picture of your physical board
 
 ### Git
 
 The url to your repository and to your deployed project
 
-[Client repository Link](https://github.com/jorgeberrizbeitia/backlog-quest)
+[Client repository Link](https://github.com/Luke-Ashref-Final-Project/fitrack-client)
 
-[Server repository Link](https://github.com/jorgeberrizbeitia/backlog-quest-server)
+[Server repository Link](https://github.com/Luke-Ashref-Final-Project/fitrack-server)
 
-[Deployed App Link](https://backlog-quest.herokuapp.com/login)
+[Deployed App Link](https://fitrack-app.netlify.app/)
 
 ### Slides
 
 The url to your presentation slides
 
-[Slides Link](https://docs.google.com/presentation/d/1zndKZ8DC-_i391alptPKsAKanCSXTrLVL39L3xtEjz8/edit?usp=sharing)
+[Slides Link](https://docs.google.com/presentation/d/1KF32iJ4J2JKJMX5MWSWo07rR9NdlvhdD4GB8ZwmEp2k/edit?usp=sharing)
