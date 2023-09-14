@@ -204,7 +204,6 @@ const updateDescription = async ({ description }) => {
     };
     const response = await api.put("/profile/description", { description }, config)
     return response.data
-
   } catch (error) {
     console.log(error)
   }

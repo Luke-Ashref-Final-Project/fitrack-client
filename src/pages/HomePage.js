@@ -35,7 +35,7 @@ const HomePage = () => {
               </button>
             </Link>
           ) : (
-            <div className="flex flex-row space-x-4 mt-4 justify-center">
+            <div className="flex flex-col space-x-4 mt-4 justify-center">
               <Link to="/signup">
                 <button className="btn btn-outline">
                   Sign up
