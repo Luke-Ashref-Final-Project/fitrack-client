@@ -35,14 +35,14 @@ const HomePage = () => {
               </button>
             </Link>
           ) : (
-            <div className="flex flex-col space-x-4 mt-4">
+            <div className="flex flex-col mt-4 space-y-4">
               <Link to="/signup">
-                <button className="btn w-full btn-outline">
+                <button className="btn btn-wide btn-outline">
                   Sign up
                 </button>
               </Link>
               <Link to="/login">
-                <button className="btn w-full btn-info">Login</button>
+                <button className="btn btn-info btn-wide">Login</button>
               </Link>
             </div>
           )}

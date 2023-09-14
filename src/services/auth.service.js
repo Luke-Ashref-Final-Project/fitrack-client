@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL 
-  // "http://localhost:5005" 
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 const signupCoach = async ({ email, username, password, description }) => {
@@ -36,10 +35,10 @@ const signupClient = async ({ email, username, password, description }) => {
 const logIn = async ({ email, password, userType }) => {
   try {
     const response = await api.post("/login", { email, password, userType });
-    return {responseData: response.data, responseStatus: response.status}
+    return { responseData: response.data, responseStatus: response.status };
   } catch (err) {
     console.error(err);
-    return err
+    return err;
   }
 };
 
@@ -48,7 +47,7 @@ const verifyToken = async (storedToken) => {
     const response = await api.get("/verify", {
       headers: { Authorization: `Bearer ${storedToken}` },
     });
-    
+
     // console.log(response.data);
 
     return response.data;
@@ -67,7 +66,6 @@ const uploadPhoto = async (file) => {
     };
     const response = await api.put("/profile/upload", file, config);
     return response.data;
-    
   } catch (err) {
     console.error(err);
   }
@@ -85,7 +83,6 @@ const getCurrentUser = async () => {
     console.error(err);
   }
 };
-
 
 const getCoaches = async () => {
   try {
@@ -126,10 +123,10 @@ const passwordUpdate = async ({ currentPassword, newPassword }) => {
 const getAllSubscribers = async () => {
   try {
     const storedToken = localStorage.getItem("authToken");
-    const response = await api.get("/profile/getallsubscribers",{
+    const response = await api.get("/profile/getallsubscribers", {
       headers: { Authorization: `Bearer ${storedToken}` },
     });
-    return response.data
+    return response.data;
   } catch (err) {
     throw err;
   }
@@ -173,12 +170,12 @@ const coachOverview = async (coachId) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.get(`/coaches/${coachId}`, config)
-    return response.data
+    const response = await api.get(`/coaches/${coachId}`, config);
+    return response.data;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
 const deleteUser = async () => {
   try {
@@ -188,12 +185,12 @@ const deleteUser = async () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.delete("/profile/delete", config)
-    return response.data
+    const response = await api.delete("/profile/delete", config);
+    return response.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 const updateDescription = async ({ description }) => {
   try {
@@ -203,10 +200,14 @@ const updateDescription = async ({ description }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await api.put("/profile/description", { description }, config)
-    return response.data
+    const response = await api.put(
+      "/profile/description",
+      { description },
+      config
+    );
+    return response.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 
