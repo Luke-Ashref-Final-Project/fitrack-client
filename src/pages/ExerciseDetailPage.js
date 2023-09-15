@@ -166,7 +166,7 @@ const ExerciseDetailPage = () => {
   }
 
   return (
-    <div data-theme={theme}>
+    <div data-theme={theme} className="h-full">
       <Nav />
 
       <div className="flex flex-col w-full mt-4 space-y-4 items-start px-6">

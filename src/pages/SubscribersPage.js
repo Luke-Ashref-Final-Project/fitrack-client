@@ -34,7 +34,7 @@ const SubscribePage = () => {
 
   return (
     isLoggedIn && (
-      <div data-theme={theme} className="pb-8">
+      <div data-theme={theme} className="pb-8 h-full">
         <Nav />
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}
 
