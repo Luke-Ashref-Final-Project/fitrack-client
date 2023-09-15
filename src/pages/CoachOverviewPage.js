@@ -67,12 +67,12 @@ const CoachOverviewPage = () => {
 
 
         <div className="flex flex-col mt-4 space-y-4 items-center md:flex-row md:space-x-6 md:items-center md:px-24">
-          <h1 className="text-3xl self-center md:mt-3 md:ml-4">
+          <h1 className="text-3xl self-center md:mt-3 md:ml-4 ">
             Subcribe or unsubscribe coach
           </h1>
         </div>
-        <div className="flex flex-wrap px-6 md:px-24">
-          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 h-full">
+        <div className="flex flex-wrap px-6 md:px-24 ">
+          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 h-full mx-auto	">
             {coach ? (
               <div
                 id={coach.id}
