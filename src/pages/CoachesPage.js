@@ -17,7 +17,6 @@ const CoachesPage = () => {
       const getCoaches = async () => {
         try {
           const response = await authMethods.getCoaches();
-          console.log(response);
           setCoachesList(response);
         } catch (error) {
           console.log(error);

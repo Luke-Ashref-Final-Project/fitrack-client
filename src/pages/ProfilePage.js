@@ -60,7 +60,6 @@ const ProfilePage = () => {
   const handleDelete = async (e) => {
     try {
       const response = await authMethods.deleteUser()
-      console.log(response)
       localStorage.removeItem("authToken");
 
       navigate("/")

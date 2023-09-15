@@ -48,8 +48,6 @@ const verifyToken = async (storedToken) => {
       headers: { Authorization: `Bearer ${storedToken}` },
     });
     
-    // console.log(response.data);
-
     return response.data;
   } catch (err) {
     console.error(err);

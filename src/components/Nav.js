@@ -136,18 +136,13 @@ const Nav = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link className="text-xl" to="/">
-                      Testing page
+                    <Link className="text-xl" to="/coaches">
+                      <FiUserPlus /> Coaches page
                     </Link>
                   </li>
                   <li>
                     <Link className="text-xl" to="/profile">
                       <FiUser /> Account
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="text-xl" to="/coaches">
-                      <FiUserPlus /> Coaches page
                     </Link>
                   </li>
                 </div>

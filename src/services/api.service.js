@@ -176,7 +176,6 @@ const updateVariation = async ({ weight, reps, variationId }) => {
       variationId: variationId,
     }, config);
     const variation = response.data;
-    console.log(variation);
     return variation;
   } catch (error) {
     console.log(error);

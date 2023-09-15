@@ -26,7 +26,6 @@ const ClientDashboard = ({ clientId }) => {
     // Listen for new-subscriber events
     clientChannel.bind('new-exercise', (data) => {
       // Handle the new subscriber notification
-      console.log(data)
       // Generate an id for each notification
       const notificationId = uuidv4();
       data.id = notificationId;

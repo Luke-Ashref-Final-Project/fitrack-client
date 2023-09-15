@@ -48,8 +48,6 @@ const CoachOverviewPage = () => {
         if (user && coach.subscribersIds.includes(user._id)) {
           setSubscribed(true);
         }
-
-        console.log("coach:", coach);
         setCoach(coach);
       } catch (error) {
         console.log(error);
