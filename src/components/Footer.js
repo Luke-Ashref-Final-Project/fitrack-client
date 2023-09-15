@@ -7,8 +7,9 @@ const Footer = () => {
         <img src={logo} alt="" />
         <p className="font-bold">
           FiTrack. <br />
-          Made by Luke and Ashref
+          Made by <a href="https://github.com/heylukechen" className="link hover:text-cyan-600" target="_blank"> Luke</a> and <a href="https://github.com/achref95" className="link hover:text-cyan-600" target="_blank"> Ashref</a>
         </p>
+
         <p>Copyright © 2023 - All right reserved</p>
       </div>
     </footer>
