@@ -53,7 +53,6 @@ const NewExercisePage = () => {
         .then((data) => {
           const subs = data.subscribersIds;
           setSubscribers(subs);
-          console.log("This is the whole data", subs);
         })
         .catch((err) => {
           console.error("Error fetching subscribers:", err);

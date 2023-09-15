@@ -38,7 +38,6 @@ const OverviewPage = () => {
           if (fetchedSubs) {
             setAllClients(fetchedSubs);
           }
-          console.log(response); //this seems undefined at the deployed version...
           if (response) {
             setAllExercises(response);
             setFilteredExercises(response);
@@ -65,11 +64,10 @@ const OverviewPage = () => {
       setTheme("cmyk");
     }
   }, [user]);
-
+  
   if (isLoading) {
     return <span className="loading loading-spinner text-error">Loading...</span>
   }
-  
   return (
     <div data-theme={theme} className="pb-8">
       <Nav />

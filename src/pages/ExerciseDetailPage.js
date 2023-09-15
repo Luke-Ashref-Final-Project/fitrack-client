@@ -56,7 +56,6 @@ const ExerciseDetailPage = () => {
     }
     newCopy[index] = updateSet;
     setExerciseSets(newCopy);
-    console.log(exerciseSets);
   };
 
   const createVariation = async () => {
@@ -83,9 +82,6 @@ const ExerciseDetailPage = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(exerciseSets);
-  });
 
   const saveAll = (e) => {
     e.preventDefault();
@@ -96,7 +92,6 @@ const ExerciseDetailPage = () => {
         reps: exerciseSets[i].reps,
         variationId: exerciseSets[i]._id,
       });
-      console.log(exerciseSets[i]);
     }
     //update the exercises
     const variationId = exerciseSets.map((exercise) => exercise._id);
@@ -113,7 +108,6 @@ const ExerciseDetailPage = () => {
       });
 
       if (updatedVariation) {
-        console.log(updatedVariation);
         const foundIndex = exerciseSets.findIndex(
           (set) => set.variationId === updatedVariation.variationId
         );
@@ -162,7 +156,9 @@ const ExerciseDetailPage = () => {
   }, [user]);
 
   if (isLoading) {
-    return <span className="loading loading-spinner text-error">Loading...</span>
+    return (
+      <span className="loading loading-spinner text-error">Loading...</span>
+    );
   }
 
   return (
@@ -188,102 +184,111 @@ const ExerciseDetailPage = () => {
 
       <div className="bg-base-100  mt-8 px-6 md:w-1/3 mx-auto pb-10">
         <figure className="w-full overflow-hidden">
-          <img src={image} alt="exercise" id="gifImage" className="w-full object-cover" />
+          <img
+            src={image}
+            alt="exercise"
+            id="gifImage"
+            className="w-full object-cover"
+          />
         </figure>
         <div className="mt-6">
           <div>
             <h1 className="text w-full text-2xl text-left mb-4">Description</h1>
-            <input
-              className="textarea textarea-bordered w-full"
-              type="text"
-              value={description}
-              onChange={(e) => {
-                handleDescription(e.target.value);
-              }}
-            />
+            {user?.type === "coach" ? (
+              <textarea
+                className="textarea textarea-bordered w-full"
+                type="text"
+                value={description}
+                onChange={(e) => {
+                  handleDescription(e.target.value);
+                }}
+              ></textarea>
+            ) : (
+              <p className="text-left">{description}</p>
+            )}
           </div>
 
           <div id="setRep" className="card mb-6">
-              {exerciseSets.map((eachSet, index) => {
-                return (
-                  <form
-                    key={index}
-                    className="flex flex-col mt-6 mb-6 border border-primary px-4 py-4 rounded-xl"
-                  >
-                    <div className="flex flex-row justify-between items-center">
-                      <h1 className="text-2xl">Set {index + 1}</h1>
-                      <button
-                        className="btn btn-circle btn-warning btn-outline btn-sm"
-                        onClick={(e) =>
-                          handleVariationDeletion(e, index, eachSet._id)
+            {exerciseSets.map((eachSet, index) => {
+              return (
+                <form
+                  key={index}
+                  className="flex flex-col mt-6 mb-6 border border-primary px-4 py-4 rounded-xl"
+                >
+                  <div className="flex flex-row justify-between items-center">
+                    <h1 className="text-2xl">Set {index + 1}</h1>
+                    <button
+                      className="btn btn-circle btn-warning btn-outline btn-sm"
+                      onClick={(e) =>
+                        handleVariationDeletion(e, index, eachSet._id)
+                      }
+                    >
+                      <FiX />
+                    </button>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex flex-col text-left">
+                      <h3 className="label">Reps</h3>
+                      <input
+                        id="reps"
+                        type="number"
+                        className="input input-bordered w-full"
+                        defaultValue={0}
+                        value={eachSet.reps}
+                        onChange={(e) =>
+                          handleRepsAndWeight(e.target.value, index, "reps")
                         }
-                      >
-                        <FiX />
-                      </button>
+                      />
                     </div>
-                    <div className="flex flex-col">
-                      <div className="flex flex-col text-left">
-                        <h3 className="label">Reps</h3>
-                        <input
-                          id="reps"
-                          type="number"
-                          className="input input-bordered w-full"
-                          defaultValue={0}
-                          value={eachSet.reps}
-                          onChange={(e) =>
-                            handleRepsAndWeight(e.target.value, index, "reps")
-                          }
-                        />
-                      </div>
-                      <div className="flex flex-col text-left">
-                        <h3 className="label">Weight</h3>
-                        <input
-                          id="weight"
-                          type="number"
-                          className="input input-bordered w-full"
-                          value={eachSet.weight}
-                          onChange={(e) =>
-                            handleRepsAndWeight(e.target.value, index, "weight")
-                          }
-                        />
-                      </div>
+                    <div className="flex flex-col text-left">
+                      <h3 className="label">Weight</h3>
+                      <input
+                        id="weight"
+                        type="number"
+                        className="input input-bordered w-full"
+                        value={eachSet.weight}
+                        onChange={(e) =>
+                          handleRepsAndWeight(e.target.value, index, "weight")
+                        }
+                      />
                     </div>
-                  </form>
-                );
-              })}
-            </div>
+                  </div>
+                </form>
+              );
+            })}
+          </div>
 
-            <div className="card-actions flex-col w-full mt-1 space-y-4">
+          <div className="card-actions flex-col w-full mt-1 space-y-4">
+            <button
+              className="btn btn-primary btn-outline w-full"
+              onClick={() => createVariation()}
+            >
+              <FiPlus />
+              Add new set
+            </button>
+            <div className="divider"></div>
+            <button
+              className="btn btn-primary w-full"
+              onClick={(e) => {
+                saveAll(e);
+              }}
+            >
+              Save
+            </button>
+            {user.userType === "coach" && (
               <button
-                className="btn btn-primary btn-outline w-full"
-                onClick={() => createVariation()}
-              >
-                <FiPlus />
-                Add new set
-              </button>
-              <div className="divider"></div>
-              <button
-                className="btn btn-primary w-full"
-                onClick={(e) => {
-                  saveAll(e);
+                className="btn btn-error w-full"
+                onClick={() => {
+                  handleExerciseDeletion();
                 }}
               >
-                Save
+                Delete
               </button>
-              {user.userType === "coach" && (
-                <button
-                  className="btn btn-error w-full"
-                  onClick={() => {
-                    handleExerciseDeletion();
-                  }}
-                >
-                  Delete
-                </button>
-              )}
-            </div>
+            )}
           </div>
         </div>
       </div>
+    </div>
   );
 };
 

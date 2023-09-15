@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL:"http://localhost:5005" || process.env.REACT_APP_API_URL 
+  baseURL: process.env.REACT_APP_API_URL 
 });
 
 const signupCoach = async ({ email, username, password, description }) => {
@@ -48,8 +48,6 @@ const verifyToken = async (storedToken) => {
       headers: { Authorization: `Bearer ${storedToken}` },
     });
     
-    // console.log(response.data);
-
     return response.data;
   } catch (err) {
     console.error(err);

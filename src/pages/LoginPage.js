@@ -44,7 +44,6 @@ const Login = () => {
         setError(response?.response?.data.message);
         setIsLoadingLogin(false);
       } else {
-        console.log(response.responseData);
         storeToken(response.responseData.authToken);
         authenticateUser();
         navigate("/overview");

@@ -5,7 +5,7 @@ const apiExternal = axios.create({
 });
 
 const api = axios.create({
-  baseURL: "http://localhost:5005" || process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 const specifiedOptions = {
@@ -19,11 +19,6 @@ const fetchExercises = async (options) => {
   try {
     const response = await apiExternal.get("/exercises", options);
     const returnedData = response.data;
-    // console.log(typeof returnedData);
-    // console.log(returnedData);
-    console.log(Array.isArray(returnedData));
-    console.log(typeof returnedData);
-    console.log(returnedData);
     return returnedData;
   } catch (error) {
     console.error(error);
@@ -175,7 +170,6 @@ const updateVariation = async ({ weight, reps, variationId }) => {
       variationId: variationId,
     }, config);
     const variation = response.data;
-    console.log(variation);
     return variation;
   } catch (error) {
     console.log(error);
