@@ -24,7 +24,6 @@ const fetchExercises = async (options) => {
     console.log(Array.isArray(returnedData));
     console.log(typeof returnedData);
     console.log(returnedData);
-
     return returnedData;
   } catch (error) {
     console.error(error);

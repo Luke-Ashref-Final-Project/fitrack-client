@@ -20,9 +20,9 @@ const NewExercisePage = () => {
   const [coachId, setCoachId] = useState("");
   const [clientId, setClientId] = useState("");
 
-  const handleCreateNewExercise = (e) => {
+  const handleCreateNewExercise = async (e) => {
     e.preventDefault();
-    const createdNewExercise = apiMethods.createNewExercise({
+    const createdNewExercise = await apiMethods.createNewExercise({
       user: user,
       clientId: clientId,
       coachId: coachId,
