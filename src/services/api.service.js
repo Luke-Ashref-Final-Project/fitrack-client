@@ -32,7 +32,13 @@ const fetchExercises = async (options) => {
 
 const getAllExercisesForClient = async (clientId) => {
   try {
-    const response = await api.get(`/exercises/client/${clientId}`);
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.get(`/exercises/client/${clientId}`, config);
     if (response) {
       const newData = response.data;
       return newData;
@@ -44,7 +50,13 @@ const getAllExercisesForClient = async (clientId) => {
 
 const getAllExercisesForCoach = async (coachId) => {
   try {
-    const response = await api.get(`/exercises/coach/${coachId}`);
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.get(`/exercises/coach/${coachId}`, config);
     if (response) {
       const newData = response.data;
       return newData;
@@ -56,7 +68,13 @@ const getAllExercisesForCoach = async (coachId) => {
 
 const getOneExercise = async (exerciseId) => {
   try {
-    const response = await api.get(`/exercise/${exerciseId}`);
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.get(`/exercise/${exerciseId}`, config);
     if (response) {
       const newData = response.data;
       return newData;
@@ -76,6 +94,12 @@ const createNewExercise = async ({
   name,
 }) => {
   try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     const response = await api.post("/exercise/new", {
       user,
       clientId,
@@ -84,7 +108,7 @@ const createNewExercise = async ({
       image,
       description,
       name,
-    });
+    }, config);
 
     if (response) {
       const newExercise = response.data;
@@ -97,10 +121,16 @@ const createNewExercise = async ({
 
 const updateExercise = async (exerciseId, description, variationId) => {
   try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     const response = await api.put(`/exercise/${exerciseId}`, {
       description,
       variationId,
-    });
+    }, config);
     const exercise = response.data;
     return exercise;
   } catch (error) {
@@ -113,10 +143,16 @@ const updateExercise = async (exerciseId, description, variationId) => {
 const createVariation = async ({ weight, reps }) => {
   // should have that
   try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     const response = await api.post("/variation/new", {
       weight,
       reps,
-    });
+    }, config);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -127,11 +163,17 @@ const createVariation = async ({ weight, reps }) => {
 //updateVariation
 const updateVariation = async ({ weight, reps, variationId }) => {
   try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     const response = await api.put("/variation/update", {
       weight: weight,
       reps: reps,
       variationId: variationId,
-    });
+    }, config);
     const variation = response.data;
     console.log(variation);
     return variation;
@@ -143,7 +185,13 @@ const updateVariation = async ({ weight, reps, variationId }) => {
 //delete exercise
 const deleteExercise = async (exerciseId) => {
   try {
-    const response = await api.delete(`/exercise/${exerciseId}/delete`);
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.delete(`/exercise/${exerciseId}/delete`, config);
     return response;
   } catch (error) {
     console.log(error);
@@ -153,9 +201,15 @@ const deleteExercise = async (exerciseId) => {
 //delete variation
 const deleteVariation = async ({ _id }) => {
   try {
+    const token = localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     const response = await api.delete(`/variation/delete`, {
       data: { variationId: _id },
-    });
+    }, config);
     return response;
   } catch (err) {
     console.log(err);

@@ -166,7 +166,7 @@ const ExerciseDetailPage = () => {
   }
 
   return (
-    <div data-theme={theme} className="mb-8">
+    <div data-theme={theme}>
       <Nav />
 
       <div className="flex flex-col w-full mt-4 space-y-4 items-start px-6">
@@ -186,7 +186,7 @@ const ExerciseDetailPage = () => {
         </div>
       </div>
 
-      <div className="bg-base-100 shadow-xl mt-8 px-6 md:w-1/3 mx-auto">
+      <div className="bg-base-100  mt-8 px-6 md:w-1/3 mx-auto pb-10">
         <figure className="w-full overflow-hidden">
           <img src={image} alt="exercise" id="gifImage" className="w-full object-cover" />
         </figure>
