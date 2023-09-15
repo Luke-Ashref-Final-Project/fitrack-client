@@ -59,9 +59,8 @@ const ProfilePage = () => {
 
   const handleDelete = async (e) => {
     try {
-      const response = await authMethods.deleteUser()
+      await authMethods.deleteUser()
       localStorage.removeItem("authToken");
-
       navigate("/")
       window.location.reload();
     } catch (error) {
