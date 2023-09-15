@@ -11,7 +11,7 @@ import ClientDashboard from "../components/ClientDashboard";
 const OverviewPage = () => {
   //theme changing
   const [theme, setTheme] = useState("cmyk");
-  const { user } = useContext(AuthContext);
+  const { user, isLoading } = useContext(AuthContext);
   const [allExercises, setAllExercises] = useState(null);
   const [allClients, setAllClients] = useState(null);
   const [filteredExercises, setFilteredExercises] = useState(null);
@@ -66,6 +66,10 @@ const OverviewPage = () => {
     }
   }, [user]);
 
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
+  
   return (
     <div data-theme={theme} className="pb-8">
       <Nav />

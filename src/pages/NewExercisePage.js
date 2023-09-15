@@ -7,7 +7,7 @@ import Nav from "../components/Nav";
 import CoachDashboard from "../components/CoachDashboard";
 
 const NewExercisePage = () => {
-  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user, isLoggedIn, isLoading } = useContext(AuthContext);
   const [theme, setTheme] = useState("cmyk");
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,20 +22,25 @@ const NewExercisePage = () => {
 
   const handleCreateNewExercise = async (e) => {
     e.preventDefault();
-    const createdNewExercise = await apiMethods.createNewExercise({
-      user: user,
-      clientId: clientId,
-      coachId: coachId,
-      bodyPart: bodyPart,
-      image: gifUrl,
-      description: description,
-      name: name,
-    });
-    if (createdNewExercise) {
-      navigate("/overview", { state: { newExerciseAdded: true } });
-      window.location.reload();
-    } else {
-      return <h1>Cannot create new exercise</h1>;
+    try {
+      const createdNewExercise = await apiMethods.createNewExercise({
+        user: user,
+        clientId: clientId,
+        coachId: coachId,
+        bodyPart: bodyPart,
+        image: gifUrl,
+        description: description,
+        name: name,
+      });
+      if (createdNewExercise) {
+        navigate("/overview", { state: { newExerciseAdded: true } });
+
+      
+      } else {
+        return <h1>Cannot create new exercise</h1>;
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -64,6 +69,10 @@ const NewExercisePage = () => {
       setCoachId(location.state.id);
     }
   }, [name, bodyPart, gifUrl, coachId, user, location.state]);
+
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
 
   return (
     <div data-theme={theme}>
