@@ -7,7 +7,7 @@ import Nav from "../components/Nav";
 import CoachDashboard from "../components/CoachDashboard";
 
 const NewExercisePage = () => {
-  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user, isLoggedIn, isLoading } = useContext(AuthContext);
   const [theme, setTheme] = useState("cmyk");
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,23 +20,28 @@ const NewExercisePage = () => {
   const [coachId, setCoachId] = useState("");
   const [clientId, setClientId] = useState("");
 
-  const handleCreateNewExercise = (e) => {
-    e.preventDefault();
-    const createdNewExercise = apiMethods.createNewExercise({
-      user: user,
-      clientId: clientId,
-      coachId: coachId,
-      bodyPart: bodyPart,
-      image: gifUrl,
-      description: description,
-      name: name,
-    });
-    if (createdNewExercise) {
-      navigate("/overview", { state: { newExerciseAdded: true } });
-      window.location.reload();
-    } else {
-      return <h1>Cannot create new exercise</h1>;
+  const handleCreateNewExercise = async (e) => {
+    try {
+      e.preventDefault();
+      const createdNewExercise = await apiMethods.createNewExercise({
+        user: user,
+        clientId: clientId,
+        coachId: coachId,
+        bodyPart: bodyPart,
+        image: gifUrl,
+        description: description,
+        name: name,
+      });
+      if (createdNewExercise) {
+        navigate("/overview", { state: { newExerciseAdded: true } });
+        // window.location.reload();
+      } else {
+        return <h1>Cannot create new exercise</h1>;
+      }
+    } catch (error) {
+      console.log(error)
     }
+
   };
 
   //UPON LOADING, RECEIVING THE DATA PASSED THROUGHT THE ROUTE
@@ -64,6 +69,11 @@ const NewExercisePage = () => {
       setCoachId(location.state.id);
     }
   }, [name, bodyPart, gifUrl, coachId, user, location.state]);
+
+  if (isLoading) {
+    return <span className="loading loading-spinner text-error">Loading...</span>
+  }
+  
 
   return (
     <div data-theme={theme}>

@@ -51,7 +51,7 @@ const SearchExercisesPage = () => {
 
   return (
     isLoggedIn && (
-      <div data-theme={theme} className="pb-8">
+      <div data-theme={theme} className="pb-8 h-screen">
         <Nav />
         
         {user?.userType === "coach" && <CoachDashboard coachId={user._id} />}

@@ -166,7 +166,7 @@ const ExerciseDetailPage = () => {
   }
 
   return (
-    <div data-theme={theme} className="mb-8">
+    <div data-theme={theme}>
       <Nav />
 
       <div className="flex flex-col w-full mt-4 space-y-4 items-start px-6">
@@ -253,7 +253,7 @@ const ExerciseDetailPage = () => {
               })}
             </div>
 
-            <div className="card-actions flex-col w-full mt-1 space-y-4">
+            <div className="card-actions flex-col w-full mt-1 space-y-4 pb-10	">
               <button
                 className="btn btn-primary btn-outline w-full"
                 onClick={() => createVariation()}
